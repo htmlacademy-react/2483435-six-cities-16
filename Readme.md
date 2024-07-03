@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Богдан Троценко](https://up.htmlacademy.ru/react/16/user/2483435).
-* Наставник: `Неизвестно`.
+* Наставник: [Arthur Litovko](https://htmlacademy.ru/profile/id6927).
 
 ---
 
