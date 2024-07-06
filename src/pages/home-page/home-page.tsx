@@ -1,4 +1,4 @@
-import Offer from '../../components/offer/offer';
+import OfferCard from '../../components/offer-card/offer-card';
 import { AppProps } from '../../types/app-props-type';
 
 
@@ -116,11 +116,11 @@ function HomePage({offersCount}: HomeScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Offer />
-                <Offer />
-                <Offer />
-                <Offer />
-                <Offer />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
               </div>
             </section>
             <div className="cities__right-section">
