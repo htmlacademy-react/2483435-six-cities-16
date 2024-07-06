@@ -1,10 +1,11 @@
 import Offer from '../../components/offer/offer';
 
+
 type HomeScreenProps = {
   offersCount: number;
 };
 
-function HomeScreen({offersCount}: HomeScreenProps): JSX.Element {
+function HomePage({offersCount}: HomeScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -133,4 +134,4 @@ function HomeScreen({offersCount}: HomeScreenProps): JSX.Element {
   );
 }
 
-export default HomeScreen;
+export default HomePage;
