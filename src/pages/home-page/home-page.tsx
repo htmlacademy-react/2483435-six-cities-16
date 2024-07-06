@@ -1,9 +1,8 @@
 import Offer from '../../components/offer/offer';
+import { AppProps } from '../../types/app-props-type';
 
 
-type HomeScreenProps = {
-  offersCount: number;
-};
+type HomeScreenProps = AppProps;
 
 function HomePage({offersCount}: HomeScreenProps): JSX.Element {
   return (
