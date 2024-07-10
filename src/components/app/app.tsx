@@ -12,25 +12,25 @@ import PrivateRoute from '../private-route/private-route';
 function App({ offersCount }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<HomePage offersCount={offersCount} />}
-        />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage />} />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<HomePage offersCount={offersCount} />}
+          />
+          <Route path={AppRoute.Login} element={<LoginPage />} />
+          <Route path={AppRoute.Offer} element={<OfferPage />} />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+                <FavoritesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </BrowserRouter>
     </HelmetProvider>
   );
 }
