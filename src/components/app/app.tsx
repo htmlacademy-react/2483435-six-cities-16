@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppProps } from '../../types/app-props-type';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { HelmetProvider } from'react-helmet-async';
 import HomePage from '../../pages/home-page/home-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
@@ -10,6 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 
 function App({ offersCount }: AppProps): JSX.Element {
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <Routes>
         <Route
@@ -29,6 +31,7 @@ function App({ offersCount }: AppProps): JSX.Element {
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

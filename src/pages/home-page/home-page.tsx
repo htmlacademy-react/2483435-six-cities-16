@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import OfferCard from '../../components/offer-card/offer-card';
 import { mockThumbnailOffer } from '../../mock/offer-mock';
@@ -6,10 +7,13 @@ import { AppProps } from '../../types/app-props-type';
 type HomeScreenProps = AppProps;
 
 function HomePage({ offersCount = 0 }: HomeScreenProps): JSX.Element {
-  const offers = Array.from({length: offersCount }, mockThumbnailOffer);
+  const offers = Array.from({ length: offersCount }, mockThumbnailOffer);
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 Cities | Home</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -114,7 +118,7 @@ function HomePage({ offersCount = 0 }: HomeScreenProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer) => (
-                  <OfferCard key = {offer.id} {...offer} />
+                  <OfferCard key={offer.id} {...offer} />
                 ))}
               </div>
             </section>
