@@ -1,18 +1,25 @@
 import { Navigate } from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
+import { ReactNode } from 'react';
 
 type PrivateRouteProps = {
-   authorizationStatus: AuthorizationStatus;
-   children: JSX.Element;
-}
+  authStatus: AuthStatus;
+  children: ReactNode;
+};
 
-function PrivateRoute({ authorizationStatus, children }: PrivateRouteProps): JSX.Element {
-  return (
-    authorizationStatus === AuthorizationStatus.Auth
-      ? children
-      : <Navigate to={AppRoute.Login} />
-  );
-}
+const getRoute = (status: AuthStatus, redirection: AppRoute) =>
+  function AccessRoute({ authStatus, children }: PrivateRouteProps) {
+    switch (authStatus) {
+      case status:
+        return children;
+      case 'UNKNOWN':
+        return 'Loading...';
+      default:
+        return <Navigate to={redirection} />;
+    }
+  };
 
-export default PrivateRoute;
+const PrivateRoute = getRoute('AUTH', AppRoute.Login);
+const PublicRoute = getRoute('NO_AUTH', AppRoute.Main);
+
+export { PrivateRoute, PublicRoute };

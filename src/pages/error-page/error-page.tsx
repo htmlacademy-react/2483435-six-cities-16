@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-function Error404(): JSX.Element {
+function ErrorPage(): JSX.Element {
   return (
     <div className="404-error">
       <Helmet>
@@ -11,4 +11,4 @@ function Error404(): JSX.Element {
   );
 }
 
-export default Error404;
+export default ErrorPage;

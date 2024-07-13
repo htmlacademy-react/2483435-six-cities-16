@@ -2,16 +2,11 @@ export const Setting = {
   OffersCount: 5,
 } as const;
 
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id'
+  Offer = '/offer/:id',
 }
 
-export enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
+export type AuthStatus = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';

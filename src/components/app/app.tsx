@@ -1,38 +1,52 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppProps } from '../../types/app-props-type';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { HelmetProvider } from'react-helmet-async';
-import HomePage from '../../pages/home-page/home-page';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import FavoritesPage from '../../pages/favorites-page/favorites-page';
-import Error404 from '../../pages/error-404-page/error-404-page';
-import PrivateRoute from '../private-route/private-route';
+import { AppProps } from '../../types/app-props-type';
+import { PrivateRoute, PublicRoute } from '../private-route/private-route';
+import HomePage from '../../pages/home-page/home-page';
+import ErrorPage from '../../pages/error-page/error-page';
 
-function App({ offersCount }: AppProps): JSX.Element {
-  return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<HomePage offersCount={offersCount} />}
-          />
-          <Route path={AppRoute.Login} element={<LoginPage />} />
-          <Route path={AppRoute.Offer} element={<OfferPage />} />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <FavoritesPage />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-      </BrowserRouter>
-    </HelmetProvider>
-  );
+export function App({ offersCount }: AppProps) {
+  const currentStatus = 'NO_AUTH';
+
+  const router = createBrowserRouter([
+    {
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage offersCount={offersCount} />,
+        },
+
+        {
+          element: <PublicRoute currentStatus={currentStatus} />,
+          children: [
+            {
+              path: AppRoute.Login,
+              element: <LoginPage />,
+            },
+          ],
+        },
+
+        {
+          element: <PrivateRoute currentStatus={currentStatus} />,
+          children: [
+            {
+              path: AppRoute.Favorites,
+              element: <FavoritesPage />,
+            },
+          ],
+        },
+
+        {
+          path: AppRoute.Offer,
+          element: <OfferPage />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
-
-export default App;
