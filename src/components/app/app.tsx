@@ -21,7 +21,7 @@ export function App({ offersCount }: AppProps) {
         },
 
         {
-          element: <PublicRoute currentStatus={currentStatus} />,
+          element: <PublicRoute authStatus={currentStatus} />,
           children: [
             {
               path: AppRoute.Login,
@@ -31,7 +31,7 @@ export function App({ offersCount }: AppProps) {
         },
 
         {
-          element: <PrivateRoute currentStatus={currentStatus} />,
+          element: <PrivateRoute authStatus={currentStatus} />,
           children: [
             {
               path: AppRoute.Favorites,

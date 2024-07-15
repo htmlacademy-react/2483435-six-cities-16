@@ -1,6 +1,6 @@
-import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import OfferCard from '../../components/offer-card/offer-card';
+import { useChangeTitle } from '../../hooks/title';
 import { mockThumbnailOffer } from '../../mock/offer-mock';
 import { AppProps } from '../../types/app-props-type';
 
@@ -9,11 +9,10 @@ type HomeScreenProps = AppProps;
 function HomePage({ offersCount = 0 }: HomeScreenProps): JSX.Element {
   const offers = Array.from({ length: offersCount }, mockThumbnailOffer);
 
+  useChangeTitle('Home');
+
   return (
     <div className="page page--gray page--main">
-      <Helmet>
-        <title>6 Cities | Home</title>
-      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

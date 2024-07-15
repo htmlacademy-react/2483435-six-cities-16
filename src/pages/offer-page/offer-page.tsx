@@ -1,12 +1,11 @@
-import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
+import { useChangeTitle } from '../../hooks/title';
 
 function OfferPage(): JSX.Element {
+  useChangeTitle('Offer');
+
   return (
     <div className="page">
-      <Helmet>
-        <title>6 Cities | Offer</title>
-      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

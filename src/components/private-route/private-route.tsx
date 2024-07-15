@@ -1,17 +1,15 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
-import { ReactNode } from 'react';
 
 type PrivateRouteProps = {
   authStatus: AuthStatus;
-  children: ReactNode;
 };
 
 const getRoute = (status: AuthStatus, redirection: AppRoute) =>
-  function AccessRoute({ authStatus, children }: PrivateRouteProps) {
+  function AccessRoute({ authStatus }: PrivateRouteProps) {
     switch (authStatus) {
       case status:
-        return children;
+        return < Outlet />;
       case 'UNKNOWN':
         return 'Loading...';
       default:
