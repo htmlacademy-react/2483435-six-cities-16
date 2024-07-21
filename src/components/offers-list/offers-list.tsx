@@ -1,5 +1,5 @@
 import { AppProps } from '../../types/app-props-type';
-import OfferCard from '../place-card/place-card';
+import OfferCard from '../offer-card/offer-card';
 
 function OffersList({ offers }: Pick<AppProps, 'offers'>) {
   return (
