@@ -8,7 +8,7 @@ import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import HomePage from '../../pages/home-page/home-page';
 import ErrorPage from '../../pages/error-page/error-page';
 
-export function App({ offersCount }: AppProps) {
+export function App({ offers, offersCount }: AppProps) {
   const currentStatus = 'NO_AUTH';
 
   const router = createBrowserRouter([
@@ -17,7 +17,7 @@ export function App({ offersCount }: AppProps) {
       children: [
         {
           index: true,
-          element: <HomePage offersCount={offersCount} />,
+          element: <HomePage offers={offers} offersCount={offersCount} />,
         },
 
         {

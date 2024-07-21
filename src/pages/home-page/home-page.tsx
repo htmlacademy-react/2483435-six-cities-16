@@ -1,14 +1,11 @@
 import Logo from '../../components/logo/logo';
-import OfferCard from '../../components/offer-card/offer-card';
+import OffersList from '../../components/offers-list/offers-list';
 import { useChangeTitle } from '../../hooks/title';
-import { mockThumbnailOffer } from '../../mock/offer-mock';
 import { AppProps } from '../../types/app-props-type';
 
 type HomeScreenProps = AppProps;
 
-function HomePage({ offersCount = 0 }: HomeScreenProps): JSX.Element {
-  const offers = Array.from({ length: offersCount }, mockThumbnailOffer);
-
+function HomePage({ offers, offersCount }: HomeScreenProps): JSX.Element {
   useChangeTitle('Home');
 
   return (
@@ -115,11 +112,7 @@ function HomePage({ offersCount = 0 }: HomeScreenProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <OfferCard key={offer.id} {...offer} />
-                ))}
-              </div>
+              <OffersList offers={offers} />c
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
