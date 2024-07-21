@@ -1,9 +1,9 @@
 import { UserGeneral } from './user-type';
 
 export interface Comment {
-  id: number;
+  id: string;
   date: string;
+  user: UserGeneral;
   comment: string;
   rating: number;
-  user: UserGeneral;
 }

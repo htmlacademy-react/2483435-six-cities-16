@@ -1,4 +1,5 @@
 import Logo from '../../components/logo/logo';
+import { Rating } from '../../components/rating/rating';
 import { useChangeTitle } from '../../hooks/title';
 
 function OfferPage(): JSX.Element {
@@ -100,13 +101,7 @@ function OfferPage(): JSX.Element {
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }} />
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
+              <Rating prefix="offer" rating={4} showValue />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   Apartment
@@ -184,12 +179,7 @@ function OfferPage(): JSX.Element {
                       <span className="reviews__user-name">Max</span>
                     </div>
                     <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{ width: '80%' }} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
+                      <Rating prefix="reviews" rating={4} />
                       <p className="reviews__text">
                         A quiet cozy and picturesque that hides behind a a river
                         by the unique lightness of Amsterdam. The building is
@@ -358,12 +348,7 @@ function OfferPage(): JSX.Element {
                       <span className="visually-hidden">In bookmarks</span>
                     </button>
                   </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
+                  <Rating prefix="place-card" rating={4} />
                   <h2 className="place-card__name">
                     <a href="#">Wood and stone place</a>
                   </h2>
@@ -404,12 +389,7 @@ function OfferPage(): JSX.Element {
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
                   </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '80%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
+                  <Rating prefix="place-card" rating={4} />
                   <h2 className="place-card__name">
                     <a href="#">Canal View Prinsengracht</a>
                   </h2>
@@ -453,12 +433,7 @@ function OfferPage(): JSX.Element {
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
                   </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: '100%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
+                  <Rating prefix="place-card" rating={5} />
                   <h2 className="place-card__name">
                     <a href="#">Nice, cozy, warm big bed apartment</a>
                   </h2>

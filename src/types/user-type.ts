@@ -1,7 +1,7 @@
 interface UserGeneral {
+  name: string;
   avatarUrl: string;
   isPro: boolean;
-  name: string;
 }
 
 interface User extends UserGeneral {

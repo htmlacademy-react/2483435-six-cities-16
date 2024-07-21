@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ThumbnailOffer } from '../../types/offer-type';
-import { CSSProperties } from 'react';
+import { Rating } from '../rating/rating';
 
 type OfferCardProps = Pick<
   ThumbnailOffer,
@@ -16,10 +16,6 @@ type OfferCardProps = Pick<
 
 const upFirstLetter = (str: string): string =>
   str[0].toUpperCase() + str.slice(1);
-
-const getRatingStyle = (rating: number): CSSProperties => ({
-  width: `${Math.round(rating) * 20}%`,
-});
 
 function Offer({
   title,
@@ -67,12 +63,7 @@ function Offer({
             <span className="visually-hidden">{favoriteLabel}</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={getRatingStyle(rating)}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating prefix="place-card" rating={rating} />
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
