@@ -1,5 +1,5 @@
-import { CITIES } from '../../mock/const-mock';
-
+import { CITIES } from '../mock/const-mock';
+import { UserGeneral } from './user-type';
 
 type CityName = (typeof CITIES)[number]['name'];
 type OfferType = 'apartment' | 'hotel' | 'house' | 'room';
@@ -38,9 +38,17 @@ interface FullOffer extends Omit<ThumbnailOffer, 'previewImage'> {
   bedrooms: number;
   description: string;
   goods: string[];
-  host: OfferHost;
+  host: UserGeneral;
   images: string[];
   maxAdults: number;
 }
 
-export type { FullOffer, OfferCity, OfferHost, OfferType, ThumbnailOffer, LocationData, CityName };
+export type {
+  FullOffer,
+  OfferCity,
+  OfferHost,
+  OfferType,
+  ThumbnailOffer,
+  LocationData,
+  CityName,
+};

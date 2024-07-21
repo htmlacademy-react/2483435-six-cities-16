@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ThumbnailOffer } from '../../types/offer-type/offer-type';
+import type { ThumbnailOffer } from '../../types/offer-type';
 import { CSSProperties } from 'react';
 
 type OfferCardProps = Pick<

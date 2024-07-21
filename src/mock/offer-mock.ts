@@ -3,7 +3,7 @@ import type {
   OfferType,
   LocationData,
   ThumbnailOffer,
-} from '../types/offer-type/offer-type';
+} from '../types/offer-type';
 import { CITIES } from './const-mock';
 
 const OFFER_TYPES: OfferType[] = ['apartment', 'hotel', 'house', 'room'];
