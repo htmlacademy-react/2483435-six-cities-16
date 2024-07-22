@@ -1,71 +1,76 @@
-import clsx from 'clsx';
 import type { ThumbnailOffer } from '../../types/offer-type';
 import { Rating } from '../rating/rating';
+import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
+import { FavoriteButton } from '../favorite-button/favorite-button';
 
-type OfferCardProps = Pick<
-  ThumbnailOffer,
-  | 'id'
-  | 'title'
-  | 'type'
-  | 'price'
-  | 'rating'
-  | 'isFavorite'
-  | 'isPremium'
-  | 'previewImage'
->;
+type OfferCardProps = {
+  className: string;
+  offerCard: Pick<
+    ThumbnailOffer,
+    | 'id'
+    | 'title'
+    | 'type'
+    | 'price'
+    | 'rating'
+    | 'isFavorite'
+    | 'isPremium'
+    | 'previewImage'
+  >;
+};
 
 const upFirstLetter = (str: string): string =>
   str[0].toUpperCase() + str.slice(1);
 
-function Offer({
-  title,
-  type,
-  price,
-  rating,
-  isFavorite,
-  isPremium,
-  previewImage,
-}: OfferCardProps): React.ReactNode {
-  const favoriteLabel = `${isFavorite ? 'In' : 'To'} bookmarks`;
-  const favoriteClasses = clsx('button', 'place-card__boolmark-button', {
-    'place-card__bookmark-button--active': isFavorite,
-  });
+const FAVORITES_CLASS_NAME = 'favorites';
+
+function Offer({ className, offerCard }: OfferCardProps): React.ReactNode {
+  const {
+    id,
+    title,
+    type,
+    price,
+    rating,
+    isFavorite,
+    isPremium,
+    previewImage,
+  } = offerCard;
+
+  const imgWidth = className === FAVORITES_CLASS_NAME ? 150 : 260;
+  const imgHeight = className === FAVORITES_CLASS_NAME ? 110 : 200;
+  const cardInfoClassName =
+    className === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${className}__card place-card`}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+        <Link to={AppRoute.Offer.replace(':id', id)}>
           <img
             className="place-card__image"
             src={previewImage}
-            width={260}
-            height={200}
+            width={imgWidth}
+            height={imgHeight}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${cardInfoClassName}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={favoriteClasses} type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{favoriteLabel}</span>
-          </button>
+          <FavoriteButton className="place-card" isFavorite={isFavorite} />
         </div>
         <Rating prefix="place-card" rating={rating} />
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.Offer.replace(':id', id)}>{title}</Link>
         </h2>
         <p className="place-card__type">{upFirstLetter(type)}</p>
       </div>
