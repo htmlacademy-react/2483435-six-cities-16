@@ -49,6 +49,19 @@ export const CITIES = [
   },
 ] as const;
 
+export const GOODS = [
+  'Heating',
+  'Wi-Fi',
+  'Kitchen',
+  'Fridge',
+  'Washing machine',
+  'Coffee machine',
+  'Dishwasher',
+  'Towels',
+  'Baby seat',
+  'Cabel TV',
+] as const;
+
 const CITIES_NAMES = CITIES.map((city) => city.name);
 
 export { CITIES_NAMES };

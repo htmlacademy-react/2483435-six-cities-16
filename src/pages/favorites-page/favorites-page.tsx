@@ -9,11 +9,13 @@ import { FavoritesList } from './favorites-list/favorites-list';
 
 export type FavoritesPageProps = {
   authStatus: AuthStatus;
+  offers: ThumbnailOffer[];
   favoritesOffers: ThumbnailOffer[];
 };
 
 function FavoritesPage({
   authStatus,
+  offers,
   favoritesOffers,
 }: FavoritesPageProps): JSX.Element {
   const favoritesCount = favoritesOffers.length;
@@ -31,7 +33,7 @@ function FavoritesPage({
           {isEmptyFavorites ? (
             <FavoritesEmpty />
           ) : (
-            <FavoritesList offers={favoritesOffers} />
+            <FavoritesList offers={offers} favoritesOffers={favoritesOffers} />
           )}
         </div>
       </main>

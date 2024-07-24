@@ -15,7 +15,6 @@ function HomePage({
 }: HomePageProps): JSX.Element {
   const favoritesCount = favoritesOffers.length;
   useChangeTitle('Home');
-
   return (
     <div className="page page--gray page--main">
       <Header authStatus={authStatus} favoritesCount={favoritesCount} />
@@ -24,7 +23,7 @@ function HomePage({
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsTabs/>
+            <LocationsTabs />
           </section>
         </div>
         <div className="cities">
@@ -60,7 +59,7 @@ function HomePage({
                   </li>
                 </ul>
               </form>
-              <OffersList offers={offers} />c
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

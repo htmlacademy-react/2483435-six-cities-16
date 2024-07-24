@@ -3,6 +3,7 @@ import { Rating } from '../rating/rating';
 import { AppRoute } from '../../../const';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from '../favorite-button/favorite-button';
+import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
   className: string;
@@ -18,9 +19,6 @@ type OfferCardProps = {
     | 'previewImage'
   >;
 };
-
-const upFirstLetter = (str: string): string =>
-  str[0].toUpperCase() + str.slice(1);
 
 const FAVORITES_CLASS_NAME = 'favorites';
 

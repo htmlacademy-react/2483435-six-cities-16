@@ -45,6 +45,7 @@ export function App({ offers, offersCount }: AppProps) {
               element: (
                 <FavoritesPage
                   authStatus={currentStatus}
+                  offers={offers}
                   favoritesOffers={favoritesOffers}
                 />
               ),
@@ -56,8 +57,9 @@ export function App({ offers, offersCount }: AppProps) {
           path: AppRoute.Offer,
           element: (
             <OfferPage
-              favoritesOffers={favoritesOffers}
               authStatus={currentStatus}
+              offers={offers}
+              favoritesOffers={favoritesOffers}
             />
           ),
         },

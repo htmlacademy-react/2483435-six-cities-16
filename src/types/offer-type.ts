@@ -15,17 +15,23 @@ interface LocationData {
   zoom: number;
 }
 
-interface ThumbnailOffer {
+interface FullOffer {
   id: string;
   title: string;
   type: OfferType;
   price: number;
   city: OfferCity;
+  location: LocationData;
   isFavorite: boolean;
   isPremium: boolean;
-  location: LocationData;
-  previewImage: string;
   rating: number;
+  previewImage: string;
+  bedrooms: number;
+  description: string;
+  goods: string[];
+  host: UserGeneral;
+  images: string[];
+  maxAdults: number;
 }
 
 interface OfferHost {
@@ -34,14 +40,12 @@ interface OfferHost {
   name: string;
 }
 
-interface FullOffer extends Omit<ThumbnailOffer, 'previewImage'> {
-  bedrooms: number;
-  description: string;
-  goods: string[];
-  host: UserGeneral;
-  images: string[];
-  maxAdults: number;
-}
+type ThumbnailOffer = Omit<
+  FullOffer,
+  'bedrooms' | 'description' | 'goods' | 'host' | 'images' | 'maxAdults'
+>;
+
+type Offer = Omit<FullOffer, 'previewImage'>;
 
 export type {
   FullOffer,
@@ -51,4 +55,5 @@ export type {
   ThumbnailOffer,
   LocationData,
   CityName,
+  Offer,
 };

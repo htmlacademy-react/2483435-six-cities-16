@@ -4,11 +4,11 @@ import { toStructureOffers } from './utils';
 import OfferCard from '../../../components/main/offer-card/offer-card';
 
 type FavoritesListProps = {
-  offers: ThumbnailOffer[];
+  favoritesOffers: ThumbnailOffer[];
 };
 
-function FavoritesList({ offers }: FavoritesListProps) {
-  const structuredOffers = toStructureOffers(offers);
+function FavoritesList({ favoritesOffers }: FavoritesListProps) {
+  const structuredOffers = toStructureOffers(favoritesOffers);
 
   return (
     <section className="favorites">
@@ -25,7 +25,11 @@ function FavoritesList({ offers }: FavoritesListProps) {
             </div>
             <div className="favorites__places">
               {offer.map((offerCard) => (
-                <OfferCard key={offerCard.id} className="favorites" offerCard={offerCard} />
+                <OfferCard
+                  key={offerCard.id}
+                  className="favorites"
+                  offerCard={offerCard}
+                />
               ))}
             </div>
           </li>
@@ -36,4 +40,3 @@ function FavoritesList({ offers }: FavoritesListProps) {
 }
 
 export { FavoritesList };
-

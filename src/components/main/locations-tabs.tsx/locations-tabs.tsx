@@ -5,7 +5,7 @@ function LocationsTabs() {
   return (
     <ul className="locations__list tabs__list">
       {CITIES_NAMES.map((city) => (
-        <li className="locations__item">
+        <li key={city} className="locations__item">
           <Link className="locations__item-link tabs__item" to="#">
             <span>{city}</span>
           </Link>
