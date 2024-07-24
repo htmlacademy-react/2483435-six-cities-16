@@ -14,4 +14,4 @@ function Logo(): JSX.Element {
   );
 }
 
-export default Logo;
+export { Logo };

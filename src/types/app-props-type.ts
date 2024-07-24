@@ -1,8 +1,8 @@
 import { mockThumbnailOffer } from '../mock/offer-mock';
 
-type Offers = ReturnType<typeof mockThumbnailOffer>;
+type Offer = ReturnType<typeof mockThumbnailOffer>;
 
 export type AppProps = {
-  offers: Offers[];
+  offers: Offer[];
   offersCount: number;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from './components/app/app';
+import { App } from './components/service/app/app';
 import { Setting } from './const';
 import { mockThumbnailOffer } from './mock/offer-mock';
 

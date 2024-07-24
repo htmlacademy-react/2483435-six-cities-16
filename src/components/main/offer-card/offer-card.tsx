@@ -1,6 +1,6 @@
-import type { ThumbnailOffer } from '../../types/offer-type';
+import type { ThumbnailOffer } from '../../../types/offer-type';
 import { Rating } from '../rating/rating';
-import { AppRoute } from '../../const';
+import { AppRoute } from '../../../const';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 
@@ -24,7 +24,7 @@ const upFirstLetter = (str: string): string =>
 
 const FAVORITES_CLASS_NAME = 'favorites';
 
-function Offer({ className, offerCard }: OfferCardProps): React.ReactNode {
+function OfferCard({ className, offerCard }: OfferCardProps): React.ReactNode {
   const {
     id,
     title,
@@ -78,4 +78,4 @@ function Offer({ className, offerCard }: OfferCardProps): React.ReactNode {
   );
 }
 
-export default Offer;
+export default OfferCard;

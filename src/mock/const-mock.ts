@@ -48,3 +48,7 @@ export const CITIES = [
     name: 'Paris',
   },
 ] as const;
+
+const CITIES_NAMES = CITIES.map((city) => city.name);
+
+export { CITIES_NAMES };
