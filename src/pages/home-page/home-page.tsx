@@ -1,23 +1,20 @@
+import { dataBase } from '../..';
 import { Header } from '../../components/header/header';
 import { LocationsTabs } from '../../components/main/locations-tabs.tsx/locations-tabs';
 import OffersList from '../../components/main/offers-list/offers-list';
+import { AuthStatus } from '../../const';
 import { useChangeTitle } from '../../hooks/title';
-import { AppProps } from '../../types/app-props-type';
-import { FavoritesPageProps } from '../favorites-page/favorites-page';
 
-export type HomePageProps = AppProps & FavoritesPageProps;
+export type HomePageProps = {
+  authStatus: AuthStatus;
+};
 
-function HomePage({
-  authStatus,
-  offers,
-  offersCount,
-  favoritesOffers,
-}: HomePageProps): JSX.Element {
-  const favoritesCount = favoritesOffers.length;
+function HomePage({ authStatus}: HomePageProps): JSX.Element {
+  const offersCount = dataBase.getOffersByName('paris').length;
   useChangeTitle('Home');
   return (
     <div className="page page--gray page--main">
-      <Header authStatus={authStatus} favoritesCount={favoritesCount} />
+      <Header authStatus={authStatus}/>
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -31,7 +28,7 @@ function HomePage({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offersCount} places to stay in Amsterdam
+                {offersCount} places to stay in Paris
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -59,7 +56,7 @@ function HomePage({
                   </li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList dataBase = {dataBase}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

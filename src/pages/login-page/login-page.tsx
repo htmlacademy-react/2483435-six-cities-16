@@ -6,12 +6,12 @@ type LoginPageProps = {
   authStatus: AuthStatus;
 };
 
-function LoginPage({ authStatus }: LoginPageProps): JSX.Element {
+function LoginPage({ authStatus}: LoginPageProps): JSX.Element {
   useChangeTitle('Login');
 
   return (
     <div className="page page--gray page--login">
-      <Header authStatus={authStatus} isLogPage />
+      <Header authStatus={authStatus}isLogPage />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

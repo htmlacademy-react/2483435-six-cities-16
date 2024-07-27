@@ -1,23 +1,22 @@
 import { useChangeTitle } from '../../hooks/title';
 import { Header } from '../../components/header/header';
-import { ThumbnailOffer } from '../../types/offer-type';
 import { Footer } from '../../components/footer/footer';
 import { AuthStatus } from '../../const';
 import clsx from 'clsx';
 import { FavoritesEmpty } from './favorites-empty';
 import { FavoritesList } from './favorites-list/favorites-list';
+import { dataBase } from '../..';
+
 
 export type FavoritesPageProps = {
   authStatus: AuthStatus;
-  favoritesOffers: ThumbnailOffer[];
 };
 
 function FavoritesPage({
   authStatus,
-  favoritesOffers,
 }: FavoritesPageProps): JSX.Element {
-  const favoritesCount = favoritesOffers.length;
-  const isEmptyFavorites = favoritesOffers.length === 0;
+  const favoritesCount = dataBase.getFavoritesOffers().length;
+  const isEmptyFavorites = favoritesCount === 0;
   const favoritePageClasses = clsx('page__main', 'page__mxain--favorites', {
     'page__main--favorites-empty': isEmptyFavorites,
   });
@@ -25,13 +24,13 @@ function FavoritesPage({
 
   return (
     <div className={`page ${isEmptyFavorites}`}>
-      <Header authStatus={authStatus} favoritesCount={favoritesCount} />
+      <Header authStatus={authStatus}/>
       <main className={favoritePageClasses}>
         <div className="page__favorites-container container">
           {isEmptyFavorites ? (
             <FavoritesEmpty />
           ) : (
-            <FavoritesList favoritesOffers={favoritesOffers} />
+            <FavoritesList/>
           )}
         </div>
       </main>

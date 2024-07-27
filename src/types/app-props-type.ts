@@ -1,8 +1,5 @@
-import { mockFullOffer } from '../mock/offer-mock';
-
-type Offer = ReturnType<typeof mockFullOffer>;
+import DataBase from '../components/service/data-base';
 
 export type AppProps = {
-  offers: Offer[];
-  offersCount: number;
+dataBase: DataBase;
 };

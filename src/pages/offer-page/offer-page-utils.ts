@@ -16,3 +16,6 @@ export const getNearOffers = (offers: ThumbnailOffer[], offerId: string) => {
 
   return nearOffers;
 };
+
+export const correctName = (name:number):string => name > 1 ? 's' : '';
+

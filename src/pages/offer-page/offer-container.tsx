@@ -3,6 +3,7 @@ import { FavoriteButton } from '../../components/main/favorite-button/favorite-b
 import { Rating } from '../../components/main/rating/rating';
 import { Offer } from '../../types/offer-type';
 import { upFirstLetter } from '../../utils/utils';
+import { correctName } from './offer-page-utils';
 
 type OfferContainerProps = {
   offer: Offer;
@@ -45,10 +46,10 @@ function OfferContainer({ offer }: OfferContainerProps) {
             {upFirstLetter(type)}
           </li>
           <li className="offer__feature offer__feature--bedrooms">
-            {`${bedrooms} Bedrooms`}
+            {`${bedrooms} Bedroom${correctName(bedrooms)}`}
           </li>
           <li className="offer__feature offer__feature--adults">
-            {`Max ${maxAdults} adults`}
+            {`Max ${maxAdults} adult${correctName(maxAdults)}`}
           </li>
         </ul>
         <div className="offer__price">
@@ -78,7 +79,7 @@ function OfferContainer({ offer }: OfferContainerProps) {
               />
             </div>
             <span className="offer__user-name">{host.name}</span>
-            <span className="offer__user-status">{host.isPro}</span>
+            {host.isPro && <span className="offer__user-status">Pro</span>}
           </div>
           <div className="offer__description">
             <p className="offer__text">{description}</p>

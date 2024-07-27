@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ThumbnailOffer } from '../../../types/offer-type';
 import { toStructureOffers } from './utils';
 import OfferCard from '../../../components/main/offer-card/offer-card';
+import { dataBase } from '../../..';
 
-type FavoritesListProps = {
-  favoritesOffers: ThumbnailOffer[];
-};
 
-function FavoritesList({ favoritesOffers }: FavoritesListProps) {
+function FavoritesList() {
+  const favoritesOffers = dataBase.getFavoritesOffers();
   const structuredOffers = toStructureOffers(favoritesOffers);
 
   return (

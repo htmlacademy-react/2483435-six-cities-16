@@ -1,10 +1,14 @@
-import { AppProps } from '../../../types/app-props-type';
+
+import DataBase from '../../service/data-base';
 import OfferCard from '../offer-card/offer-card';
 
-function OffersList({ offers }: Pick<AppProps, 'offers'>) {
+type OfferListType = {
+  dataBase: DataBase;
+}
+function OffersList({dataBase}:OfferListType) {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (
+      {dataBase.offers.map((offer) => (
         <OfferCard key={offer.id} className="cities" offerCard={offer} />
       ))}
     </div>

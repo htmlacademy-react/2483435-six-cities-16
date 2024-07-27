@@ -4,11 +4,11 @@ import { Navigation } from './navigation';
 
 export type HeaderProps = {
   authStatus: AuthStatus;
-  favoritesCount?: number;
   isLogPage?: boolean;
 };
 
-function Header({ authStatus, favoritesCount, isLogPage }: HeaderProps) {
+function Header({ authStatus, isLogPage }: HeaderProps) {
+
   return (
     <header className="header">
       <div className="container">
@@ -16,12 +16,7 @@ function Header({ authStatus, favoritesCount, isLogPage }: HeaderProps) {
           <div className="header__left">
             <Logo />
           </div>
-          {!isLogPage && (
-            <Navigation
-              authStatus={authStatus}
-              favoritesCount={favoritesCount}
-            />
-          )}
+          {!isLogPage && <Navigation authStatus={authStatus}/>}
         </div>
       </div>
     </header>
