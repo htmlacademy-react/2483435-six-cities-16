@@ -18,11 +18,13 @@ type OfferCardProps = {
     | 'isPremium'
     | 'previewImage'
   >;
+  onMouseEnter:(evt: React.FormEvent) => void;
+  onMouseLeave:(evt: React.FormEvent) => void;
 };
 
 const FAVORITES_CLASS_NAME = 'favorites';
 
-function OfferCard({ className, offerCard }: OfferCardProps): React.ReactNode {
+function OfferCard({ className, offerCard, onMouseEnter, onMouseLeave }: OfferCardProps): React.ReactNode {
   const {
     id,
     title,
@@ -40,7 +42,10 @@ function OfferCard({ className, offerCard }: OfferCardProps): React.ReactNode {
     className === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
 
   return (
-    <article className={`${className}__card place-card`}>
+    <article className={`${className}__card place-card`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

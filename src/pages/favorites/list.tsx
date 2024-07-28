@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import { toStructureOffers } from './utils';
-import OfferCard from '../../../components/main/offer-card/offer-card';
-import { dataBase } from '../../..';
+import OfferCard from '../../components/main/offer-card/offer-card';
+import { dataBase } from '../../components/service/data-base';
 
-
-function FavoritesList() {
+function List() {
   const favoritesOffers = dataBase.getFavoritesOffers();
   const structuredOffers = toStructureOffers(favoritesOffers);
 
@@ -37,4 +36,4 @@ function FavoritesList() {
   );
 }
 
-export { FavoritesList };
+export { List };

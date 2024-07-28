@@ -1,21 +1,26 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import FavoritesPage from '../../../pages/favorites-page/favorites-page';
-import LoginPage from '../../../pages/login-page/login-page';
-import OfferPage from '../../../pages/offer-page/offer-page';
+import SignIn from '../../../pages/sign-in/sign-in';
 import { PrivateRoute, PublicRoute } from '../private-route/private-route';
-import HomePage from '../../../pages/home-page/home-page';
+import Cities from '../../../pages/cities/cities';
 import { AppRoute } from '../../../const';
-// import ErrorPage from '../../../pages/error-page/error-page';
+import Error from '../../../pages/cities/error/error';
+import { DataBase } from '../data-base';
+import Favorites from '../../../pages/favorites/favorites';
+import Offer from '../../../pages/offer/offer';
 
-export function App() {
-  const currentStatus = 'AUTH';
+export type AppProps = {
+  dataBase: DataBase;
+};
+
+export function App({ dataBase }: AppProps) {
+  const currentStatus = dataBase.authStatus;
   const router = createBrowserRouter([
     {
-      // errorElement: <ErrorPage />,
+      errorElement: <Error />,
       children: [
         {
           index: true,
-          element: <HomePage authStatus={currentStatus} />,
+          element: <Cities dataBase={dataBase} />,
         },
 
         {
@@ -23,7 +28,7 @@ export function App() {
           children: [
             {
               path: AppRoute.Login,
-              element: <LoginPage authStatus={currentStatus} />,
+              element: <SignIn authStatus={currentStatus} />,
             },
           ],
         },
@@ -33,14 +38,14 @@ export function App() {
           children: [
             {
               path: AppRoute.Favorites,
-              element: <FavoritesPage authStatus={currentStatus} />,
+              element: <Favorites dataBase={dataBase} />,
             },
           ],
         },
 
         {
           path: AppRoute.Offer,
-          element: <OfferPage authStatus={currentStatus} />,
+          element: <Offer dataBase={dataBase} />,
         },
       ],
     },

@@ -1,7 +1,6 @@
-import { ThumbnailOffer } from '../../../types/offer-type';
+import { ThumbnailOffer } from '../../types/offer-type';
 
 type StructuredOffersType = {
-  // [ key: typeof CITIES_NAMES[number]]: ThumbnailOffer[];
   [key: string]: ThumbnailOffer[];
 };
 

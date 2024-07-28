@@ -3,13 +3,14 @@ import { FavoriteButton } from '../../components/main/favorite-button/favorite-b
 import { Rating } from '../../components/main/rating/rating';
 import { Offer } from '../../types/offer-type';
 import { upFirstLetter } from '../../utils/utils';
-import { correctName } from './offer-page-utils';
+import { correctName } from './utils';
+import { Reviews } from './reviews/reviews';
 
-type OfferContainerProps = {
+type DescriptionProps = {
   offer: Offer;
 };
 
-function OfferContainer({ offer }: OfferContainerProps) {
+function Description({ offer }: DescriptionProps) {
   const {
     title,
     type,
@@ -85,9 +86,10 @@ function OfferContainer({ offer }: OfferContainerProps) {
             <p className="offer__text">{description}</p>
           </div>
         </div>
+        <Reviews offerId={offer.id} />
       </div>
     </div>
   );
 }
 
-export { OfferContainer };
+export { Description };
