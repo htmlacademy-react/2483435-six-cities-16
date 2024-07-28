@@ -26,7 +26,7 @@ function CityOffers({ city, offers }: CityOffersProps) {
           <OfferCard
             key={offer.id}
             className="cities"
-            offerCard={offer}
+            offer={offer}
             onMouseEnter={() => setActiveId(offer.id)}
             onMouseLeave={resetActiveId}
           />

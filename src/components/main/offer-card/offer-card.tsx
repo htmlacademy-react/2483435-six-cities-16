@@ -7,7 +7,7 @@ import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
   className: string;
-  offerCard: Pick<
+  offer: Pick<
     ThumbnailOffer,
     | 'id'
     | 'title'
@@ -24,7 +24,7 @@ type OfferCardProps = {
 
 const FAVORITES_CLASS_NAME = 'favorites';
 
-function OfferCard({ className, offerCard, onMouseEnter, onMouseLeave }: OfferCardProps): React.ReactNode {
+function OfferCard({ className, offer, onMouseEnter, onMouseLeave }: OfferCardProps): React.ReactNode {
   const {
     id,
     title,
@@ -34,7 +34,7 @@ function OfferCard({ className, offerCard, onMouseEnter, onMouseLeave }: OfferCa
     isFavorite,
     isPremium,
     previewImage,
-  } = offerCard;
+  } = offer;
 
   const imgWidth = className === FAVORITES_CLASS_NAME ? 150 : 260;
   const imgHeight = className === FAVORITES_CLASS_NAME ? 110 : 200;
