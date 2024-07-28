@@ -29,7 +29,7 @@ export function Neighboring({
                 <OfferCard
                   key={offer.id}
                   className="near-places"
-                  offerCard={offer}
+                  offer={offer}
                   onMouseEnter={() => setActiveId(offer.id)}
                   onMouseLeave={resetActiveId}
                 />
