@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
-import { Setting } from './const';
+import { App } from './components/service/app/app';
+import { dataBase } from './components/service/data-base';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
-    <App
-      offersCount={Setting.OffersCount}
-    />
+    <App dataBase={dataBase}/>
   </React.StrictMode>
 );

@@ -1,10 +1,7 @@
 import { faker } from '@faker-js/faker';
-import type {
-  OfferType,
-  LocationData,
-  ThumbnailOffer,
-} from '../types/offer-type/offer-type';
-import { CITIES } from './const-mock';
+import type { OfferType, LocationData, FullOffer } from '../types/offer-type';
+import { CITIES, GOODS } from './const-mock';
+import { createMockUserGeneral } from './user-mock';
 
 const OFFER_TYPES: OfferType[] = ['apartment', 'hotel', 'house', 'room'];
 
@@ -24,20 +21,26 @@ const mockLocation = ({
   zoom: faker.number.int({ max: 10, min: 1 }),
 });
 
-export function mockThumbnailOffer(): ThumbnailOffer {
+export function mockFullOffer(): FullOffer {
   const type = faker.helpers.arrayElement(OFFER_TYPES);
   const city = faker.helpers.arrayElement(CITIES);
 
   return {
-    city,
     id: crypto.randomUUID(),
-    isFavorite: faker.datatype.boolean(),
-    isPremium: faker.datatype.boolean(),
-    location: mockLocation(city.location),
-    previewImage: faker.image.urlLoremFlickr({ category: type }),
-    price: faker.number.int({ max: 10000, min: 100 }),
-    rating: faker.number.int({ max: 5, min: 0 }),
     title: faker.location.streetAddress(),
     type,
+    price: faker.number.int({ max: 10000, min: 100 }),
+    city,
+    location: mockLocation(city.location),
+    isFavorite: faker.datatype.boolean(),
+    isPremium: faker.datatype.boolean(),
+    rating: faker.number.int({ max: 5, min: 0 }),
+    previewImage: faker.image.urlLoremFlickr({ category: type }),
+    bedrooms: faker.number.int({ max: 4, min: 1 }),
+    description: faker.lorem.paragraph(),
+    goods: faker.helpers.arrayElements(GOODS, { min: 2, max: 4 }),
+    host: createMockUserGeneral(),
+    images: Array.from({ length: 5 }, () => faker.image.url()),
+    maxAdults: faker.number.int({ max: 8, min: 1 }),
   };
 }
