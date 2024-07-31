@@ -23,7 +23,7 @@ function CityOffers({city, onOfferHover}:CityOffersProps) {
     }
   };
 
-const correctEnding = offers.length > 1 ? 's' : '';
+  const correctEnding = offers.length > 1 ? 's' : '';
 
 
   return (

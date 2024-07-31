@@ -29,6 +29,7 @@ export function Map({ className, activeCity, activeOffer, offers }: MapProps) {
       className={`${className}__map map`}
       style={{ height: '900px' }}
       ref={mapRef}
-    ></section>
+    >
+    </section>
   );
 }
