@@ -6,11 +6,12 @@ type Location = {
   lng: number;
   zoom: number;
 };
-
-const MAP_URL =
-  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-const MAP_COPYRIGHT =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+enum MapSetting {
+  MapUrl =
+    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  MapCopyright =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+}
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -29,8 +30,8 @@ function useMap(
         zoom: currentCity.zoom,
       });
 
-      const layer = new TileLayer(MAP_URL, {
-        attribution: MAP_COPYRIGHT,
+      const layer = new TileLayer(MapSetting.MapUrl, {
+        attribution: MapSetting.MapCopyright,
       });
       instance.addLayer(layer);
 

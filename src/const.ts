@@ -22,6 +22,6 @@ export const AUTH_STATUS = ['AUTH', 'NO_AUTH', 'UNKNOWN'];
 export type AuthStatus = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
 
 export enum MapMarker {
-  DefaultMarker = '../markup/img/pin.svg',
-  ActiveMarker = '../markup/img/pin-active.svg',
+  DefaultMarker = 'img/pin.svg',
+  ActiveMarker = 'img/pin-active.svg',
 }
