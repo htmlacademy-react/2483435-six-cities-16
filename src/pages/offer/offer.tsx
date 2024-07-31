@@ -4,23 +4,22 @@ import { useChangeTitle } from '../../hooks/title';
 import { getCurrentOffer } from './utils';
 import { Description } from './description';
 import { DataBase } from '../../components/service/data-base';
-import { useState } from 'react';
 import { Neighboring } from './neighboring';
 import { Photos } from './photos';
-import { Map } from './map';
+import { Map } from '../../components/map/map';
 
 type OfferProps = {
   dataBase: DataBase;
 };
 
+const MAX_NEARBY_OFFER_COUNT = 4;
+
 function Offer({ dataBase }: OfferProps): JSX.Element {
   const { offers, authStatus } = dataBase;
   const { id: offerId } = useParams();
   const currentOffer = getCurrentOffer(offers, offerId!)!;
-  const [activeId, setActiveId] = useState('');
-  dataBase.activeId = activeId;
 
-  const resetActiveId = () => setActiveId('');
+  const nearOffers = dataBase.getOffersByCity(currentOffer.city.name).slice(0, MAX_NEARBY_OFFER_COUNT);
   useChangeTitle('Offer');
 
   return (
@@ -30,9 +29,12 @@ function Offer({ dataBase }: OfferProps): JSX.Element {
         <section className="offer">
           <Photos currentOffer={currentOffer} />
           <Description offer={currentOffer} />
-          <Map />
+          <Map className="offer" activeCity={currentOffer.city.name} activeOffer={currentOffer} offers={nearOffers}/>
         </section>
-        <Neighboring currentOffer={currentOffer} setActiveId={setActiveId} resetActiveId={resetActiveId}/>
+        <Neighboring
+          currentOffer={currentOffer}
+          nearOffers={nearOffers}
+        />
       </main>
     </div>
   );
