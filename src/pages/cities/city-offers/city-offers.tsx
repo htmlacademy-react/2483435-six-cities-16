@@ -1,24 +1,36 @@
-import { useState } from 'react';
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
-import { CityName, ThumbnailOffer } from '../../../types/offer-type';
+import { CityName, FullOffer } from '../../../types/offer-type';
 import { dataBase } from '../../../components/service/data-base';
 
-type CityOffersProps = {
-  city: CityName;
-  offers: ThumbnailOffer[];
-};
+type CityOffersProps ={
+  city:CityName;
+  onOfferHover?: (offer?:FullOffer) => void;
+}
 
-function CityOffers({ city, offers }: CityOffersProps) {
-  const [activeId, setActiveId] = useState('');
-  const resetActiveId = () => setActiveId('');
-  dataBase.activeId = activeId;
+
+function CityOffers({city, onOfferHover}:CityOffersProps) {
+  const offers = dataBase.getOffersByCity(city);
+  const handleMouseEnter = (offer:FullOffer)=> {
+    if (onOfferHover) {
+      onOfferHover(offer);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (onOfferHover) {
+      onOfferHover();
+    }
+  };
+
+const correctEnding = offers.length > 1 ? 's' : '';
+
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {offers.length} places to stay in {city}
+        {offers.length} place{correctEnding} to stay in {city}
       </b>
       <SortSelect />
       <div className="cities__places-list places__list tabs__content">
@@ -27,8 +39,10 @@ function CityOffers({ city, offers }: CityOffersProps) {
             key={offer.id}
             className="cities"
             offer={offer}
-            onMouseEnter={() => setActiveId(offer.id)}
-            onMouseLeave={resetActiveId}
+            onMouseEnter={() => {
+              handleMouseEnter(offer);
+            }}
+            onMouseLeave={handleMouseLeave}
           />
         ))}
       </div>

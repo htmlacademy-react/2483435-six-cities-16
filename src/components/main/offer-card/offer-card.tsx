@@ -7,24 +7,14 @@ import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
   className: string;
-  offer: Pick<
-    ThumbnailOffer,
-    | 'id'
-    | 'title'
-    | 'type'
-    | 'price'
-    | 'rating'
-    | 'isFavorite'
-    | 'isPremium'
-    | 'previewImage'
-  >;
-  onMouseEnter:(evt: React.FormEvent) => void;
-  onMouseLeave:(evt: React.FormEvent) => void;
+  offer: ThumbnailOffer;
+  onMouseEnter?: (offer: ThumbnailOffer) => void;
+  onMouseLeave?: () => void;
 };
 
 const FAVORITES_CLASS_NAME = 'favorites';
 
-function OfferCard({ className, offer, onMouseEnter, onMouseLeave }: OfferCardProps): React.ReactNode {
+function OfferCard({ className, offer, onMouseEnter, onMouseLeave}: OfferCardProps): React.ReactNode {
   const {
     id,
     title,
@@ -42,10 +32,7 @@ function OfferCard({ className, offer, onMouseEnter, onMouseLeave }: OfferCardPr
     className === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
 
   return (
-    <article className={`${className}__card place-card`}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <article className={`${className}__card place-card`} onMouseEnter={()=>onMouseEnter?.(offer)} onMouseLeave={()=>onMouseLeave?.()}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

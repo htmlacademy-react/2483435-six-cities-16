@@ -1,19 +1,14 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
-import { dataBase } from '../../components/service/data-base';
-import { Offer } from '../../types/offer-type';
+import { FullOffer, Offer } from '../../types/offer-type';
 
 type NeighboringProps = {
   currentOffer: Offer;
-  setActiveId: (id: string) => void;
-  resetActiveId: () => void;
+  nearOffers: FullOffer[];
 };
 
-export function Neighboring({
-  currentOffer,
-  setActiveId,
-  resetActiveId,
-}: NeighboringProps) {
-  const nearOffers = dataBase.getOffersByCity(currentOffer.city.name);
+
+export function Neighboring({ currentOffer, nearOffers }: NeighboringProps) {
+
   return nearOffers.length <= 1 ? (
     ''
   ) : (
@@ -30,8 +25,6 @@ export function Neighboring({
                   key={offer.id}
                   className="near-places"
                   offer={offer}
-                  onMouseEnter={() => setActiveId(offer.id)}
-                  onMouseLeave={resetActiveId}
                 />
               )
           )}

@@ -10,13 +10,14 @@ export function Reviews({ offerId }: ReviewsProps) {
   const authStatus = dataBase.authStatus;
   const isAuth = authStatus === 'AUTH';
   const reviews = sortByDate(dataBase.getCommentsById(offerId));
+  const lastestsReviews = reviews.slice(0,10);
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviews.map((review) => (
+        {lastestsReviews.map((review) => (
           <Review key={review.id} review={review} />
         ))}
       </ul>

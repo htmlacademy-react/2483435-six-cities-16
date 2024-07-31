@@ -31,7 +31,7 @@ export function mockFullOffer(): FullOffer {
     type,
     price: faker.number.int({ max: 10000, min: 100 }),
     city,
-    location: mockLocation(city.location),
+    location: mockLocation(CITIES.find((currentCity)=> city.name === currentCity.name)!.location),
     isFavorite: faker.datatype.boolean(),
     isPremium: faker.datatype.boolean(),
     rating: faker.number.int({ max: 5, min: 0 }),

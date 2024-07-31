@@ -48,7 +48,7 @@ export const CITIES = [
     },
     name: 'Dusseldorf',
   }
-] as const;
+];
 
 export const GOODS = [
   'Heating',
