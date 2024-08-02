@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { FullOffer, LocationData } from '../../types/offer-type';
-import { Icon,Map as LeafletMap, Marker, layerGroup } from 'leaflet';
+import { Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 
 type Location = {
@@ -31,16 +31,18 @@ export const adaptLocation = ({
   zoom: zoom,
 });
 
-export const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
+export const useUpdateLocation = (map: any, location: Location) => {
   useEffect(() => {
     if (map) {
       map.setView(location);
+      const markerLayer = layerGroup().addTo(map);
+      map.removeLayer(markerLayer);
     }
   });
 };
 
 export const useUpdateMarkers = (
-  map: LeafletMap | null,
+  map: any,
   offers: FullOffer[],
   activeOffer?: FullOffer | null
 ) => {

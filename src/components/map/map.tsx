@@ -27,6 +27,7 @@ export function Map({ className, activeCity, activeOffer, offers }: MapProps) {
   return (
     <section
       className={`${className}__map map`}
+      style={{ height: '900px' }}
       ref={mapRef}
     >
     </section>

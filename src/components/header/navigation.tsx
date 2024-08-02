@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { HeaderProps } from './header';
 import { IsLogged } from './isLogged';
 import { AppRoute } from '../../const';
+import { store } from '../service/store/store';
 
-type NavigationProps = HeaderProps;
-
-function Navigation({ authStatus}: NavigationProps) {
+function Navigation() {
+  const authStatus = store.getState().status;
   const isAuth = authStatus === 'AUTH';
 
   return (

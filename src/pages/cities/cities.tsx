@@ -8,13 +8,14 @@ import { Empty } from './empty';
 import { Map } from '../../components/map/map';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { store } from '../../components/service/store/store';
+import { setCity } from '../../components/service/store/state';
 
 type CitiesProps = AppProps;
 
 function Cities({ dataBase }: CitiesProps): JSX.Element {
-  const { authStatus } = dataBase;
   const [activeOffer, setActiveOffer] = useState<FullOffer | null>(null);
-  const [activeCity, setActiveCity] = useState('Paris');
+  const activeCity = store.getState().city.city;
   const offers = dataBase.getOffersByCity(activeCity);
   const isEmpty = offers.length === 0;
   const isEmptyMainClasses = clsx('page__main', 'page__main--index', {
@@ -25,17 +26,16 @@ function Cities({ dataBase }: CitiesProps): JSX.Element {
   });
 
   const handleCityChange = (city: CityName) => {
-    setActiveCity(city);
+    store.dispatch(setCity(city));
   };
   const handleOfferHover = (offer?: FullOffer) => {
     setActiveOffer(offer || null);
   };
-
   useChangeTitle('Home');
 
   return (
     <div className="page page--gray page--main">
-      <Header authStatus={authStatus} />
+      <Header/>
 
       <main className={isEmptyMainClasses}>
         <h1 className="visually-hidden">Cities</h1>
