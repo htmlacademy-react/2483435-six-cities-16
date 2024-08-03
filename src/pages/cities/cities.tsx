@@ -9,7 +9,7 @@ import { Map } from '../../components/map/map';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { store } from '../../components/service/store/store';
-import { setCity } from '../../components/service/store/state';
+import { setCity } from '../../components/service/store/rent-slice';
 
 type CitiesProps = AppProps;
 
@@ -35,7 +35,7 @@ function Cities({ dataBase }: CitiesProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <Header/>
+      <Header />
 
       <main className={isEmptyMainClasses}>
         <h1 className="visually-hidden">Cities</h1>
