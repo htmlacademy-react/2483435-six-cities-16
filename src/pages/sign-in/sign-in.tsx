@@ -1,17 +1,12 @@
 import { Header } from '../../components/header/header';
-import { AuthStatus } from '../../const';
 import { useChangeTitle } from '../../hooks/title';
 
-type SignInProps = {
-  authStatus: AuthStatus;
-};
-
-function SignIn({ authStatus }: SignInProps): JSX.Element {
+function SignIn(): JSX.Element {
   useChangeTitle('Login');
 
   return (
     <div className="page page--gray page--login">
-      <Header authStatus={authStatus} isLogPage />
+      <Header isLogPage />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

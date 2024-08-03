@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { IsLogged } from './isLogged';
 import { AppRoute } from '../../const';
-import { store } from '../service/store/store';
+import { useAppSelector } from '../service/store/hocks';
 
 function Navigation() {
-  const authStatus = store.getState().status;
+  const authStatus = useAppSelector((state)=>state.rentSlice.status);
   const isAuth = authStatus === 'AUTH';
 
   return (

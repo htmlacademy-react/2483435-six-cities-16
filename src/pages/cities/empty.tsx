@@ -1,10 +1,7 @@
-import { CityName } from '../../types/offer-type';
+import { useAppSelector } from '../../components/service/store/hocks';
 
-type EmptyProps = {
-  city: CityName;
-};
-
-export function Empty({ city }: EmptyProps) {
+export function Empty() {
+  const city = useAppSelector((state)=>state.rentSlice.city);
   return (
 
     <>

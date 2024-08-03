@@ -1,23 +1,20 @@
 import { Header } from '../../components/header/header';
 import { LocationsTabs } from './cities-tabs.tsx/cities-tabs';
 import CityOffers from './city-offers/city-offers';
-import { AppProps } from '../../components/service/app/app';
 import { useChangeTitle } from '../../hooks/title';
-import { CityName, FullOffer } from '../../types/offer-type';
 import { Empty } from './empty';
 import { Map } from '../../components/map/map';
-import { useState } from 'react';
 import clsx from 'clsx';
-import { store } from '../../components/service/store/store';
-import { setCity } from '../../components/service/store/rent-slice';
+import { useAppSelector } from '../../components/service/store/hocks';
+import { getOffersByCity } from '../../utils/utils';
+function Cities(): JSX.Element {
 
-type CitiesProps = AppProps;
 
-function Cities({ dataBase }: CitiesProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<FullOffer | null>(null);
-  const activeCity = store.getState().city.city;
-  const offers = dataBase.getOffersByCity(activeCity);
-  const isEmpty = offers.length === 0;
+  const city = useAppSelector((state)=>state.rentSlice.city);
+  const offers = useAppSelector((state)=>state.rentSlice.offers);
+  const activeOffer = useAppSelector((state)=>state.rentSlice.activeOffer);
+  const filteredOffers = getOffersByCity(city,offers);
+  const isEmpty = filteredOffers.length === 0;
   const isEmptyMainClasses = clsx('page__main', 'page__main--index', {
     'page__main--index-empty': isEmpty,
   });
@@ -25,12 +22,6 @@ function Cities({ dataBase }: CitiesProps): JSX.Element {
     'cities__places-container--empty': isEmpty,
   });
 
-  const handleCityChange = (city: CityName) => {
-    store.dispatch(setCity(city));
-  };
-  const handleOfferHover = (offer?: FullOffer) => {
-    setActiveOffer(offer || null);
-  };
   useChangeTitle('Home');
 
   return (
@@ -41,25 +32,22 @@ function Cities({ dataBase }: CitiesProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsTabs
-              activeCity={activeCity}
-              onCityChange={handleCityChange}
-            />
+            <LocationsTabs/>
           </section>
         </div>
         <div className="cities">
           <div className={isEmptyCitiesClasses}>
             {isEmpty ? (
-              <Empty city={activeCity} />
+              <Empty/>
             ) : (
               <>
-                <CityOffers city={activeCity} onOfferHover={handleOfferHover} />
+                <CityOffers/>
                 <div className="cities__right-section">
                   <Map
                     className="cities"
-                    activeCity={activeCity}
+                    activeCity={city}
+                    offers={filteredOffers}
                     activeOffer={activeOffer}
-                    offers={offers}
                   />
                 </div>
               </>

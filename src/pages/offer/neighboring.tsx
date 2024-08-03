@@ -1,13 +1,11 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
-import { FullOffer, Offer } from '../../types/offer-type';
+import { useAppSelector } from '../../components/service/store/hocks';
+import { MAX_NEARBY_OFFER_COUNT } from '../../const';
 
-type NeighboringProps = {
-  currentOffer: Offer;
-  nearOffers: FullOffer[];
-};
-
-
-export function Neighboring({ currentOffer, nearOffers }: NeighboringProps) {
+export function Neighboring() {
+  const offers = useAppSelector((state) => state.rentSlice.offers);
+  const nearOffers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  const currentOffer = useAppSelector((state) => state.rentSlice.activeOffer);
 
   return nearOffers.length <= 1 ? (
     ''
@@ -20,7 +18,7 @@ export function Neighboring({ currentOffer, nearOffers }: NeighboringProps) {
         <div className="near-places__list places__list">
           {nearOffers.map(
             (offer) =>
-              offer.id !== currentOffer.id && (
+              offer.id !== currentOffer!.id && (
                 <OfferCard
                   key={offer.id}
                   className="near-places"

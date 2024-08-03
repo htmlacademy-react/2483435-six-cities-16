@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import { toStructureOffers } from './utils';
 import OfferCard from '../../components/main/offer-card/offer-card';
-import { dataBase } from '../../components/service/data-base';
-import { useState } from 'react';
+import { useAppSelector } from '../../components/service/store/hocks';
 
 function List() {
-  const favoritesOffers = dataBase.getFavoritesOffers();
-  const structuredOffers = toStructureOffers(favoritesOffers);
-  const [activeId, setActiveId] = useState('');
-  const resetActiveId = () => setActiveId('');
-  dataBase.activeId = activeId;
+  const favorites = useAppSelector((state) => state.rentSlice.favorites);
+  const structuredOffers = toStructureOffers(favorites);
 
   return (
     <section className="favorites">
@@ -26,13 +22,7 @@ function List() {
             </div>
             <div className="favorites__places">
               {offers.map((offer) => (
-                <OfferCard
-                  key={offer.id}
-                  className="favorites"
-                  offer={offer}
-                  onMouseEnter={() => setActiveId(offer.id)}
-                  onMouseLeave={resetActiveId}
-                />
+                <OfferCard key={offer.id} className="favorites" offer={offer} />
               ))}
             </div>
           </li>

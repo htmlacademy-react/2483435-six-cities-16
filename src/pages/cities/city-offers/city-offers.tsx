@@ -1,40 +1,39 @@
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
-import { CityName, FullOffer } from '../../../types/offer-type';
-import { dataBase } from '../../../components/service/data-base';
+import { FullOffer } from '../../../types/offer-type';
+import { handleActiveOffer } from '../../../components/service/store/rent-slice';
+import { useAppSelector } from '../../../components/service/store/hocks';
+import { getOffersByCity } from '../../../utils/utils';
+import { dispatch } from '../../../components/service/store/store';
 
-type CityOffersProps ={
-  city:CityName;
-  onOfferHover?: (offer?:FullOffer) => void;
-}
+function CityOffers() {
 
-
-function CityOffers({city, onOfferHover}:CityOffersProps) {
-  const offers = dataBase.getOffersByCity(city);
+  const city = useAppSelector((state)=>state.rentSlice.city);
+  const offers = useAppSelector((state)=>state.rentSlice.offers);
+  const filteredOffers = getOffersByCity(city,offers);
   const handleMouseEnter = (offer:FullOffer)=> {
-    if (onOfferHover) {
-      onOfferHover(offer);
+    if (handleActiveOffer) {
+      dispatch(handleActiveOffer(offer));
     }
   };
 
   const handleMouseLeave = () => {
-    if (onOfferHover) {
-      onOfferHover();
+    if (handleActiveOffer) {
+      dispatch(handleActiveOffer());
     }
   };
 
-  const correctEnding = offers.length > 1 ? 's' : '';
-
+  const correctEnding = filteredOffers.length > 1 ? 's' : '';
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {offers.length} place{correctEnding} to stay in {city}
+        {filteredOffers.length} place{correctEnding} to stay in {city}
       </b>
       <SortSelect />
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
+        {filteredOffers.map((offer) => (
           <OfferCard
             key={offer.id}
             className="cities"

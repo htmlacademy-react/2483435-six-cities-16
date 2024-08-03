@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import type { OfferType, LocationData, FullOffer } from '../types/offer-type';
 import { CITIES, GOODS } from './const-mock';
 import { createMockUserGeneral } from './user-mock';
+import { Setting } from '../const';
 
 const OFFER_TYPES: OfferType[] = ['apartment', 'hotel', 'house', 'room'];
 
@@ -44,3 +45,5 @@ export function mockFullOffer(): FullOffer {
     maxAdults: faker.number.int({ max: 8, min: 1 }),
   };
 }
+
+export const generateOffers = () => Array.from({ length: Setting.OffersCount }, mockFullOffer);

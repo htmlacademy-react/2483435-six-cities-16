@@ -1,4 +1,4 @@
-import type { ThumbnailOffer } from '../../../types/offer-type';
+import type { FullOffer } from '../../../types/offer-type';
 import { Rating } from '../rating/rating';
 import { AppRoute } from '../../../const';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,8 @@ import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
   className: string;
-  offer: ThumbnailOffer;
-  onMouseEnter?: (offer: ThumbnailOffer) => void;
+  offer: FullOffer;
+  onMouseEnter?: (offer: FullOffer) => void;
   onMouseLeave?: () => void;
 };
 

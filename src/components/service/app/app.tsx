@@ -4,48 +4,54 @@ import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import Cities from '../../../pages/cities/cities';
 import { AppRoute } from '../../../const';
 import Error from '../../../pages/cities/error/error';
-import { DataBase } from '../data-base';
 import Favorites from '../../../pages/favorites/favorites';
 import Offer from '../../../pages/offer/offer';
+import { useEffect } from 'react';
+import { loadComments, loadOffers } from '../store/rent-slice';
+import { dispatch, store } from '../store/store';
+import { useAppSelector } from '../store/hocks';
 
-export type AppProps = {
-  dataBase: DataBase;
-};
+export function App() {
+  useEffect(() => {
+    dispatch(loadOffers());
+    //ВОПРОС store state
+    dispatch(loadComments(store.getState().rentSlice.offers));
+  },[]
+  );
 
-export function App({ dataBase }: AppProps) {
-  const currentStatus = dataBase.authStatus;
+  const authStatus = useAppSelector((state)=>state.rentSlice.status);
   const router = createBrowserRouter([
     {
       errorElement: <Error />,
       children: [
         {
           index: true,
-          element: <Cities dataBase={dataBase} />,
+          element: <Cities/>,
         },
 
         {
-          element: <PublicRoute authStatus={currentStatus} />,
+          element: <PublicRoute authStatus={authStatus} />,
           children: [
             {
               path: AppRoute.Login,
-              element: <SignIn authStatus={currentStatus} />,
+              element: <SignIn/>,
             },
           ],
         },
 
         {
-          element: <PrivateRoute authStatus={currentStatus} />,
+          element: <PrivateRoute authStatus={authStatus}/>,
           children: [
             {
               path: AppRoute.Favorites,
-              element: <Favorites dataBase={dataBase} />,
+              element: <Favorites/>,
             },
           ],
         },
 
         {
           path: AppRoute.Offer,
-          element: <Offer dataBase={dataBase} />,
+          element: <Offer/>,
         },
       ],
     },

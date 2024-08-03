@@ -1,5 +1,5 @@
 export const Setting = {
-  OffersCount: 30,
+  OffersCount: 10,
 } as const;
 
 export enum AppRoute {
@@ -25,3 +25,5 @@ export enum MapMarker {
   DefaultMarker = '../markup/img/pin.svg',
   ActiveMarker = '../markup/img/pin-active.svg',
 }
+
+export const MAX_NEARBY_OFFER_COUNT = 4;

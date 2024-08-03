@@ -1,20 +1,22 @@
-import { dataBase } from '../../../components/service/data-base';
 import { sortByDate } from '../utils';
 import { Review } from './review';
 import { NewReview } from './new-review';
+import { useAppSelector } from '../../../components/service/store/hocks';
+import { getCommentsById } from '../../../utils/utils';
 
-type ReviewsProps = {
-  offerId: string | undefined;
-};
-export function Reviews({ offerId }: ReviewsProps) {
-  const authStatus = dataBase.authStatus;
+
+export function Reviews() {
+  const currentOffer = useAppSelector((state)=>state.rentSlice.activeOffer)!;
+  const authStatus = useAppSelector((state)=>state.rentSlice.status);
   const isAuth = authStatus === 'AUTH';
-  const reviews = sortByDate(dataBase.getCommentsById(offerId));
-  const lastestsReviews = reviews.slice(0,10);
+  const comments = useAppSelector((state)=>state.rentSlice.comments);
+  const reviews = getCommentsById(currentOffer, comments);
+  const sortedReviews = sortByDate(reviews);
+  const lastestsReviews = sortedReviews!.slice(0,10);
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews · <span className="reviews__amount">{reviews.length}</span>
+        Reviews · <span className="reviews__amount">{sortedReviews.length}</span>
       </h2>
       <ul className="reviews__list">
         {lastestsReviews.map((review) => (
