@@ -7,26 +7,22 @@ import Error from '../../../pages/cities/error/error';
 import Favorites from '../../../pages/favorites/favorites';
 import Offer from '../../../pages/offer/offer';
 import { useEffect } from 'react';
-import { loadComments, loadOffers } from '../store/rent-slice';
-import { dispatch, store } from '../store/store';
-import { useAppSelector } from '../store/hocks';
+import { useAppSelector } from '../../../hooks/store';
+import { loadData } from '../../../store/slices/offers-slice';
 
 export function App() {
   useEffect(() => {
-    dispatch(loadOffers());
-    //ВОПРОС store state
-    dispatch(loadComments(store.getState().rentSlice.offers));
-  },[]
-  );
+    loadData();
+  }, []);
 
-  const authStatus = useAppSelector((state)=>state.rentSlice.status);
+  const authStatus = useAppSelector((state) => state.user.status);
   const router = createBrowserRouter([
     {
       errorElement: <Error />,
       children: [
         {
           index: true,
-          element: <Cities/>,
+          element: <Cities />,
         },
 
         {
@@ -34,24 +30,24 @@ export function App() {
           children: [
             {
               path: AppRoute.Login,
-              element: <SignIn/>,
+              element: <SignIn />,
             },
           ],
         },
 
         {
-          element: <PrivateRoute authStatus={authStatus}/>,
+          element: <PrivateRoute authStatus={authStatus} />,
           children: [
             {
               path: AppRoute.Favorites,
-              element: <Favorites/>,
+              element: <Favorites />,
             },
           ],
         },
 
         {
           path: AppRoute.Offer,
-          element: <Offer/>,
+          element: <Offer />,
         },
       ],
     },

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { toStructureOffers } from './utils';
 import OfferCard from '../../components/main/offer-card/offer-card';
-import { useAppSelector } from '../../components/service/store/hocks';
+import { useAppSelector } from '../../hooks/store';
 
 function List() {
-  const favorites = useAppSelector((state) => state.rentSlice.favorites);
+  const favorites = useAppSelector((state) => state.offers.offers);
   const structuredOffers = toStructureOffers(favorites);
 
   return (

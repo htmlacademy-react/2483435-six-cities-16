@@ -5,15 +5,13 @@ import { useChangeTitle } from '../../hooks/title';
 import { Empty } from './empty';
 import { Map } from '../../components/map/map';
 import clsx from 'clsx';
-import { useAppSelector } from '../../components/service/store/hocks';
+import { useAppSelector } from '../../hooks/store';
 import { getOffersByCity } from '../../utils/utils';
 function Cities(): JSX.Element {
-
-
-  const city = useAppSelector((state)=>state.rentSlice.city);
-  const offers = useAppSelector((state)=>state.rentSlice.offers);
-  const activeOffer = useAppSelector((state)=>state.rentSlice.activeOffer);
-  const filteredOffers = getOffersByCity(city,offers);
+  const city = useAppSelector((state) => state.interplay.selectCity);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const activeOffer = useAppSelector((state) => state.interplay.activeOffer);
+  const filteredOffers = getOffersByCity(city, offers);
   const isEmpty = filteredOffers.length === 0;
   const isEmptyMainClasses = clsx('page__main', 'page__main--index', {
     'page__main--index-empty': isEmpty,
@@ -32,16 +30,16 @@ function Cities(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsTabs/>
+            <LocationsTabs />
           </section>
         </div>
         <div className="cities">
           <div className={isEmptyCitiesClasses}>
             {isEmpty ? (
-              <Empty/>
+              <Empty />
             ) : (
               <>
-                <CityOffers/>
+                <CityOffers />
                 <div className="cities__right-section">
                   <Map
                     className="cities"

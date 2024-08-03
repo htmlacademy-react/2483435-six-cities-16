@@ -4,10 +4,10 @@ import { Rating } from '../../components/main/rating/rating';
 import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
-import { useAppSelector } from '../../components/service/store/hocks';
+import { useAppSelector } from '../../hooks/store';
 
 function Description() {
-  const currentOffer = useAppSelector((state)=>state.rentSlice.activeOffer)!;
+  const currentOffer = useAppSelector((state) => state.interplay.activeOffer)!;
   const {
     title,
     type,
@@ -83,7 +83,7 @@ function Description() {
             <p className="offer__text">{description}</p>
           </div>
         </div>
-        <Reviews/>
+        <Reviews />
       </div>
     </div>
   );

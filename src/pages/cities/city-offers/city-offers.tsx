@@ -1,17 +1,16 @@
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
 import { FullOffer } from '../../../types/offer-type';
-import { handleActiveOffer } from '../../../components/service/store/rent-slice';
-import { useAppSelector } from '../../../components/service/store/hocks';
+import { useAppSelector } from '../../../hooks/store';
 import { getOffersByCity } from '../../../utils/utils';
-import { dispatch } from '../../../components/service/store/store';
+import { dispatch } from '../../../store/store';
+import { handleActiveOffer } from '../../../store/slices/interplay-slice';
 
 function CityOffers() {
-
-  const city = useAppSelector((state)=>state.rentSlice.city);
-  const offers = useAppSelector((state)=>state.rentSlice.offers);
-  const filteredOffers = getOffersByCity(city,offers);
-  const handleMouseEnter = (offer:FullOffer)=> {
+  const city = useAppSelector((state) => state.interplay.selectCity);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const filteredOffers = getOffersByCity(city, offers);
+  const handleMouseEnter = (offer: FullOffer) => {
     if (handleActiveOffer) {
       dispatch(handleActiveOffer(offer));
     }

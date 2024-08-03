@@ -1,8 +1,7 @@
-import { useAppSelector } from '../../components/service/store/hocks';
-
+import { useAppSelector } from '../../hooks/store';
 
 export function Photos() {
-  const currentOffer = useAppSelector((state)=>state.rentSlice.activeOffer);
+  const currentOffer = useAppSelector((state) => state.interplay.activeOffer);
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">

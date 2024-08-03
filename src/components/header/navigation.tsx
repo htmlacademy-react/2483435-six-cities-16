@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { IsLogged } from './isLogged';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../service/store/hocks';
+import { useAppSelector } from '../../hooks/store';
 
 function Navigation() {
-  const authStatus = useAppSelector((state)=>state.rentSlice.status);
+  const authStatus = useAppSelector((state) => state.user.status);
   const isAuth = authStatus === 'AUTH';
 
   return (
     <nav className="header__nav">
       {isAuth ? (
-        <IsLogged/>
+        <IsLogged />
       ) : (
         <ul className="header__nav-list">
           <li className="header__nav-item user">

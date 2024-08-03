@@ -4,10 +4,10 @@ import { Footer } from '../../components/footer/footer';
 import clsx from 'clsx';
 import { Empty } from '../favorites/empty';
 import { List } from './list';
-import { useAppSelector } from '../../components/service/store/hocks';
+import { useAppSelector } from '../../hooks/store';
 
 function Favorites(): JSX.Element {
-  const favorites = useAppSelector((state) => state.rentSlice.favorites);
+  const favorites = useAppSelector((state) => state.offers.offers);
   const isEmptyFavorites = favorites.length === 0;
   const favoritePageClasses = clsx('page__main', 'page__mxain--favorites', {
     'page__main--favorites-empty': isEmptyFavorites,
