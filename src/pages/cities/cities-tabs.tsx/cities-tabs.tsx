@@ -2,28 +2,36 @@ import clsx from 'clsx';
 import { CITIES_NAMES } from '../../../mock/const-mock';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
-import { useAppSelector } from '../../../hooks/store';
-import { dispatch } from '../../../store/store';
-import { activeSelectors, handleChangeCity } from '../../../store/slices/active-slice';
+import { useActionCreators, useAppSelector } from '../../../hooks/store';
+import {
+  activeActions,
+  activeSelectors,
+} from '../../../store/slices/active-slice';
+import { CityName } from '../../../types/offer-type';
 
 function CitiesTabs() {
-  const currentCity = useAppSelector(activeSelectors.city);
+  const city = useAppSelector(activeSelectors.city);
+  const { setCity } = useActionCreators(activeActions);
 
-  const isCurrent = (city: string) =>
+  const handleChangeCity = (city: CityName) => {
+    setCity(city);
+  };
+
+  const isCurrent = (cityName: string) =>
     clsx('locations__item-link', 'tabs__item', {
-      'tabs__item--active': city === currentCity,
+      'tabs__item--active': cityName === city,
     });
 
   return (
     <ul className="locations__list tabs__list">
-      {CITIES_NAMES.map((city) => (
-        <li key={city} className="locations__item">
+      {CITIES_NAMES.map((cityName) => (
+        <li key={cityName} className="locations__item">
           <Link
-            className={isCurrent(city)}
+            className={isCurrent(cityName)}
             to={AppRoute.Main}
-            onClick={() => dispatch(handleChangeCity(city))}
+            onClick={() => handleChangeCity(cityName)}
           >
-            <span>{city}</span>
+            <span>{cityName}</span>
           </Link>
         </li>
       ))}

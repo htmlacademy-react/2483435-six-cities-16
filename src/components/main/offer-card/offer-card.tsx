@@ -4,17 +4,18 @@ import { AppRoute } from '../../../const';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 import { upFirstLetter } from '../../../utils/utils';
+import { useActionCreators } from '../../../hooks/store';
+import { activeActions } from '../../../store/slices/active-slice';
 
 type OfferCardProps = {
   className: string;
   offer: FullOffer;
-  onMouseEnter?: (offer: FullOffer) => void;
-  onMouseLeave?: () => void;
 };
 
 const FAVORITES_CLASS_NAME = 'favorites';
 
-function OfferCard({ className, offer, onMouseEnter, onMouseLeave}: OfferCardProps): React.ReactNode {
+function OfferCard({ className, offer}: OfferCardProps): React.ReactNode {
+  const {setOfferId} = useActionCreators(activeActions);
   const {
     id,
     title,
@@ -26,13 +27,17 @@ function OfferCard({ className, offer, onMouseEnter, onMouseLeave}: OfferCardPro
     previewImage,
   } = offer;
 
+  const handleMouseEnter = (offer: FullOffer) => setOfferId(offer.id);
+  const handleMouseLeave = () => setOfferId('');
+
+
   const imgWidth = className === FAVORITES_CLASS_NAME ? 150 : 260;
   const imgHeight = className === FAVORITES_CLASS_NAME ? 110 : 200;
   const cardInfoClassName =
     className === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
 
   return (
-    <article className={`${className}__card place-card`} onMouseEnter={()=>onMouseEnter?.(offer)} onMouseLeave={()=>onMouseLeave?.()}>
+    <article className={`${className}__card place-card`} onMouseEnter={()=>handleMouseEnter?.(offer)} onMouseLeave={()=>handleMouseLeave?.()}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

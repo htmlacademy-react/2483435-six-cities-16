@@ -21,5 +21,6 @@ const userSlice = createSlice({
 });
 const userSelectors = userSlice.selectors;
 const { setStatus } = userSlice.actions;
+const userActions = userSlice.actions;
 
-export { userSlice, userSelectors, setStatus };
+export { userSlice, userSelectors, setStatus, userActions };

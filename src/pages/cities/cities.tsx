@@ -6,13 +6,10 @@ import { Empty } from './empty';
 import { Map } from '../../components/map/map';
 import clsx from 'clsx';
 import { useAppSelector } from '../../hooks/store';
-import { activeSelectors } from '../../store/slices/active-slice';
-import { offersByCity} from '../../store/slices/offers-slice';
+import { offersByCity } from '../../store/slices/offers-slice';
 function Cities(): JSX.Element {
-  const city = useAppSelector(activeSelectors.city);
-  const activeOffer = useAppSelector(activeSelectors.offer);
-  const filteredOffers = useAppSelector(offersByCity);
-  const isEmpty = filteredOffers.length === 0;
+  const cityOffers = useAppSelector(offersByCity);
+  const isEmpty = cityOffers.length === 0;
   const isEmptyMainClasses = clsx('page__main', 'page__main--index', {
     'page__main--index-empty': isEmpty,
   });
@@ -43,9 +40,7 @@ function Cities(): JSX.Element {
                 <div className="cities__right-section">
                   <Map
                     className="cities"
-                    activeCity={city}
-                    offers={filteredOffers}
-                    activeOffer={activeOffer}
+                    offers={cityOffers}
                   />
                 </div>
               </>

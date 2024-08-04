@@ -30,11 +30,18 @@ const offersSlice = createSlice({
 
 const offersSelectors = offersSlice.selectors;
 const { setOffers, setComments } = offersSlice.actions;
+const offersActions = offersSlice.actions;
 
 const offersByCity = createSelector(
   activeSelectors.city,
   offersSelectors.offers,
   (city, offers) => offers.filter((offer) => offer.city.name === city)
+);
+
+const offerById = createSelector(
+  activeSelectors.offerId,
+  offersSelectors.offers,
+  (offerId, offers) => offers.find((offer) => offer.id === offerId)
 );
 
 const loadData = () => (dispatch: AppDispatch) => {
@@ -48,6 +55,8 @@ export {
   offersSelectors,
   setOffers,
   setComments,
+  offersActions,
   offersByCity,
+  offerById,
   loadData,
 };

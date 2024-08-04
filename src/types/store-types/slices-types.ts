@@ -9,7 +9,7 @@ type OffersSlice = {
 
 type ActiveSlice = {
   city: CityName;
-  offer: FullOffer | null;
+  offerId: string| null;
 };
 
 type UserSlice = {

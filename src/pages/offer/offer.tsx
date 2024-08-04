@@ -10,7 +10,6 @@ import { activeSelectors } from '../../store/slices/active-slice';
 import { offersSelectors } from '../../store/slices/offers-slice';
 
 function Offer(): JSX.Element {
-  const city = useAppSelector(activeSelectors.city);
   const offers = useAppSelector(offersSelectors.offers);
   const nearOffers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
   const currentOffer = useAppSelector(activeSelectors.offer);
@@ -25,9 +24,8 @@ function Offer(): JSX.Element {
           <Description />
           <Map
             className="offer"
-            activeCity={city}
-            activeOffer={currentOffer}
             offers={nearOffers}
+            activeOffer={currentOffer}
           />
         </section>
         <Neighboring />

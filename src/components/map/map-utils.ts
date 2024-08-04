@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
-import { FullOffer, LocationData } from '../../types/offer-type';
+import { LocationData } from '../../types/offer-type';
 import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
+import { activeSelectors } from '../../store/slices/active-slice';
+import { useAppSelector } from '../../hooks/store';
+import { offerById, offersSelectors } from '../../store/slices/offers-slice';
 
 type Location = {
   lat: number;
@@ -38,17 +41,15 @@ export const useUpdateLocation = (
   useEffect(() => {
     if (map) {
       map.setView(location);
-      const markerLayer = layerGroup().addTo(map);
-      map.removeLayer(markerLayer);
     }
   });
 };
 
-export const useUpdateMarkers = (
-  map: LeafletMap | null,
-  offers: FullOffer[],
-  activeOffer?: FullOffer | null
-) => {
+export const useUpdateMarkers = (map: LeafletMap | null) => {
+  const offers = useAppSelector(offersSelectors.offers);
+  const offerId = useAppSelector(activeSelectors.offerId);
+  const activeOffer = useAppSelector(offerById);
+
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
@@ -70,5 +71,5 @@ export const useUpdateMarkers = (
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, offers, offerId]);
 };
