@@ -13,8 +13,8 @@ function CitiesTabs() {
   const city = useAppSelector(activeSelectors.city);
   const { setCity } = useActionCreators(activeActions);
 
-  const handleChangeCity = (city: CityName) => {
-    setCity(city);
+  const handleChangeCity = (cityName: CityName) => {
+    setCity(cityName);
   };
 
   const isCurrent = (cityName: string) =>

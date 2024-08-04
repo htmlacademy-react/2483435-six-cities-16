@@ -1,13 +1,19 @@
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
-import { useAppSelector } from '../../../hooks/store';
-import { activeSelectors } from '../../../store/slices/active-slice';
+import { useActionCreators, useAppSelector } from '../../../hooks/store';
 import { offersByCity } from '../../../store/slices/offers-slice';
+import { FullOffer } from '../../../types/offer-type';
+import { activeActions, activeSelectors } from '../../../store/slices/active-slice';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
   const cityOffers = useAppSelector(offersByCity);
   const correctEnding = cityOffers.length > 1 ? 's' : '';
+
+
+  const { setActiveOffer } = useActionCreators(activeActions);
+  const handleMouseEnter = (offer: FullOffer) => setActiveOffer(offer);
+  const handleMouseLeave = () => setActiveOffer(null);
 
   return (
     <section className="cities__places places">
@@ -20,8 +26,10 @@ function CityOffers() {
         {cityOffers.map((offer) => (
           <OfferCard
             key={offer.id}
-            className="cities"
+            bemBlock="cities"
             offer={offer}
+            onMouseEnter={() => handleMouseEnter(offer)}
+            onMouseLeave={handleMouseLeave}
           />
         ))}
       </div>

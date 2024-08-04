@@ -8,7 +8,7 @@ import { useAppSelector } from '../../hooks/store';
 import { activeSelectors } from '../../store/slices/active-slice';
 
 function Description() {
-  const currentOffer = useAppSelector(activeSelectors.offer)!;
+  const activeOffer = useAppSelector(activeSelectors.activeOffer);
   const {
     title,
     type,
@@ -21,7 +21,7 @@ function Description() {
     goods,
     host,
     maxAdults,
-  } = currentOffer;
+  } = activeOffer!;
 
   const isHostPro = clsx('offer__avatar-wrapper', 'user__avatar-wrapper', {
     'offer__avatar-wrapper--pro': host.isPro,

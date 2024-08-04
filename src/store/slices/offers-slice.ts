@@ -38,10 +38,13 @@ const offersByCity = createSelector(
   (city, offers) => offers.filter((offer) => offer.city.name === city)
 );
 
-const offerById = createSelector(
-  activeSelectors.offerId,
-  offersSelectors.offers,
-  (offerId, offers) => offers.find((offer) => offer.id === offerId)
+const favoritesOffers = createSelector(offersSelectors.offers,(offers) => offers.filter((offer)=> offer.isFavorite));
+
+
+const commentsById = createSelector(
+  activeSelectors.activeOffer,
+  offersSelectors.comments,
+  (activeOffer, comments) => comments[activeOffer!.id]
 );
 
 const loadData = () => (dispatch: AppDispatch) => {
@@ -57,6 +60,7 @@ export {
   setComments,
   offersActions,
   offersByCity,
-  offerById,
+  favoritesOffers,
+  commentsById,
   loadData,
 };

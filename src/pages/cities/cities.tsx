@@ -39,8 +39,7 @@ function Cities(): JSX.Element {
                 <CityOffers />
                 <div className="cities__right-section">
                   <Map
-                    className="cities"
-                    offers={cityOffers}
+                    bemBlock="cities"
                   />
                 </div>
               </>

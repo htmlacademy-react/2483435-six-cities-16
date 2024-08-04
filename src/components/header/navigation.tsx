@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import { IsLogged } from './isLogged';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/store';
+import { userSelectors } from '../../store/slices/user-slice';
 
 function Navigation() {
-  const authStatus = useAppSelector((state) => state.user.status);
+  const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
 
   return (

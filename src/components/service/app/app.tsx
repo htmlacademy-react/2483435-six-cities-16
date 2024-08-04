@@ -9,15 +9,15 @@ import Offer from '../../../pages/offer/offer';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../../hooks/store';
 import { loadData } from '../../../store/slices/offers-slice';
-import { dispatch, store } from '../../../store/store';
+import { dispatch } from '../../../store/store';
 import { userSelectors } from '../../../store/slices/user-slice';
 
 export function App() {
   useEffect(() => {
     dispatch(loadData());
-    console.log(store.getState());
   }, []);
   const authStatus = useAppSelector(userSelectors.status);
+
   const router = createBrowserRouter([
     {
       errorElement: <Error />,

@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CityName } from '../../types/offer-type';
-import { AppDispatch } from '../../types/store-types/store-type';
+import { CityName, FullOffer } from '../../types/offer-type';
 import { ActiveSlice } from '../../types/store-types/slices-types';
 
 const activeState: ActiveSlice = {
   city: 'Paris',
-  offerId: null,
+  activeOffer: null,
 };
 
 const activeSlice = createSlice({
@@ -15,30 +14,18 @@ const activeSlice = createSlice({
     setCity: (state, action: PayloadAction<CityName>) => {
       state.city = action.payload;
     },
-    setOfferId: (state, action: PayloadAction<string | null>) => {
-      state.offerId = action.payload;
+    setActiveOffer: (state, action: PayloadAction<FullOffer | null>) => {
+      state.activeOffer = action.payload;
     },
   },
   selectors: {
     city: (state) => state.city,
-    offerId: (state) => state.offerId,
+    activeOffer: (state) => state.activeOffer,
   },
 });
 
 const activeSelectors = activeSlice.selectors;
-const { setCity, setOfferId } = activeSlice.actions;
+const { setCity, setActiveOffer } = activeSlice.actions;
 const activeActions = activeSlice.actions;
 
-// const handleActiveOffer =
-//   (offerId?: string | null) => (dispatch: AppDispatch) => {
-//     dispatch(setOfferId(offerId || null));
-//   };
-
-export {
-  activeSlice,
-  activeSelectors,
-  setCity,
-  setOfferId,
-  activeActions,
-  // handleActiveOffer,
-};
+export { activeSlice, activeSelectors, setCity, setActiveOffer, activeActions };

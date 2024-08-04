@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { LocationData } from '../../types/offer-type';
+import { CityName, FullOffer, LocationData } from '../../types/offer-type';
 import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
-import { offerById, offersSelectors } from '../../store/slices/offers-slice';
+import { CITIES } from '../../mock/const-mock';
 
 type Location = {
   lat: number;
@@ -24,7 +24,10 @@ const currentCustomIcon = new Icon({
   iconAnchor: [15, 40],
 });
 
-export const adaptLocation = ({
+const getLocation = (cityName: CityName) =>
+  CITIES.find((city) => city.name === cityName)!.location;
+
+const adaptLocation = ({
   latitude,
   longitude,
   zoom,
@@ -34,21 +37,18 @@ export const adaptLocation = ({
   zoom: zoom,
 });
 
-export const useUpdateLocation = (
-  map: LeafletMap | null,
-  location: Location
-) => {
+const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
   useEffect(() => {
     if (map) {
       map.setView(location);
+      const markerLayer = layerGroup().addTo(map);
+      map.removeLayer(markerLayer);
     }
   });
 };
 
-export const useUpdateMarkers = (map: LeafletMap | null) => {
-  const offers = useAppSelector(offersSelectors.offers);
-  const offerId = useAppSelector(activeSelectors.offerId);
-  const activeOffer = useAppSelector(offerById);
+const useUpdateMarkers = (map: LeafletMap | null, offers: FullOffer[]) => {
+  const activeOffer = useAppSelector(activeSelectors.activeOffer);
 
   useEffect(() => {
     if (map) {
@@ -71,5 +71,7 @@ export const useUpdateMarkers = (map: LeafletMap | null) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, offerId]);
+  }, [map, offers, activeOffer]);
 };
+
+export { getLocation, adaptLocation, useUpdateLocation, useUpdateMarkers };

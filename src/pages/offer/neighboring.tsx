@@ -1,13 +1,22 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
-import { useAppSelector } from '../../hooks/store';
+import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { offersSelectors } from '../../store/slices/offers-slice';
-import { activeSelectors } from '../../store/slices/active-slice';
+import { offersByCity } from '../../store/slices/offers-slice';
+import { FullOffer } from '../../types/offer-type';
+import {
+  activeActions,
+  activeSelectors,
+} from '../../store/slices/active-slice';
 
 export function Neighboring() {
-  const offers = useAppSelector(offersSelectors.offers);
-  const nearOffers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
-  const currentOffer = useAppSelector(activeSelectors.offer)!;
+  const activeOffer = useAppSelector(activeSelectors.activeOffer);
+  const nearOffers = useAppSelector(offersByCity).slice(
+    0,
+    MAX_NEARBY_OFFER_COUNT
+  );
+
+  const { setActiveOffer } = useActionCreators(activeActions);
+  const handleMouseClick = (offer: FullOffer) => setActiveOffer(offer);
 
   return nearOffers.length <= 1 ? (
     ''
@@ -20,11 +29,12 @@ export function Neighboring() {
         <div className="near-places__list places__list">
           {nearOffers.map(
             (offer) =>
-              offer.id !== currentOffer.id && (
+              offer.id !== activeOffer!.id && (
                 <OfferCard
                   key={offer.id}
-                  className="near-places"
+                  bemBlock="near-places"
                   offer={offer}
+                  onClick={() => handleMouseClick(offer)}
                 />
               )
           )}
