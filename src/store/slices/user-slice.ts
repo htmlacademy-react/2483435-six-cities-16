@@ -3,12 +3,11 @@ import { faker } from '@faker-js/faker';
 import { AUTH_STATUS, AuthStatus } from '../../const';
 import { UserSlice } from '../../types/store-types/slices-types';
 
-
 const userState: UserSlice = {
   status: faker.helpers.arrayElement(AUTH_STATUS) as AuthStatus,
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: userState,
   reducers: {
@@ -16,8 +15,11 @@ export const userSlice = createSlice({
       state.status = action.payload;
     },
   },
+  selectors: {
+    status: (state) => state.status,
+  },
 });
+const userSelectors = userSlice.selectors;
+const { setStatus } = userSlice.actions;
 
-export const { setStatus } = userSlice.actions;
-
-export default userSlice;
+export { userSlice, userSelectors, setStatus };

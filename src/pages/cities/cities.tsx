@@ -1,5 +1,5 @@
 import { Header } from '../../components/header/header';
-import { LocationsTabs } from './cities-tabs.tsx/cities-tabs';
+import { CitiesTabs } from './cities-tabs.tsx/cities-tabs';
 import CityOffers from './city-offers/city-offers';
 import { useChangeTitle } from '../../hooks/title';
 import { Empty } from './empty';
@@ -7,10 +7,12 @@ import { Map } from '../../components/map/map';
 import clsx from 'clsx';
 import { useAppSelector } from '../../hooks/store';
 import { getOffersByCity } from '../../utils/utils';
+import { activeSelectors } from '../../store/slices/active-slice';
+import { offersSelectors } from '../../store/slices/offers-slice';
 function Cities(): JSX.Element {
-  const city = useAppSelector((state) => state.interplay.selectCity);
-  const offers = useAppSelector((state) => state.offers.offers);
-  const activeOffer = useAppSelector((state) => state.interplay.activeOffer);
+  const city = useAppSelector(activeSelectors.city);
+  const offers = useAppSelector(offersSelectors.offers);
+  const activeOffer = useAppSelector(activeSelectors.offer);
   const filteredOffers = getOffersByCity(city, offers);
   const isEmpty = filteredOffers.length === 0;
   const isEmptyMainClasses = clsx('page__main', 'page__main--index', {
@@ -30,7 +32,7 @@ function Cities(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsTabs />
+            <CitiesTabs />
           </section>
         </div>
         <div className="cities">

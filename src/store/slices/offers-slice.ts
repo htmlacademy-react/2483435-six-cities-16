@@ -2,16 +2,15 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { FullOffer } from '../../types/offer-type';
 import { generateOffers } from '../../mock/offer-mock';
 import { Comments, generateComments } from '../../mock/comment-mock';
-import { dispatch } from '../store';
 import { OffersSlice } from '../../types/store-types/slices-types';
-
+import { AppDispatch } from '../../types/store-types/store-type';
 
 const offersState: OffersSlice = {
   offers: [],
   comments: {},
 };
 
-export const offersSlice = createSlice({
+const offersSlice = createSlice({
   name: 'offers',
   initialState: offersState,
   reducers: {
@@ -22,14 +21,20 @@ export const offersSlice = createSlice({
       state.comments = action.payload;
     },
   },
+  selectors: {
+    offers: (state) => state.offers,
+    comments: (state) => state.comments,
+  },
 });
 
-export const { setOffers, setComments } = offersSlice.actions;
-export default offersSlice;
+const offersSelectors = offersSlice.selectors;
+const { setOffers, setComments } = offersSlice.actions;
 
-export const loadData = () => {
+
+const loadData = () => (dispatch: AppDispatch)=>{
   const offers = generateOffers();
-
   dispatch(setOffers(offers));
   dispatch(setComments(generateComments(offers)));
 };
+
+export { offersSlice, offersSelectors, setOffers, setComments, loadData };

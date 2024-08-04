@@ -6,12 +6,14 @@ import { Photos } from './photos';
 import { Map } from '../../components/map/map';
 import { useAppSelector } from '../../hooks/store';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import { activeSelectors } from '../../store/slices/active-slice';
+import { offersSelectors } from '../../store/slices/offers-slice';
 
 function Offer(): JSX.Element {
-  const city = useAppSelector((state) => state.interplay.selectCity);
-  const offers = useAppSelector((state) => state.offers.offers);
+  const city = useAppSelector(activeSelectors.city);
+  const offers = useAppSelector(offersSelectors.offers);
   const nearOffers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
-  const currentOffer = useAppSelector((state) => state.interplay.activeOffer);
+  const currentOffer = useAppSelector(activeSelectors.offer);
   useChangeTitle('Offer');
 
   return (

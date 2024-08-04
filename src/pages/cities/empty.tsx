@@ -1,7 +1,8 @@
 import { useAppSelector } from '../../hooks/store';
+import { activeSelectors } from '../../store/slices/active-slice';
 
 export function Empty() {
-  const city = useAppSelector((state) => state.interplay.selectCity);
+  const city = useAppSelector(activeSelectors.city);
   return (
     <>
       <section className="cities__no-places">

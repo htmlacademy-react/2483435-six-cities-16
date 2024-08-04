@@ -1,11 +1,13 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
 import { useAppSelector } from '../../hooks/store';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import { offersSelectors } from '../../store/slices/offers-slice';
+import { activeSelectors } from '../../store/slices/active-slice';
 
 export function Neighboring() {
-  const offers = useAppSelector((state) => state.offers.offers);
+  const offers = useAppSelector(offersSelectors.offers);
   const nearOffers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
-  const currentOffer = useAppSelector((state) => state.interplay.activeOffer)!;
+  const currentOffer = useAppSelector(activeSelectors.offer)!;
 
   return nearOffers.length <= 1 ? (
     ''

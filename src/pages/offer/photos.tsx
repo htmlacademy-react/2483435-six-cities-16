@@ -1,7 +1,8 @@
 import { useAppSelector } from '../../hooks/store';
+import { activeSelectors } from '../../store/slices/active-slice';
 
 export function Photos() {
-  const currentOffer = useAppSelector((state) => state.interplay.activeOffer);
+  const currentOffer = useAppSelector(activeSelectors.offer);
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">

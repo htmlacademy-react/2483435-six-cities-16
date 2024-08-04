@@ -3,12 +3,15 @@ import { Review } from './review';
 import { NewReview } from './new-review';
 import { useAppSelector } from '../../../hooks/store';
 import { getCommentsById } from '../../../utils/utils';
+import { activeSelectors } from '../../../store/slices/active-slice';
+import { userSelectors } from '../../../store/slices/user-slice';
+import { offersSelectors } from '../../../store/slices/offers-slice';
 
 export function Reviews() {
-  const currentOffer = useAppSelector((state) => state.interplay.activeOffer)!;
-  const authStatus = useAppSelector((state) => state.user.status);
+  const currentOffer = useAppSelector(activeSelectors.offer)!;
+  const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
-  const comments = useAppSelector((state) => state.offers.comments);
+  const comments = useAppSelector(offersSelectors.comments);
   const reviews = getCommentsById(currentOffer, comments);
   const sortedReviews = sortByDate(reviews);
   const lastestsReviews = sortedReviews.slice(0, 10);

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAppSelector } from '../../../hooks/store';
 import { dispatch } from '../../../store/store';
-import { handleChangeCity } from '../../../store/slices/interplay-slice';
+import { activeSelectors, handleChangeCity } from '../../../store/slices/active-slice';
 
 function CitiesTabs() {
-  const currentCity = useAppSelector((state) => state.interplay.selectCity);
+  const currentCity = useAppSelector(activeSelectors.city);
 
   const isCurrent = (city: string) =>
     clsx('locations__item-link', 'tabs__item', {
@@ -31,4 +31,4 @@ function CitiesTabs() {
   );
 }
 
-export { CitiesTabs as LocationsTabs };
+export { CitiesTabs };

@@ -5,9 +5,10 @@ import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
 import { useAppSelector } from '../../hooks/store';
+import { activeSelectors } from '../../store/slices/active-slice';
 
 function Description() {
-  const currentOffer = useAppSelector((state) => state.interplay.activeOffer)!;
+  const currentOffer = useAppSelector(activeSelectors.offer)!;
   const {
     title,
     type,

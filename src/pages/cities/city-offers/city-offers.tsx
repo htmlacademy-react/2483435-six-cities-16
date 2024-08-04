@@ -4,11 +4,12 @@ import { FullOffer } from '../../../types/offer-type';
 import { useAppSelector } from '../../../hooks/store';
 import { getOffersByCity } from '../../../utils/utils';
 import { dispatch } from '../../../store/store';
-import { handleActiveOffer } from '../../../store/slices/interplay-slice';
+import { activeSelectors, handleActiveOffer } from '../../../store/slices/active-slice';
+import { offersSelectors } from '../../../store/slices/offers-slice';
 
 function CityOffers() {
-  const city = useAppSelector((state) => state.interplay.selectCity);
-  const offers = useAppSelector((state) => state.offers.offers);
+  const city = useAppSelector(activeSelectors.city);
+  const offers = useAppSelector(offersSelectors.offers);
   const filteredOffers = getOffersByCity(city, offers);
   const handleMouseEnter = (offer: FullOffer) => {
     if (handleActiveOffer) {
