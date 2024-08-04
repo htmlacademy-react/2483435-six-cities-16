@@ -9,7 +9,7 @@ import Offer from '../../../pages/offer/offer';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../../hooks/store';
 import { loadData } from '../../../store/slices/offers-slice';
-import { dispatch } from '../../../store/store';
+import { dispatch} from '../../../store/store';
 
 export function App() {
   useEffect(() => {
