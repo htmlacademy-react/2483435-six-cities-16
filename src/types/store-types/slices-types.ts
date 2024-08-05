@@ -1,4 +1,4 @@
-import { AuthStatus } from '../../const';
+import { AuthStatus, SortType } from '../../const';
 import { Comments } from '../../mock/comment-mock';
 import { CityName, FullOffer } from '../offer-type';
 
@@ -10,6 +10,7 @@ type OffersSlice = {
 type ActiveSlice = {
   city: CityName;
   activeOffer: FullOffer | null;
+  sortOption: SortType
 };
 
 type UserSlice = {

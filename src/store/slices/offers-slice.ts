@@ -38,6 +38,11 @@ const offersByCity = createSelector(
   (city, offers) => offers.filter((offer) => offer.city.name === city)
 );
 
+const sortedOffers = createSelector(
+  offersByCity,
+  (offers) => offers.sort((a, b) => b.price - a.price)
+)
+
 const favoritesOffers = createSelector(offersSelectors.offers,(offers) => offers.filter((offer)=> offer.isFavorite));
 
 
