@@ -6,7 +6,7 @@ import { Empty } from './empty';
 import { Map } from '../../components/map/map';
 import clsx from 'clsx';
 import { useAppSelector } from '../../hooks/store';
-import { offersByCity } from '../../store/slices/offers-slice';
+import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
 function Cities(): JSX.Element {
   const cityOffers = useAppSelector(offersByCity);
   const isEmpty = cityOffers.length === 0;
@@ -38,9 +38,7 @@ function Cities(): JSX.Element {
               <>
                 <CityOffers />
                 <div className="cities__right-section">
-                  <Map
-                    bemBlock="cities"
-                  />
+                  <Map bemBlock="cities" />
                 </div>
               </>
             )}

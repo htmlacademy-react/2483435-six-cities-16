@@ -10,7 +10,7 @@ type OffersSlice = {
 type ActiveSlice = {
   city: CityName;
   activeOffer: FullOffer | null;
-  sortOption: SortType
+  sortOption: SortType;
 };
 
 type UserSlice = {

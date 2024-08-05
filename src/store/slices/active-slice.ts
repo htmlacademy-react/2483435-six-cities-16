@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CityName, FullOffer } from '../../types/offer-type';
 import { ActiveSlice } from '../../types/store-types/slices-types';
-import { SortType } from '../../const';
+import { SortType } from '../../types/sort-type';
 
 const activeState: ActiveSlice = {
   city: 'Paris',
@@ -26,7 +26,7 @@ const activeSlice = createSlice({
   selectors: {
     city: (state) => state.city,
     activeOffer: (state) => state.activeOffer,
-    sortOption: (state) => state.sortOption,
+    sortOption: (state) => state.sortOption as SortType,
   },
 });
 

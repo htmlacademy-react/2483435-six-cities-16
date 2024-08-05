@@ -1,5 +1,5 @@
 export const Setting = {
-  OffersCount: 10,
+  OffersCount: 30,
 } as const;
 
 export enum AppRoute {
@@ -21,11 +21,22 @@ export const AUTH_STATUS = ['AUTH', 'NO_AUTH', 'UNKNOWN'];
 
 export type AuthStatus = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
 
-export const SORT_TYPES = ['Popular', 'PriceLowToHigh', 'PriceHighToLow', 'TopRatedFirst'] as const;
-export type SortType = (typeof SORT_TYPES)[number];
+export const SORT_TYPES = [
+  'Popular',
+  'PriceLowToHigh',
+  'PriceHighToLow',
+  'TopRatedFirst',
+] as const;
 export enum MapMarker {
   DefaultMarker = '../markup/img/pin.svg',
   ActiveMarker = '../markup/img/pin-active.svg',
 }
 
 export const MAX_NEARBY_OFFER_COUNT = 4;
+
+export const SortOption = {
+  Popular: 'Popular',
+  PriceLowToHigh: 'Price: low to high',
+  PriceHighToLow: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
+};

@@ -1,12 +1,12 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { offersByCity } from '../../store/slices/offers-slice';
 import { FullOffer } from '../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../store/slices/active-slice';
+import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
 
 export function Neighboring() {
   const activeOffer = useAppSelector(activeSelectors.activeOffer);

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { offersSlice } from './slices/offers-slice';
+import { offersSlice } from './slices/offers-slice/offers-slice';
 import { activeSlice } from './slices/active-slice';
 import { userSlice } from './slices/user-slice';
 

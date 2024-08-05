@@ -9,8 +9,8 @@ import {
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
 import { useMap } from './use-map';
-import { offersByCity } from '../../store/slices/offers-slice';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
 
 type MapProps = {
   bemBlock: string;

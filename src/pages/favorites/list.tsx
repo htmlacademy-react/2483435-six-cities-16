@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { toStructureOffers } from './favorites-utils';
 import OfferCard from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { favoritesOffers } from '../../store/slices/offers-slice';
 import { activeActions } from '../../store/slices/active-slice';
 import { FullOffer } from '../../types/offer-type';
+import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
 
 function List() {
   const favorites = useAppSelector(favoritesOffers);
@@ -27,7 +27,12 @@ function List() {
             </div>
             <div className="favorites__places">
               {offers.map((offer) => (
-                <OfferCard key={offer.id} bemBlock="favorites" offer={offer} onClick={() => handleMouseClick(offer)}/>
+                <OfferCard
+                  key={offer.id}
+                  bemBlock="favorites"
+                  offer={offer}
+                  onClick={() => handleMouseClick(offer)}
+                />
               ))}
             </div>
           </li>
