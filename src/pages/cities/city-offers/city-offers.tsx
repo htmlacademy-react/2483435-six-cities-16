@@ -1,21 +1,23 @@
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../../hooks/store';
-import { FullOffer } from '../../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../../store/slices/active-slice';
 import { toSortOffers } from '../../../store/slices/offers-slice/offers-selectors';
+import { store } from '../../../store/store';
+import { fetchOfferAction } from '../../../store/api-actions/offers-actions/fetch-offer-action';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
   const sortedOffers = useAppSelector(toSortOffers);
   const correctEnding = sortedOffers.length > 1 ? 's' : '';
 
-  const { setActiveOffer } = useActionCreators(activeActions);
-  const handleMouseEnter = (offer: FullOffer) => setActiveOffer(offer);
-  const handleMouseLeave = () => setActiveOffer(null);
+  const { setActiveOfferId } = useActionCreators(activeActions);
+  const handleMouseEnter = (id: string) => setActiveOfferId(id);
+  const handleMouseLeave = () => setActiveOfferId('');
+  const handleMouseClick = (id: string) => store.dispatch(fetchOfferAction(id));
 
   return (
     <section className="cities__places places">
@@ -30,8 +32,9 @@ function CityOffers() {
             key={offer.id}
             bemBlock="cities"
             offer={offer}
-            onMouseEnter={() => handleMouseEnter(offer)}
+            onMouseEnter={() => handleMouseEnter(offer.id)}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleMouseClick(offer.id)}
           />
         ))}
       </div>

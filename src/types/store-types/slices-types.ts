@@ -1,5 +1,5 @@
 import { Comments } from '../comment-type';
-import { CityName, FullOffer } from '../offer-type';
+import { CityName, FullOffer, Offer } from '../offer-type';
 import { SortType } from '../sort-type';
 import { AuthType } from '../user-type';
 
@@ -12,7 +12,8 @@ type ActiveSlice = {
   isLoading: boolean;
   sortOption: SortType;
   city: CityName;
-  activeOffer: FullOffer | null;
+  activeOfferId: string;
+  activeOffer: Offer | null;
 };
 
 type UserSlice = {

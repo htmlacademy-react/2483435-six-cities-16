@@ -3,20 +3,19 @@ import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
 import { FullOffer } from '../../types/offer-type';
 import {
-  activeActions,
-  activeSelectors,
+  activeActions, activeSelectors
 } from '../../store/slices/active-slice';
 import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
 
 export function Neighboring() {
-  const activeOffer = useAppSelector(activeSelectors.activeOffer);
+  const activeOffer = useAppSelector(activeSelectors.activeOffer)!;
   const nearOffers = useAppSelector(offersByCity).slice(
     0,
     MAX_NEARBY_OFFER_COUNT
   );
 
-  const { setActiveOffer } = useActionCreators(activeActions);
-  const handleMouseClick = (offer: FullOffer) => setActiveOffer(offer);
+  const { setActiveOfferId } = useActionCreators(activeActions);
+  const handleMouseClick = (offer: FullOffer) => setActiveOfferId(offer.id);
 
   return nearOffers.length <= 1 ? (
     ''

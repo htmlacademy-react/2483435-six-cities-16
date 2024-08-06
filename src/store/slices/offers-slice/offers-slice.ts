@@ -18,6 +18,7 @@ const offersSlice = createSlice({
     setComments: (state, action: PayloadAction<Comments>) => {
       state.comments = action.payload;
     },
+    
   },
   selectors: {
     offers: (state) => state.offers,

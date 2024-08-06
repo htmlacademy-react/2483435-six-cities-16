@@ -10,7 +10,7 @@ type OfferCardProps = {
   offer: FullOffer;
   onMouseEnter?: (offer: FullOffer) => void;
   onMouseLeave?: () => void;
-  onClick?: (offer: FullOffer) => void;
+  onClick: (id: string) => void;
 };
 const FAVORITES_CLASS_NAME = 'favorites';
 
@@ -42,7 +42,7 @@ function OfferCard({
       className={`${bemBlock}__card place-card`}
       onMouseEnter={() => onMouseEnter?.(offer)}
       onMouseLeave={() => onMouseLeave?.()}
-      onClick={() => onClick?.(offer)}
+      onClick={() => onClick?.(id)}
     >
       {isPremium && (
         <div className="place-card__mark">

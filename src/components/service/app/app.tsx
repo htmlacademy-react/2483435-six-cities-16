@@ -2,20 +2,15 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import SignIn from '../../../pages/sign-in/sign-in';
 import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import Cities from '../../../pages/cities/cities';
-import { AppRoute } from '../../../const';
+import { AppRoute, AuthStatus } from '../../../const';
 import Error from '../../../pages/cities/error/error';
 import Favorites from '../../../pages/favorites/favorites';
 import Offer from '../../../pages/offer/offer';
-import { useEffect } from 'react';
 import { useAppSelector } from '../../../hooks/store';
-import { dispatch } from '../../../store/store';
 import { userSelectors } from '../../../store/slices/user-slice';
-import { loadData } from '../../../store/slices/offers-slice/offers-selectors';
 
 export function App() {
-  useEffect(() => {
-    dispatch(loadData());
-  }, []);
+ 
   const authStatus = useAppSelector(userSelectors.status);
 
   const router = createBrowserRouter([
@@ -28,7 +23,7 @@ export function App() {
         },
 
         {
-          element: <PublicRoute authStatus={authStatus} />,
+          element: <PublicRoute authStatus={authStatus as AuthStatus} />,
           children: [
             {
               path: AppRoute.Login,
@@ -38,7 +33,7 @@ export function App() {
         },
 
         {
-          element: <PrivateRoute authStatus={authStatus} />,
+          element: <PrivateRoute authStatus={authStatus as AuthStatus} />,
           children: [
             {
               path: AppRoute.Favorites,
