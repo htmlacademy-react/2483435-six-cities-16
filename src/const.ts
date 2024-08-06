@@ -9,6 +9,7 @@ export enum AppRoute {
   Offer = '/offer/:id',
 }
 
+
 export const RATING = [
   { value: 5, text: 'perfect' },
   { value: 4, text: 'good' },
