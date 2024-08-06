@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
-import { HeaderProps } from './header';
 import { IsLogged } from './isLogged';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks/store';
+import { userSelectors } from '../../store/slices/user-slice';
 
-type NavigationProps = HeaderProps;
-
-function Navigation({ authStatus}: NavigationProps) {
+function Navigation() {
+  const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
 
   return (
     <nav className="header__nav">
       {isAuth ? (
-        <IsLogged/>
+        <IsLogged />
       ) : (
         <ul className="header__nav-list">
           <li className="header__nav-item user">

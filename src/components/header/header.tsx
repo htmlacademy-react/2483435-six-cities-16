@@ -1,14 +1,11 @@
-import { AuthStatus } from '../../const';
 import { Logo } from './logo';
 import { Navigation } from './navigation';
 
 export type HeaderProps = {
-  authStatus: AuthStatus;
   isLogPage?: boolean;
 };
 
-function Header({ authStatus, isLogPage }: HeaderProps) {
-
+function Header({ isLogPage }: HeaderProps) {
   return (
     <header className="header">
       <div className="container">
@@ -16,7 +13,7 @@ function Header({ authStatus, isLogPage }: HeaderProps) {
           <div className="header__left">
             <Logo />
           </div>
-          {!isLogPage && <Navigation authStatus={authStatus}/>}
+          {!isLogPage && <Navigation />}
         </div>
       </div>
     </header>

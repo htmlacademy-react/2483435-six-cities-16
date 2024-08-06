@@ -4,48 +4,52 @@ import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import Cities from '../../../pages/cities/cities';
 import { AppRoute } from '../../../const';
 import Error from '../../../pages/cities/error/error';
-import { DataBase } from '../data-base';
 import Favorites from '../../../pages/favorites/favorites';
 import Offer from '../../../pages/offer/offer';
+import { useEffect } from 'react';
+import { useAppSelector } from '../../../hooks/store';
+import { dispatch } from '../../../store/store';
+import { userSelectors } from '../../../store/slices/user-slice';
+import { loadData } from '../../../store/slices/offers-slice/offers-selectors';
 
-export type AppProps = {
-  dataBase: DataBase;
-};
+export function App() {
+  useEffect(() => {
+    dispatch(loadData());
+  }, []);
+  const authStatus = useAppSelector(userSelectors.status);
 
-export function App({ dataBase }: AppProps) {
-  const currentStatus = dataBase.authStatus;
   const router = createBrowserRouter([
     {
       errorElement: <Error />,
       children: [
         {
           index: true,
-          element: <Cities dataBase={dataBase} />,
+          element: <Cities />,
         },
 
         {
-          element: <PublicRoute authStatus={currentStatus} />,
+          element: <PublicRoute authStatus={authStatus} />,
           children: [
             {
               path: AppRoute.Login,
-              element: <SignIn authStatus={currentStatus} />,
+              element: <SignIn />,
             },
           ],
         },
 
         {
-          element: <PrivateRoute authStatus={currentStatus} />,
+          element: <PrivateRoute authStatus={authStatus} />,
           children: [
             {
               path: AppRoute.Favorites,
-              element: <Favorites dataBase={dataBase} />,
+              element: <Favorites />,
             },
           ],
         },
 
         {
           path: AppRoute.Offer,
-          element: <Offer dataBase={dataBase} />,
+          element: <Offer />,
         },
       ],
     },

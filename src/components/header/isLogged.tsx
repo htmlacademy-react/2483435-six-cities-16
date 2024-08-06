@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { dataBase } from '../service/data-base';
 import { createMockUser } from '../../mock/user-mock';
-
+import { useAppSelector } from '../../hooks/store';
+import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
 
 function IsLogged() {
-  const favorites = dataBase.getFavoritesOffers().length;
+  const favorites = useAppSelector(favoritesOffers);
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -17,7 +17,7 @@ function IsLogged() {
           <span className="header__user-name user__name">
             {createMockUser().email}
           </span>
-          <span className="header__favorite-count">{favorites}</span>
+          <span className="header__favorite-count">{favorites.length}</span>
         </Link>
       </li>
       <li className="header__nav-item">

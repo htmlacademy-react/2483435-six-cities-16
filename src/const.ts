@@ -22,6 +22,15 @@ export const AUTH_STATUS = ['AUTH', 'NO_AUTH', 'UNKNOWN'];
 export type AuthStatus = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
 
 export enum MapMarker {
-  DefaultMarker = 'img/pin.svg',
-  ActiveMarker = 'img/pin-active.svg',
+  DefaultMarker = '../markup/img/pin.svg',
+  ActiveMarker = '../markup/img/pin-active.svg',
 }
+
+export const MAX_NEARBY_OFFER_COUNT = 4;
+
+export const SortOption = {
+  Popular: 'Popular',
+  PriceLowToHigh: 'Price: low to high',
+  PriceHighToLow: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
+};

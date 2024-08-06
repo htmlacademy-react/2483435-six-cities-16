@@ -1,4 +1,5 @@
 function Empty() {
+
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>

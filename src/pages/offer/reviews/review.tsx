@@ -1,6 +1,6 @@
+import dayjs from 'dayjs';
 import { Rating } from '../../../components/main/rating/rating';
 import { Comment } from '../../../types/comment-type';
-import * as dayjs from 'dayjs';
 
 type ReviewProps = {
   review: Comment;

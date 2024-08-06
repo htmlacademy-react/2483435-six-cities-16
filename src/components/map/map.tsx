@@ -1,34 +1,32 @@
 import { useRef } from 'react';
-import useMap from '../../components/map/use-map';
 import 'leaflet/dist/leaflet.css';
-import { CityName, FullOffer } from '../../types/offer-type';
-import { dataBase } from '../service/data-base';
 import {
   adaptLocation,
+  getLocation,
   useUpdateLocation,
   useUpdateMarkers,
 } from './map-utils';
+import { activeSelectors } from '../../store/slices/active-slice';
+import { useAppSelector } from '../../hooks/store';
+import { useMap } from './use-map';
+import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
 
 type MapProps = {
-  className: string;
-  activeCity?: CityName;
-  activeOffer?: FullOffer | null;
-  offers: FullOffer[];
+  bemBlock: string;
 };
 
-export function Map({ className, activeCity, activeOffer, offers }: MapProps) {
-  const correctLocation = adaptLocation(dataBase.getLocation(activeCity)!);
+export function Map({ bemBlock }: MapProps) {
+  const offers = useAppSelector(offersByCity);
+  const offersForMap =
+    bemBlock === 'cities' ? offers : offers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  const city = useAppSelector(activeSelectors.city);
+  const correctLocation = adaptLocation(getLocation(city));
   const mapRef = useRef(null);
   const map = useMap(mapRef, correctLocation);
 
   useUpdateLocation(map, correctLocation);
-  useUpdateMarkers(map, offers, activeOffer);
+  useUpdateMarkers(map, offersForMap);
 
-  return (
-    <section
-      className={`${className}__map map`}
-      ref={mapRef}
-    >
-    </section>
-  );
+  return <section className={`${bemBlock}__map map`} ref={mapRef}></section>;
 }

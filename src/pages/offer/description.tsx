@@ -1,16 +1,14 @@
 import clsx from 'clsx';
 import { FavoriteButton } from '../../components/main/favorite-button/favorite-button';
 import { Rating } from '../../components/main/rating/rating';
-import { Offer } from '../../types/offer-type';
 import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
+import { useAppSelector } from '../../hooks/store';
+import { activeSelectors } from '../../store/slices/active-slice';
 
-type DescriptionProps = {
-  offer: Offer;
-};
-
-function Description({ offer }: DescriptionProps) {
+function Description() {
+  const activeOffer = useAppSelector(activeSelectors.activeOffer);
   const {
     title,
     type,
@@ -23,7 +21,7 @@ function Description({ offer }: DescriptionProps) {
     goods,
     host,
     maxAdults,
-  } = offer;
+  } = activeOffer!;
 
   const isHostPro = clsx('offer__avatar-wrapper', 'user__avatar-wrapper', {
     'offer__avatar-wrapper--pro': host.isPro,
@@ -86,7 +84,7 @@ function Description({ offer }: DescriptionProps) {
             <p className="offer__text">{description}</p>
           </div>
         </div>
-        <Reviews offerId={offer.id} />
+        <Reviews />
       </div>
     </div>
   );
