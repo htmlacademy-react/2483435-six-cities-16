@@ -1,6 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Comments } from '../../../types/comment-type';
 import { FullOffer } from '../../../types/offer-type';
-import { Comments } from '../../../mock/comment-mock';
 import { OffersSlice } from '../../../types/store-types/slices-types';
 
 const offersState: OffersSlice = {

@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { CityName, FullOffer, LocationData } from '../../types/offer-type';
 import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
-import { CITIES } from '../../mock/const-mock';
+import { FullOffer, LocationData } from '../../types/offer-type';
 
 type Location = {
   lat: number;
@@ -24,8 +23,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [15, 40],
 });
 
-const getLocation = (cityName: CityName) =>
-  CITIES.find((city) => city.name === cityName)!.location;
+const getLocation = (offers: FullOffer[]) => offers[0].city.location;
 
 const adaptLocation = ({
   latitude,

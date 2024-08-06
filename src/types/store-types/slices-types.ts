@@ -1,6 +1,7 @@
-import { AuthStatus, SortType } from '../../const';
-import { Comments } from '../../mock/comment-mock';
+import { Comments } from '../comment-type';
 import { CityName, FullOffer } from '../offer-type';
+import { SortType } from '../sort-type';
+import { AuthType } from '../user-type';
 
 type OffersSlice = {
   offers: FullOffer[];
@@ -8,13 +9,14 @@ type OffersSlice = {
 };
 
 type ActiveSlice = {
+  isLoading: boolean;
+  sortOption: SortType;
   city: CityName;
   activeOffer: FullOffer | null;
-  sortOption: SortType;
 };
 
 type UserSlice = {
-  status: AuthStatus;
+  status: AuthType;
 };
 
 export type { OffersSlice, ActiveSlice, UserSlice };

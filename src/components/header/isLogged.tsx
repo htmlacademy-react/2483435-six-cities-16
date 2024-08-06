@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { createMockUser } from '../../mock/user-mock';
 import { useAppSelector } from '../../hooks/store';
 import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
 
@@ -15,7 +14,7 @@ function IsLogged() {
         >
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
           <span className="header__user-name user__name">
-            {createMockUser().email}
+            {'email'}
           </span>
           <span className="header__favorite-count">{favorites.length}</span>
         </Link>

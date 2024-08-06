@@ -1,7 +1,7 @@
-import { CITIES } from '../mock/const-mock';
-import { UserGeneral } from './user-type';
 
-type CityName = (typeof CITIES)[number]['name'];
+import { CITIES } from '../const';
+import { UserGeneral } from './user-type';
+type CityName = (typeof CITIES)[number];
 type OfferType = 'apartment' | 'hotel' | 'house' | 'room';
 
 interface OfferCity {

@@ -1,21 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { activeSelectors } from '../active-slice';
-import { offersSelectors, setComments, setOffers } from './offers-slice';
-import { generateOffers } from '../../../mock/offer-mock';
-import { generateComments } from '../../../mock/comment-mock';
-import { AppDispatch } from '../../../types/store-types/store-type';
 import { FullOffer } from '../../../types/offer-type';
 import { SortType } from '../../../types/sort-type';
-import {
-  priceHighSort,
-  priceLowSort,
-  topRatedSort,
-} from '../../../utils/sorting';
+import { priceHighSort, priceLowSort, topRatedSort } from '../../../utils/sorting';
+import { activeSelectors } from '../active-slice';
+import { offersSelectors } from './offers-slice';
 
 const offersByCity = createSelector(
   activeSelectors.city,
   offersSelectors.offers,
-  (city, offers) => offers.filter((offer) => offer.city.name === city)
+  (city, offers) => offers.filter((offer:FullOffer) => offer.city.name === city)
 );
 
 const toSortOffers = createSelector(
@@ -46,10 +39,4 @@ const commentsById = createSelector(
   (activeOffer, comments) => comments[activeOffer!.id]
 );
 
-const loadData = () => (dispatch: AppDispatch) => {
-  const offers = generateOffers();
-  dispatch(setOffers(offers));
-  dispatch(setComments(generateComments(offers)));
-};
-
-export { offersByCity, toSortOffers, favoritesOffers, commentsById, loadData };
+export { offersByCity, toSortOffers, favoritesOffers, commentsById };

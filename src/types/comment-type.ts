@@ -7,3 +7,7 @@ export interface Comment {
   comment: string;
   rating: number;
 }
+
+export type Comments = {
+  [key: string]: Comment[];
+};

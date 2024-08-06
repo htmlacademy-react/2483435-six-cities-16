@@ -9,7 +9,6 @@ export enum AppRoute {
   Offer = '/offer/:id',
 }
 
-
 export const RATING = [
   { value: 5, text: 'perfect' },
   { value: 4, text: 'good' },
@@ -18,9 +17,11 @@ export const RATING = [
   { value: 1, text: 'terrible' },
 ];
 
-export const AUTH_STATUS = ['AUTH', 'NO_AUTH', 'UNKNOWN'];
-
-export type AuthStatus = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
+export enum AuthStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
 
 export enum MapMarker {
   DefaultMarker = '../markup/img/pin.svg',
@@ -35,3 +36,24 @@ export const SortOption = {
   PriceHighToLow: 'Price: high to low',
   TopRatedFirst: 'Top rated first',
 };
+
+export enum APIRoute {
+  Offers = '/offers',
+  Offer = '/offers{offerId}',
+  Nearby = '/offers{offerId}/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments/{offerId}',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];

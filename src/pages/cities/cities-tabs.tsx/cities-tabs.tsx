@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import { CITIES_NAMES } from '../../../mock/const-mock';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import { AppRoute, CITIES } from '../../../const';
 import { useActionCreators, useAppSelector } from '../../../hooks/store';
 import {
   activeActions,
@@ -24,7 +23,7 @@ function CitiesTabs() {
 
   return (
     <ul className="locations__list tabs__list">
-      {CITIES_NAMES.map((cityName) => (
+      {CITIES.map((cityName) => (
         <li key={cityName} className="locations__item">
           <Link
             className={isCurrent(cityName)}

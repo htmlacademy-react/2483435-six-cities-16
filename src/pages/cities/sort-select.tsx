@@ -37,6 +37,7 @@ export function SortSelect() {
       <ul className={`places__options places__options--custom ${openedClass}`}>
         {Object.entries(SortOption).map((sortType) => (
           <li
+          key={sortType[0]}
             className={`${
               activeSortOption === sortType[0] ? 'places__option--active' : ''
             } places__option`}
