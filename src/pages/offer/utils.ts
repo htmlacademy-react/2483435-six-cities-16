@@ -5,7 +5,7 @@ import { Comment } from '../../types/comment-type';
 export const getCurrentOffer = (offers: FullOffer[], offerId: string) =>
   offers.find((offer: FullOffer) => offer.id === offerId);
 
-export const sortByDate = (reviews: Comment[]) => reviews.sort((date1, date2) => new Date(date2.date).getTime() - new Date(date1.date).getTime());
+export const sortByDate = (reviews: Comment[]) => [...reviews].sort((date1, date2) => new Date(date2.date).getTime() - new Date(date1.date).getTime());
 
 export const getStarsText = (star: number) =>
   `${star} + ${star > 1 ? 'stars' : 'star'}`;

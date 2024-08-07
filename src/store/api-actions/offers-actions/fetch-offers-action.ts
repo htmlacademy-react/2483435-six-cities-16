@@ -15,5 +15,5 @@ export const fetchOffersAction = createAsyncThunk<
   }
 >('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
   const { data: offers } = await api.get<FullOffer[]>(APIRoute.Offers);
-  dispatch(offersActions.setOffers(offers));
+  dispatch(offersActions.setAllOffers(offers));
 });

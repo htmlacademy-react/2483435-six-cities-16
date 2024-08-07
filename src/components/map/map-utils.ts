@@ -3,7 +3,7 @@ import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
-import { FullOffer, LocationData } from '../../types/offer-type';
+import { FullOffer, LocationData, Offer, ThumbnailOffer } from '../../types/offer-type';
 
 type Location = {
   lat: number;
@@ -45,8 +45,8 @@ const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
   });
 };
 
-const useUpdateMarkers = (map: LeafletMap | null, offers: FullOffer[]) => {
-  const activeOffer = useAppSelector(activeSelectors.activeOffer);
+const useUpdateMarkers = (map: LeafletMap | null, offers: (ThumbnailOffer | Offer)[]) => {
+  const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
 
   useEffect(() => {
     if (map) {
@@ -59,7 +59,7 @@ const useUpdateMarkers = (map: LeafletMap | null, offers: FullOffer[]) => {
 
         marker
           .setIcon(
-            activeOffer !== undefined && offer.title === activeOffer?.title
+            activeOfferId !== undefined && offer.id === activeOfferId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -69,7 +69,7 @@ const useUpdateMarkers = (map: LeafletMap | null, offers: FullOffer[]) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, offers, activeOfferId]);
 };
 
 export { getLocation, adaptLocation, useUpdateLocation, useUpdateMarkers };

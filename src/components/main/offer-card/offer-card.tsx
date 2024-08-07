@@ -1,4 +1,4 @@
-import type { FullOffer } from '../../../types/offer-type';
+import type { ThumbnailOffer } from '../../../types/offer-type';
 import { Rating } from '../rating/rating';
 import { AppRoute } from '../../../const';
 import { Link } from 'react-router-dom';
@@ -7,10 +7,10 @@ import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
   bemBlock: string;
-  offer: FullOffer;
-  onMouseEnter?: (offer: FullOffer) => void;
+  offer: ThumbnailOffer;
+  onMouseEnter?: (offer: ThumbnailOffer) => void;
   onMouseLeave?: () => void;
-  onClick: (id: string) => void;
+  onClick: (offer: ThumbnailOffer) => void;
 };
 const FAVORITES_CLASS_NAME = 'favorites';
 
@@ -35,14 +35,14 @@ function OfferCard({
   const imgWidth = bemBlock === FAVORITES_CLASS_NAME ? 150 : 260;
   const imgHeight = bemBlock === FAVORITES_CLASS_NAME ? 110 : 200;
   const cardInfoClassName =
-  bemBlock === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
+    bemBlock === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
 
   return (
     <article
       className={`${bemBlock}__card place-card`}
       onMouseEnter={() => onMouseEnter?.(offer)}
       onMouseLeave={() => onMouseLeave?.()}
-      onClick={() => onClick?.(id)}
+      onClick={() => onClick?.(offer)}
     >
       {isPremium && (
         <div className="place-card__mark">

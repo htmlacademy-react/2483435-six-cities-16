@@ -28,7 +28,7 @@ export enum MapMarker {
   ActiveMarker = '../markup/img/pin-active.svg',
 }
 
-export const MAX_NEARBY_OFFER_COUNT = 4;
+export const MAX_NEARBY_OFFER_COUNT = 3;
 
 export const SortOption = {
   Popular: 'Popular',
@@ -39,9 +39,8 @@ export const SortOption = {
 
 export enum APIRoute {
   Offers = '/offers',
-  Nearby = '/offers{offerId}/nearby',
   Favorite = '/favorite',
-  Comments = '/comments/{offerId}',
+  Comments = '/comments',
   Login = '/login',
   Logout = '/logout',
 }

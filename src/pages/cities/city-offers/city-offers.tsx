@@ -8,6 +8,9 @@ import {
 import { toSortOffers } from '../../../store/slices/offers-slice/offers-selectors';
 import { store } from '../../../store/store';
 import { fetchOfferAction } from '../../../store/api-actions/offers-actions/fetch-offer-action';
+import { ThumbnailOffer } from '../../../types/offer-type';
+import { fetchCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
+import { fetchOffersNearbyAction } from '../../../store/api-actions/offers-actions/fetch-offers-nearby-action';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
@@ -15,9 +18,14 @@ function CityOffers() {
   const correctEnding = sortedOffers.length > 1 ? 's' : '';
 
   const { setActiveOfferId } = useActionCreators(activeActions);
-  const handleMouseEnter = (id: string) => setActiveOfferId(id);
+  const handleMouseEnter = (offer: ThumbnailOffer) =>
+    setActiveOfferId(offer.id);
   const handleMouseLeave = () => setActiveOfferId('');
-  const handleMouseClick = (id: string) => store.dispatch(fetchOfferAction(id));
+  const handleMouseClick = (offer: ThumbnailOffer) => {
+    store.dispatch(fetchOfferAction(offer.id));
+    store.dispatch(fetchCommentsAction(offer.id));
+    store.dispatch(fetchOffersNearbyAction(offer.id));
+  };
 
   return (
     <section className="cities__places places">
@@ -32,9 +40,9 @@ function CityOffers() {
             key={offer.id}
             bemBlock="cities"
             offer={offer}
-            onMouseEnter={() => handleMouseEnter(offer.id)}
+            onMouseEnter={() => handleMouseEnter(offer)}
             onMouseLeave={handleMouseLeave}
-            onClick={() => handleMouseClick(offer.id)}
+            onClick={() => handleMouseClick(offer)}
           />
         ))}
       </div>

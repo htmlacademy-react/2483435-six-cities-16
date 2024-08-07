@@ -1,11 +1,14 @@
-import { Comments } from '../comment-type';
-import { CityName, FullOffer, Offer } from '../offer-type';
+import { Comment } from '../comment-type';
+
+import { CityName, Offer, ThumbnailOffer } from '../offer-type';
 import { SortType } from '../sort-type';
 import { AuthType } from '../user-type';
 
 type OffersSlice = {
-  offers: FullOffer[];
-  comments: Comments;
+  allOffers: ThumbnailOffer[];
+  activeOffer: Offer | null;
+  nearbyOffers: ThumbnailOffer[];
+  comments: Comment[];
 };
 
 type ActiveSlice = {
@@ -13,7 +16,6 @@ type ActiveSlice = {
   sortOption: SortType;
   city: CityName;
   activeOfferId: string;
-  activeOffer: Offer | null;
 };
 
 type UserSlice = {

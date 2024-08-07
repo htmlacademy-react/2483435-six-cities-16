@@ -1,20 +1,25 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { FullOffer } from '../../../types/offer-type';
+import { ThumbnailOffer } from '../../../types/offer-type';
 import { SortType } from '../../../types/sort-type';
-import { priceHighSort, priceLowSort, topRatedSort } from '../../../utils/sorting';
+import {
+  priceHighSort,
+  priceLowSort,
+  topRatedSort,
+} from '../../../utils/sorting';
 import { activeSelectors } from '../active-slice';
 import { offersSelectors } from './offers-slice';
 
 const offersByCity = createSelector(
   activeSelectors.city,
-  offersSelectors.offers,
-  (city, offers) => offers.filter((offer:FullOffer) => offer.city.name === city)
+  offersSelectors.allOffers,
+  (city, offers) =>
+    offers.filter((offer: ThumbnailOffer) => offer.city.name === city)
 );
 
 const toSortOffers = createSelector(
   offersByCity,
   activeSelectors.sortOption,
-  (offers: FullOffer[], sortType: SortType) => {
+  (offers: ThumbnailOffer[], sortType: SortType) => {
     if (sortType === 'Popular') {
       return offers;
     }
@@ -29,14 +34,8 @@ const toSortOffers = createSelector(
   }
 );
 
-const favoritesOffers = createSelector(offersSelectors.offers, (offers) =>
+const favoritesOffers = createSelector(offersSelectors.allOffers, (offers) =>
   offers.filter((offer) => offer.isFavorite)
 );
 
-const commentsById = createSelector(
-  activeSelectors.activeOffer,
-  offersSelectors.comments,
-  (activeOffer, comments) => comments[activeOffer!.id]
-);
-
-export { offersByCity, toSortOffers, favoritesOffers, commentsById };
+export { offersByCity, toSortOffers, favoritesOffers };

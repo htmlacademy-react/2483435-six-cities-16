@@ -1,15 +1,11 @@
-import ShowLoading from '../../components/main/show-loading';
-import { useAppSelector } from '../../hooks/store';
-import { activeSelectors } from '../../store/slices/active-slice';
+import { Offer } from '../../types/offer-type';
 
+export type PhotosProps = {
+  activeOffer: Offer
+}
 
+export function Photos({activeOffer}:PhotosProps) {
 
-export function Photos() {
-  const activeOffer = useAppSelector(activeSelectors.activeOffer);
-
-  if (!activeOffer) {
-    return <ShowLoading/>
-  }
 
   return (
     <div className="offer__gallery-container container">
@@ -23,3 +19,4 @@ export function Photos() {
     </div>
   );
 }
+
