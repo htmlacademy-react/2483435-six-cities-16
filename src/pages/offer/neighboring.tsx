@@ -6,7 +6,7 @@ import {
   activeSelectors,
 } from '../../store/slices/active-slice';
 import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { fetchCommentsAction } from '../../store/api-actions/comments-actions/fetch-comments-action';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions/fetch-comments-action';
 import { fetchOfferAction } from '../../store/api-actions/offers-actions/fetch-offer-action';
 import { fetchOffersNearbyAction } from '../../store/api-actions/offers-actions/fetch-offers-nearby-action';
 import { store } from '../../store/store';
@@ -23,7 +23,7 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
   const handleMouseClick = (offer: ThumbnailOffer) => {
     setActiveOfferId(offer.id);
     store.dispatch(fetchOfferAction(offer.id));
-    store.dispatch(fetchCommentsAction(offer.id));
+    store.dispatch(fetchGetCommentsAction(offer.id));
     store.dispatch(fetchOffersNearbyAction(offer.id));
   };
 

@@ -9,7 +9,7 @@ import { toSortOffers } from '../../../store/slices/offers-slice/offers-selector
 import { store } from '../../../store/store';
 import { fetchOfferAction } from '../../../store/api-actions/offers-actions/fetch-offer-action';
 import { ThumbnailOffer } from '../../../types/offer-type';
-import { fetchCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
+import { fetchGetCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
 import { fetchOffersNearbyAction } from '../../../store/api-actions/offers-actions/fetch-offers-nearby-action';
 
 function CityOffers() {
@@ -23,7 +23,7 @@ function CityOffers() {
   const handleMouseLeave = () => setActiveOfferId('');
   const handleMouseClick = (offer: ThumbnailOffer) => {
     store.dispatch(fetchOfferAction(offer.id));
-    store.dispatch(fetchCommentsAction(offer.id));
+    store.dispatch(fetchGetCommentsAction(offer.id));
     store.dispatch(fetchOffersNearbyAction(offer.id));
   };
 
