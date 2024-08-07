@@ -20,6 +20,7 @@ type ActiveSlice = {
 
 type UserSlice = {
   status: AuthType;
+  userEmail: string;
 };
 
 export type { OffersSlice, ActiveSlice, UserSlice };

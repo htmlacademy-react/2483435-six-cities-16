@@ -21,4 +21,5 @@ export const loginAction = createAsyncThunk<
   } = await api.post<User>(APIRoute.Login, { email, password });
   saveToken(token);
   dispatch(userActions.setStatus(AuthStatus.Auth));
+  dispatch(userActions.setUserEmail(email));
 });

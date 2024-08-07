@@ -6,7 +6,6 @@ import { SortType } from '../../types/sort-type';
 const activeState: ActiveSlice = {
   city: 'Paris',
   activeOfferId: '',
-
   sortOption: 'Popular',
   isLoading: false,
 };

@@ -7,12 +7,22 @@ import SignIn from '../../pages/sign-in/sign-in';
 import { userSelectors } from '../../store/slices/user-slice';
 import { PublicRoute, PrivateRoute } from '../private-route/private-route';
 import Offer from '../../pages/offer/offer';
-// import { activeSelectors } from '../../store/slices/active-slice';
 import { Error } from '../../components/main/error/error';
+import ShowLoading from '../../components/main/show-loading';
+import { activeSelectors } from '../../store/slices/active-slice';
 
 export function App() {
+
+
   const authStatus = useAppSelector(userSelectors.status);
-  // const isLoading = useAppSelector(activeSelectors.isLoading);
+  const isLoading = useAppSelector(activeSelectors.isLoading);
+
+  if (authStatus === AuthStatus.Unknown || isLoading) {
+    return (
+      <ShowLoading />
+    );
+  }
+
 
   const router = createBrowserRouter([
     {
@@ -51,10 +61,6 @@ export function App() {
     },
   ]);
 
-  // if (authStatus === AuthStatus.Unknown || isLoading) {
-  //   return (
-  //     <ShowLoading />
-  //   );
-  // }
+
   return <RouterProvider router={router} />;
 }
