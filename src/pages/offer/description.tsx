@@ -9,7 +9,7 @@ import ShowLoading from '../../components/main/show-loading';
 import { Comment } from '../../types/comment-type';
 
 type DescriptionProps = PhotosProps & {
-  comments: Comment[]
+  comments: Comment[];
 };
 function Description({ activeOffer, comments }: DescriptionProps) {
   if (!activeOffer) {

@@ -13,8 +13,10 @@ function Offer(): JSX.Element {
   const nearbyOffers = useAppSelector(offersSelectors.nearbyOffers);
   useChangeTitle('Offer');
 
-  if (!activeOffer || !comments) return <ShowLoading />;
-  
+  if (!activeOffer || !comments) {
+    return <ShowLoading />;
+  }
+
   return (
     <div className="page">
       <Header />

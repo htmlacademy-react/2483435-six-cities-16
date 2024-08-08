@@ -1,7 +1,7 @@
 import { Offer } from '../../types/offer-type';
 
 export type PhotosProps = {
-  activeOffer: Offer
+  activeOffer: Offer;
 }
 
 export function Photos({activeOffer}:PhotosProps) {

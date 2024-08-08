@@ -10,7 +10,7 @@ import { useAppSelector } from '../../../hooks/store';
 import { userSelectors } from '../../../store/slices/user-slice';
 
 export function App() {
- 
+
   const authStatus = useAppSelector(userSelectors.status);
 
   const router = createBrowserRouter([

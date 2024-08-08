@@ -30,7 +30,7 @@ const activeSlice = createSlice({
   selectors: {
     city: (state) => state.city,
     activeOfferId: (state) => state.activeOfferId,
-    sortOption: (state) => state.sortOption as SortType,
+    sortOption: (state) => state.sortOption ,
     isLoading: (state) => state.isLoading,
   },
 });
