@@ -1,9 +1,8 @@
 import { Fragment, useRef, useState } from 'react';
 import { RATING } from '../../../const';
 import { getStarsText } from '../utils';
-import { dispatch } from '../../../store/store';
-import { fetchPostCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
-import { useAppSelector } from '../../../hooks/store';
+import { dispatch, store } from '../../../store/store';
+import { fetchGetCommentsAction, fetchPostCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
 import { activeSelectors } from '../../../store/slices/active-slice';
 
 type NewReviewProps = HTMLFormElement & {
@@ -31,16 +30,18 @@ export function NewReview() {
   };
 
   const handleFormSubmit = (evt: React.FormEvent<NewReviewProps>) => {
-    const offerId = useAppSelector(activeSelectors.activeOfferId);
     evt.preventDefault();
+    const id = activeSelectors.activeOfferId(store.getState());
 
     dispatch(
       fetchPostCommentsAction({
-        offerId:offerId,
-        comment: commentRef.current!.value,
-        rating: Number(ratingRef.current!.value),
+        offerId: id,
+        comment: reviewForm.review,
+        rating: reviewForm.rating,
       })
     );
+    fetchGetCommentsAction(id);
+    setReviewForm({ rating: 0, review: '' });
   };
 
   const isButtonDisabled =
@@ -63,12 +64,12 @@ export function NewReview() {
         {RATING.map((star) => (
           <Fragment key={star.value}>
             <input
-              ref={ratingRef}
               className="form__rating-input visually-hidden"
               name="rating"
               defaultValue={star.value}
               id={getStarsText(star.value)}
               type="radio"
+              ref={ratingRef}
             />
             <label
               htmlFor={getStarsText(star.value)}

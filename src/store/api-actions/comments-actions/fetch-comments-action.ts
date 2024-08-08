@@ -21,5 +21,8 @@ export const fetchPostCommentsAction = appCreateAsyncThunk<
   await api.post<{ comment: string; rating: number }>(
     `${APIRoute.Comments}/${offerId}`,
     { comment, rating }
-  );
+    );
+
+    store.dispatch(fetchGetCommentsAction(offerId));
+
 });
