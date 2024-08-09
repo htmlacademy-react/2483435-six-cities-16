@@ -3,12 +3,14 @@ import { Review } from './review';
 import { NewReview } from './new-review';
 import { useAppSelector } from '../../../hooks/store';
 import { userSelectors } from '../../../store/slices/user-slice';
-import { commentsById } from '../../../store/slices/offers-slice/offers-selectors';
+import { Comment } from '../../../types/comment-type';
 
-export function Reviews() {
+type ReviewsProp = {
+  comments: Comment[];
+};
+export function Reviews({ comments }: ReviewsProp) {
   const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
-  const comments = structuredClone(useAppSelector(commentsById));
   const sortedReviews = sortByDate(comments);
   const lastestsReviews = sortedReviews.slice(0, 10);
   return (

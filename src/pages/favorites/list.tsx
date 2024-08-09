@@ -9,9 +9,9 @@ import { favoritesOffers } from '../../store/slices/offers-slice/offers-selector
 function List() {
   const favorites = useAppSelector(favoritesOffers);
   const structuredOffers = toStructureOffers(favorites);
-  const { setActiveOffer } = useActionCreators(activeActions);
+  const { setActiveOfferId } = useActionCreators(activeActions);
 
-  const handleMouseClick = (offer: FullOffer) => setActiveOffer(offer);
+  const handleMouseClick = (offer: FullOffer) => setActiveOfferId(offer.id);
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>

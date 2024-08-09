@@ -1,12 +1,12 @@
-import { FullOffer } from '../types/offer-type';
+import { ThumbnailOffer } from '../types/offer-type';
 
-const priceLowSort = (offerA: FullOffer, offerB: FullOffer) =>
+const priceLowSort = (offerA: ThumbnailOffer, offerB: ThumbnailOffer) =>
   offerA.price - offerB.price;
 
-const priceHighSort = (offerA: FullOffer, offerB: FullOffer) =>
+const priceHighSort = (offerA: ThumbnailOffer, offerB: ThumbnailOffer) =>
   offerB.price - offerA.price;
 
-const topRatedSort = (offerA: FullOffer, offerB: FullOffer) =>
+const topRatedSort = (offerA: ThumbnailOffer, offerB: ThumbnailOffer) =>
   offerB.rating - offerA.rating;
 
 export { priceLowSort, priceHighSort, topRatedSort };

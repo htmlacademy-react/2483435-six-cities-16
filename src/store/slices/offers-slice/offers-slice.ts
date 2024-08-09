@@ -1,32 +1,51 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { FullOffer } from '../../../types/offer-type';
-import { Comments } from '../../../mock/comment-mock';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Offer, ThumbnailOffer } from '../../../types/offer-type';
 import { OffersSlice } from '../../../types/store-types/slices-types';
+import { Comment } from '../../../types/comment-type';
 
 const offersState: OffersSlice = {
-  offers: [],
-  comments: {},
+  allOffers: [],
+  activeOffer: null,
+  nearbyOffers: [],
+  comments: [],
 };
 
 const offersSlice = createSlice({
   name: 'offers',
   initialState: offersState,
   reducers: {
-    setOffers: (state, action: PayloadAction<FullOffer[]>) => {
-      state.offers = action.payload;
+    setAllOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
+      state.allOffers = action.payload;
     },
-    setComments: (state, action: PayloadAction<Comments>) => {
+    setActiveOffer: (state, action: PayloadAction<Offer | null>) => {
+      state.activeOffer = action.payload;
+    },
+    setNearbyOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
+      state.nearbyOffers = action.payload;
+    },
+    setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
     },
   },
   selectors: {
-    offers: (state) => state.offers,
+    allOffers: (state) => state.allOffers,
+    activeOffer: (state) => state.activeOffer,
+    nearbyOffers: (state) => state.nearbyOffers,
     comments: (state) => state.comments,
   },
 });
 
 const offersSelectors = offersSlice.selectors;
-const { setOffers, setComments } = offersSlice.actions;
+const { setAllOffers, setActiveOffer, setNearbyOffers, setComments } =
+  offersSlice.actions;
 const offersActions = offersSlice.actions;
 
-export { offersSlice, offersSelectors, setOffers, setComments, offersActions };
+export {
+  offersSlice,
+  offersSelectors,
+  setAllOffers,
+  setActiveOffer,
+  setNearbyOffers,
+  setComments,
+  offersActions,
+};

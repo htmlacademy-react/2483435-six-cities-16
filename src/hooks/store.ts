@@ -5,9 +5,11 @@ import { ActionCreatorsMapObject, bindActionCreators } from '@reduxjs/toolkit';
 
 const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 const useAppSelector = useSelector.withTypes<RootState>();
-const useActionCreators = <Actions extends ActionCreatorsMapObject>(actions: Actions)=>{
+const useActionCreators = <Actions extends ActionCreatorsMapObject>(
+  actions: Actions
+) => {
   const dispatch = useAppDispatch();
-  return useMemo(()=> bindActionCreators(actions, dispatch), []);
+  return useMemo(() => bindActionCreators(actions, dispatch), []);
 };
 
 export { useAppDispatch, useAppSelector, useActionCreators };

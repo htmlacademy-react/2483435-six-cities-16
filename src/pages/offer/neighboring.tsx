@@ -1,24 +1,33 @@
 import OfferCard from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { FullOffer } from '../../types/offer-type';
+import { ThumbnailOffer } from '../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../store/slices/active-slice';
-import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
+import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions/fetch-comments-action';
+import { fetchOfferAction } from '../../store/api-actions/offers-actions/fetch-offer-action';
+import { fetchOffersNearbyAction } from '../../store/api-actions/offers-actions/fetch-offers-nearby-action';
+import { store } from '../../store/store';
 
-export function Neighboring() {
-  const activeOffer = useAppSelector(activeSelectors.activeOffer);
-  const nearOffers = useAppSelector(offersByCity).slice(
-    0,
-    MAX_NEARBY_OFFER_COUNT
-  );
+type NeighboringProps = {
+  nearbyOffers: ThumbnailOffer[];
+};
 
-  const { setActiveOffer } = useActionCreators(activeActions);
-  const handleMouseClick = (offer: FullOffer) => setActiveOffer(offer);
+export function Neighboring({ nearbyOffers }: NeighboringProps) {
+  const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
+  nearbyOffers = nearbyOffers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  const { setActiveOfferId } = useActionCreators(activeActions);
 
-  return nearOffers.length <= 1 ? (
+  const handleMouseClick = (offer: ThumbnailOffer) => {
+    setActiveOfferId(offer.id);
+    store.dispatch(fetchOfferAction(offer.id));
+    store.dispatch(fetchGetCommentsAction(offer.id));
+    store.dispatch(fetchOffersNearbyAction(offer.id));
+  };
+
+  return nearbyOffers.length <= 1 ? (
     ''
   ) : (
     <div className="container">
@@ -27,9 +36,9 @@ export function Neighboring() {
           Other places in the neighbourhood
         </h2>
         <div className="near-places__list places__list">
-          {nearOffers.map(
+          {nearbyOffers.map(
             (offer) =>
-              offer.id !== activeOffer!.id && (
+              offer.id !== activeOfferId && (
                 <OfferCard
                   key={offer.id}
                   bemBlock="near-places"

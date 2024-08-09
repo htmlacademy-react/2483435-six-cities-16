@@ -1,6 +1,12 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { RATING } from '../../../const';
 import { getStarsText } from '../utils';
+import { dispatch, store } from '../../../store/store';
+import {
+  fetchGetCommentsAction,
+  fetchPostCommentsAction,
+} from '../../../store/api-actions/comments-actions/fetch-comments-action';
+import { activeSelectors } from '../../../store/slices/active-slice';
 
 type NewReviewProps = HTMLFormElement & {
   rating: HTMLInputElement;
@@ -12,6 +18,9 @@ export function NewReview() {
     rating: 0,
     review: '',
   });
+
+  const ratingRef = useRef<HTMLInputElement | null>(null);
+  const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleFormInput = (evt: React.ChangeEvent<NewReviewProps>) => {
     const name = evt.target.name;
@@ -25,9 +34,23 @@ export function NewReview() {
 
   const handleFormSubmit = (evt: React.FormEvent<NewReviewProps>) => {
     evt.preventDefault();
+    const id = activeSelectors.activeOfferId(store.getState());
+
+    dispatch(
+      fetchPostCommentsAction({
+        offerId: id,
+        comment: reviewForm.review,
+        rating: reviewForm.rating,
+      })
+    );
+    fetchGetCommentsAction(id);
+    setReviewForm({ rating: 0, review: '' });
   };
 
-  const isButtonDisabled = !reviewForm.rating || reviewForm.review.length < 50 || reviewForm.review.length > 300;
+  const isButtonDisabled =
+    !reviewForm.rating ||
+    reviewForm.review.length < 50 ||
+    reviewForm.review.length > 300;
 
   return (
     <form
@@ -49,6 +72,7 @@ export function NewReview() {
               defaultValue={star.value}
               id={getStarsText(star.value)}
               type="radio"
+              ref={ratingRef}
             />
             <label
               htmlFor={getStarsText(star.value)}
@@ -63,6 +87,7 @@ export function NewReview() {
         ))}
       </div>
       <textarea
+        ref={commentRef}
         value={reviewForm.review}
         className="reviews__textarea form__textarea"
         id="review"

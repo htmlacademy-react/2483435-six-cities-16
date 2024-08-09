@@ -4,11 +4,17 @@ import { Rating } from '../../components/main/rating/rating';
 import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
-import { useAppSelector } from '../../hooks/store';
-import { activeSelectors } from '../../store/slices/active-slice';
+import { PhotosProps } from './photos';
+import ShowLoading from '../../components/main/show-loading';
+import { Comment } from '../../types/comment-type';
 
-function Description() {
-  const activeOffer = useAppSelector(activeSelectors.activeOffer);
+type DescriptionProps = PhotosProps & {
+  comments: Comment[];
+};
+function Description({ activeOffer, comments }: DescriptionProps) {
+  if (!activeOffer) {
+    return <ShowLoading />;
+  }
   const {
     title,
     type,
@@ -21,7 +27,7 @@ function Description() {
     goods,
     host,
     maxAdults,
-  } = activeOffer!;
+  } = activeOffer;
 
   const isHostPro = clsx('offer__avatar-wrapper', 'user__avatar-wrapper', {
     'offer__avatar-wrapper--pro': host.isPro,
@@ -84,7 +90,7 @@ function Description() {
             <p className="offer__text">{description}</p>
           </div>
         </div>
-        <Reviews />
+        <Reviews comments={comments} />
       </div>
     </div>
   );

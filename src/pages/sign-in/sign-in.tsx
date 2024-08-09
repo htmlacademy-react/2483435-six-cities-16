@@ -1,8 +1,30 @@
+import { FormEvent, useRef } from 'react';
 import { Header } from '../../components/header/header';
 import { useChangeTitle } from '../../hooks/title';
+import { useNavigate } from 'react-router-dom';
+import { dispatch } from '../../store/store';
+import { loginAction } from '../../store/api-actions/auth-actions.ts/login-action';
+import { AppRoute } from '../../const';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
+
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(
+        loginAction({
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        })
+      );
+    }
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -12,10 +34,16 @@ function SignIn(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              onSubmit={handleSubmit}
+              method="post"
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  ref={loginRef}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -26,6 +54,7 @@ function SignIn(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  ref={passwordRef}
                   className="login__input form__input"
                   type="password"
                   name="password"
@@ -33,6 +62,7 @@ function SignIn(): JSX.Element {
                 />
               </div>
               <button
+                onSubmit={() => navigate(AppRoute.Main)}
                 className="login__submit form__submit button"
                 type="submit"
               >

@@ -1,26 +1,30 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { faker } from '@faker-js/faker';
-import { AUTH_STATUS, AuthStatus } from '../../const';
 import { UserSlice } from '../../types/store-types/slices-types';
+import { AuthType } from '../../types/user-type';
 
 const userState: UserSlice = {
-  status: faker.helpers.arrayElement(AUTH_STATUS) as AuthStatus,
+  status: 'UNKNOWN',
+  userEmail: '',
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userState,
   reducers: {
-    setStatus: (state, action: PayloadAction<AuthStatus>) => {
+    setStatus: (state, action: PayloadAction<AuthType>) => {
       state.status = action.payload;
+    },
+    setUserEmail: (state, action: PayloadAction<string>) => {
+      state.userEmail = action.payload;
     },
   },
   selectors: {
     status: (state) => state.status,
+    userEmail: (state) => state.userEmail,
   },
 });
 const userSelectors = userSlice.selectors;
-const { setStatus } = userSlice.actions;
+const { setStatus, setUserEmail } = userSlice.actions;
 const userActions = userSlice.actions;
 
-export { userSlice, userSelectors, setStatus, userActions };
+export { userSlice, userSelectors, setStatus, setUserEmail, userActions };

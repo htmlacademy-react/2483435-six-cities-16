@@ -9,4 +9,10 @@ interface User extends UserGeneral {
   token: string;
 }
 
-export type { User, UserGeneral };
+type AuthData = {
+  login: string;
+  password: string;
+};
+
+type AuthType = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
+export type { User, UserGeneral, AuthData, AuthType };

@@ -1,21 +1,31 @@
 import { SortSelect } from '../sort-select';
 import OfferCard from '../../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../../hooks/store';
-import { FullOffer } from '../../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../../store/slices/active-slice';
 import { toSortOffers } from '../../../store/slices/offers-slice/offers-selectors';
+import { store } from '../../../store/store';
+import { fetchOfferAction } from '../../../store/api-actions/offers-actions/fetch-offer-action';
+import { ThumbnailOffer } from '../../../types/offer-type';
+import { fetchGetCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
+import { fetchOffersNearbyAction } from '../../../store/api-actions/offers-actions/fetch-offers-nearby-action';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
   const sortedOffers = useAppSelector(toSortOffers);
   const correctEnding = sortedOffers.length > 1 ? 's' : '';
 
-  const { setActiveOffer } = useActionCreators(activeActions);
-  const handleMouseEnter = (offer: FullOffer) => setActiveOffer(offer);
-  const handleMouseLeave = () => setActiveOffer(null);
+  const { setActiveOfferId } = useActionCreators(activeActions);
+  const handleMouseEnter = (offer: ThumbnailOffer) =>
+    setActiveOfferId(offer.id);
+  const handleMouseLeave = () => setActiveOfferId('');
+  const handleMouseClick = (offer: ThumbnailOffer) => {
+    store.dispatch(fetchOfferAction(offer.id));
+    store.dispatch(fetchGetCommentsAction(offer.id));
+    store.dispatch(fetchOffersNearbyAction(offer.id));
+  };
 
   return (
     <section className="cities__places places">
@@ -32,6 +42,7 @@ function CityOffers() {
             offer={offer}
             onMouseEnter={() => handleMouseEnter(offer)}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleMouseClick(offer)}
           />
         ))}
       </div>
