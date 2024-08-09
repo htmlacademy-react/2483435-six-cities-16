@@ -1,4 +1,4 @@
-import { ThumbnailOffer } from '../../types/offer-type';
+import type { ThumbnailOffer } from '../../types/offer-type';
 
 type StructuredOffersType = {
   [key: string]: ThumbnailOffer[];

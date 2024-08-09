@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../../const';
-import { userSelectors } from '../../../store/slices/user-slice';
-import { useAppSelector } from '../../../hooks/store';
+import { AppRoute, AuthStatus } from '../../const';
+import { userSelectors } from '../../store/slices/user-slice';
+import { useAppSelector } from '../../hooks/store';
 
 const getRoute = (status: AuthStatus, redirection: AppRoute) =>
   function AccessRoute() {

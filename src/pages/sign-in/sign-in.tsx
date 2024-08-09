@@ -8,7 +8,6 @@ import { loginAction } from '../../store/api-actions/auth-actions';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
-
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
@@ -73,7 +72,7 @@ function SignIn(): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+                <span>Paris</span>
               </a>
             </div>
           </section>
@@ -83,4 +82,4 @@ function SignIn(): JSX.Element {
   );
 }
 
-export default SignIn;
+export { SignIn };

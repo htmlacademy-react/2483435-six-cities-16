@@ -1,8 +1,8 @@
 import { Header } from '../../components/header/header';
-import { CitiesTabs } from './cities-tabs.tsx/cities-tabs';
-import CityOffers from './city-offers/city-offers';
+import { CitiesTabs } from './cities-tabs';
+import { CityOffers } from './city-offers';
 import { useChangeTitle } from '../../hooks/title';
-import { Empty } from './empty';
+import { CitiesEmpty } from './cities-empty';
 import { Map } from '../../components/map/map';
 import clsx from 'clsx';
 import { useAppSelector } from '../../hooks/store';
@@ -35,7 +35,7 @@ function Cities(): JSX.Element {
         <div className="cities">
           <div className={isEmptyCitiesClasses}>
             {isEmpty ? (
-              <Empty />
+              <CitiesEmpty />
             ) : (
               <>
                 <CityOffers />
@@ -43,7 +43,7 @@ function Cities(): JSX.Element {
                   <Map
                     bemBlock="cities"
                     activeOffer={activeOffer}
-                    offers = {cityOffers}
+                    offers={cityOffers}
                   />
                 </div>
               </>
@@ -55,4 +55,4 @@ function Cities(): JSX.Element {
   );
 }
 
-export default Cities;
+export { Cities };

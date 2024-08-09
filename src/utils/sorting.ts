@@ -1,4 +1,4 @@
-import { ThumbnailOffer } from '../types/offer-type';
+import type { ThumbnailOffer } from '../types/offer-type';
 
 const priceLowSort = (offerA: ThumbnailOffer, offerB: ThumbnailOffer) =>
   offerA.price - offerB.price;

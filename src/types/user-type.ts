@@ -15,4 +15,5 @@ type AuthData = {
 };
 
 type AuthType = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
+
 export type { User, UserGeneral, AuthData, AuthType };

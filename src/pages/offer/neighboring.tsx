@@ -1,22 +1,25 @@
-import OfferCard from '../../components/main/offer-card/offer-card';
+import { OfferCard } from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { ThumbnailOffer } from '../../types/offer-type';
+import type { ThumbnailOffer } from '../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../store/slices/active-slice';
-import { MAX_NEARBY_OFFER_COUNT } from '../../const';
 import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 import { store } from '../../store/store';
-import { fetchOfferAction, fetchOffersNearbyAction } from '../../store/api-actions/offers-actions';
+import {
+  fetchOfferAction,
+  fetchOffersNearbyAction,
+} from '../../store/api-actions/offers-actions';
+import { Setting } from '../../const';
 
 type NeighboringProps = {
   offers: ThumbnailOffer[];
 };
 
-export function Neighboring({ offers }: NeighboringProps) {
+function Neighboring({ offers }: NeighboringProps) {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
-  offers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  offers = offers.slice(0, Setting.NearbyCount);
   const { setActiveOfferId } = useActionCreators(activeActions);
 
   const handleMouseClick = (offer: ThumbnailOffer) => {
@@ -51,3 +54,5 @@ export function Neighboring({ offers }: NeighboringProps) {
     </div>
   );
 }
+
+export { Neighboring };

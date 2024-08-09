@@ -1,8 +1,7 @@
-import { Comment } from '../comment-type';
-
-import { CityName, OfferType, ThumbnailOffer } from '../offer-type';
-import { SortType } from '../sort-type';
-import { AuthType } from '../user-type';
+import type { Comment } from '../comment-type';
+import type { CityName, OfferType, ThumbnailOffer } from '../offer-type';
+import type { SortType } from '../sort-type';
+import type { AuthType } from '../user-type';
 
 type OffersSlice = {
   allOffers: ThumbnailOffer[];

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OfferType, ThumbnailOffer } from '../../../types/offer-type';
+import type { Comment } from '../../../types/comment-type';
+import type { OfferType, ThumbnailOffer } from '../../../types/offer-type';
 import { OffersSlice } from '../../../types/store-types/slices-types';
-import { Comment } from '../../../types/comment-type';
 
 const offersState: OffersSlice = {
   allOffers: [],
@@ -41,11 +41,11 @@ const { setAllOffers, setActiveOffer, setNearbyOffers, setComments } =
 const offersActions = offersSlice.actions;
 
 export {
-  offersSlice,
-  offersSelectors,
-  setAllOffers,
-  setActiveOffer,
-  setNearbyOffers,
-  setComments,
   offersActions,
+  offersSelectors,
+  offersSlice,
+  setActiveOffer,
+  setAllOffers,
+  setComments,
+  setNearbyOffers,
 };

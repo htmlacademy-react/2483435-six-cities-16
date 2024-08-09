@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { toStructureOffers } from './favorites-utils';
-import OfferCard from '../../components/main/offer-card/offer-card';
+import { OfferCard } from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { activeActions } from '../../store/slices/active-slice';
-import { FullOffer } from '../../types/offer-type';
+import type { ThumbnailOffer } from '../../types/offer-type';
 import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
 
 function List() {
@@ -11,7 +11,8 @@ function List() {
   const structuredOffers = toStructureOffers(favorites);
   const { setActiveOfferId } = useActionCreators(activeActions);
 
-  const handleMouseClick = (offer: FullOffer) => setActiveOfferId(offer.id);
+  const handleMouseClick = (offer: ThumbnailOffer) =>
+    setActiveOfferId(offer.id);
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>

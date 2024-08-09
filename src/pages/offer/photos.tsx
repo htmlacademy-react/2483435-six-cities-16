@@ -1,10 +1,10 @@
-import { OfferType } from '../../types/offer-type';
+import type { OfferType } from '../../types/offer-type';
 
 type PhotosProps = {
   activeOffer: OfferType;
 };
 
-export function Photos({ activeOffer }: PhotosProps) {
+function Photos({ activeOffer }: PhotosProps) {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
@@ -17,3 +17,4 @@ export function Photos({ activeOffer }: PhotosProps) {
     </div>
   );
 }
+export { Photos };

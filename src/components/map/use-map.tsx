@@ -1,11 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { Map, TileLayer } from 'leaflet';
-
-type Location = {
-  lat: number;
-  lng: number;
-  zoom: number;
-};
+import type { Location } from './map-utils';
 
 enum MapSetting {
   MapUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',

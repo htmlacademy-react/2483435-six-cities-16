@@ -1,15 +1,18 @@
-import { SortSelect } from '../sort-select';
-import OfferCard from '../../../components/main/offer-card/offer-card';
-import { useActionCreators, useAppSelector } from '../../../hooks/store';
+import { SortSelect } from './sort-select';
+import { OfferCard } from '../../components/main/offer-card/offer-card';
+import { useActionCreators, useAppSelector } from '../../hooks/store';
 import {
   activeActions,
   activeSelectors,
-} from '../../../store/slices/active-slice';
-import { toSortOffers } from '../../../store/slices/offers-slice/offers-selectors';
-import { store } from '../../../store/store';
-import { ThumbnailOffer } from '../../../types/offer-type';
-import { fetchGetCommentsAction } from '../../../store/api-actions/comments-actions';
-import { fetchOfferAction, fetchOffersNearbyAction } from '../../../store/api-actions/offers-actions';
+} from '../../store/slices/active-slice';
+import { toSortOffers } from '../../store/slices/offers-slice/offers-selectors';
+import { store } from '../../store/store';
+import type { ThumbnailOffer } from '../../types/offer-type';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
+import {
+  fetchOfferAction,
+  fetchOffersNearbyAction,
+} from '../../store/api-actions/offers-actions';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
@@ -49,4 +52,4 @@ function CityOffers() {
   );
 }
 
-export default CityOffers;
+export { CityOffers };

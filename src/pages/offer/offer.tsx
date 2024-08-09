@@ -1,23 +1,26 @@
 import { useAppSelector } from '../../hooks/store';
 import { Header } from '../../components/header/header';
-import ShowLoading from '../../components/main/show-loading';
+import { ShowLoading } from '../../components/main/show-loading';
 import { Photos } from './photos';
 import { Description } from './description';
 import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
 import { Neighboring } from './neighboring';
 import { useChangeTitle } from '../../hooks/title';
 import { Map } from '../../components/map/map';
-import { ThumbnailOffer } from '../../types/offer-type';
-import {OfferType} from '../../types/offer-type';
-import { MAX_NEARBY_OFFER_COUNT } from '../../const';
+import type { ThumbnailOffer } from '../../types/offer-type';
+import type { OfferType } from '../../types/offer-type';
+import { Setting } from '../../const';
 
-export type OffersMapType = (OfferType|ThumbnailOffer);
+export type OffersMapType = OfferType | ThumbnailOffer;
 
 function Offer(): JSX.Element {
   const activeOffer = useAppSelector(offersSelectors.activeOffer)!;
   const comments = useAppSelector(offersSelectors.comments);
-  const nearbyOffers = useAppSelector(offersSelectors.nearbyOffers).slice(0, MAX_NEARBY_OFFER_COUNT);
-  const offersForMap:OffersMapType[] = [...nearbyOffers, activeOffer];
+  const nearbyOffers = useAppSelector(offersSelectors.nearbyOffers).slice(
+    0,
+    Setting.NearbyCount
+  );
+  const offersForMap: OffersMapType[] = [...nearbyOffers, activeOffer];
 
   useChangeTitle('Offer');
 
@@ -44,4 +47,4 @@ function Offer(): JSX.Element {
   );
 }
 
-export default Offer;
+export { Offer };

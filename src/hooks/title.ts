@@ -7,10 +7,12 @@ const restoreTitle = () => {
   };
 };
 
-export function useChangeTitle(title: string) {
+function useChangeTitle(title: string) {
   useEffect(restoreTitle, []);
 
   useEffect(() => {
     document.title = `6 Cities | ${title}`;
   }, [title]);
 }
+
+export { useChangeTitle };

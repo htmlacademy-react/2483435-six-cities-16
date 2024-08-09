@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import { Rating } from '../../../components/main/rating/rating';
-import { Comment } from '../../../types/comment-type';
+import type { Comment } from '../../../types/comment-type';
 
 type ReviewProps = {
   review: Comment;
 };
 
-export function Review({ review }: ReviewProps) {
+function Review({ review }: ReviewProps) {
   const { user, rating, comment, date } = review;
 
   return (
@@ -33,3 +33,5 @@ export function Review({ review }: ReviewProps) {
     </li>
   );
 }
+
+export { Review };

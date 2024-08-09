@@ -1,53 +1,9 @@
-export const Setting = {
-  OffersCount: 30,
+const Setting = {
+  NearbyCount: 3,
+  TimeoutError: 2000,
 } as const;
 
-export enum AppRoute {
-  Main = '/',
-  Login = '/login',
-  Favorites = '/favorites',
-  Offer = '/offer/:id',
-}
-
-export const RATING = [
-  { value: 5, text: 'perfect' },
-  { value: 4, text: 'good' },
-  { value: 3, text: 'not bad' },
-  { value: 2, text: 'badly' },
-  { value: 1, text: 'terrible' },
-];
-
-export enum AuthStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
-
-export enum MapMarker {
-  DefaultMarker = '../markup/img/pin.svg',
-  ActiveMarker = '../markup/img/pin-active.svg',
-}
-
-export const MAX_NEARBY_OFFER_COUNT = 3;
-
-export const SortOption = {
-  Popular: 'Popular',
-  PriceLowToHigh: 'Price: low to high',
-  PriceHighToLow: 'Price: high to low',
-  TopRatedFirst: 'Top rated first',
-};
-
-export enum APIRoute {
-  Offers = '/offers',
-  Favorite = '/favorite',
-  Comments = '/comments',
-  Login = '/login',
-  Logout = '/logout',
-}
-
-export const TIMEOUT_SHOW_ERROR = 2000;
-
-export const CITIES = [
+const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -55,3 +11,61 @@ export const CITIES = [
   'Hamburg',
   'Dusseldorf',
 ];
+
+const RATING = [
+  { value: 5, text: 'perfect' },
+  { value: 4, text: 'good' },
+  { value: 3, text: 'not bad' },
+  { value: 2, text: 'badly' },
+  { value: 1, text: 'terrible' },
+];
+
+const SortOption = {
+  Popular: 'Popular',
+  PriceLowToHigh: 'Price: low to high',
+  PriceHighToLow: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
+};
+
+enum BemClass {
+  Offer = 'offer',
+  Favorites = 'favorites',
+}
+
+enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+}
+
+enum MapMarker {
+  DefaultMarker = '../markup/img/pin.svg',
+  ActiveMarker = '../markup/img/pin-active.svg',
+}
+
+enum AuthStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export {
+  Setting,
+  CITIES,
+  RATING,
+  SortOption,
+  BemClass,
+  AppRoute,
+  MapMarker,
+  AuthStatus,
+  APIRoute,
+};

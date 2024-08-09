@@ -1,25 +1,24 @@
 import clsx from 'clsx';
-
-const OFFER_CLASS_NAME = 'offer';
+import { BemClass } from '../../../const';
 
 type FavoriteButtonProps = {
-  className: string;
+  bemBlock: string;
   isFavorite: boolean;
 };
 
-function FavoriteButton({ className, isFavorite }: FavoriteButtonProps) {
+function FavoriteButton({ bemBlock, isFavorite }: FavoriteButtonProps) {
   const favoriteLabel = `${isFavorite ? 'In' : 'To'} bookmarks`;
-  const favoriteClasses = clsx('button', `${className}__bookmark-button`, {
-    [`${className}__bookmark-button--active`]: isFavorite,
+  const favoriteClasses = clsx('button', `${bemBlock}__bookmark-button`, {
+    [`${bemBlock}__bookmark-button--active`]: isFavorite,
   });
 
-  const imgWidth = className === OFFER_CLASS_NAME ? 31 : 18;
-  const imgHeight = className === OFFER_CLASS_NAME ? 33 : 19;
+  const imgWidth = bemBlock === BemClass.Offer ? 31 : 18;
+  const imgHeight = bemBlock === BemClass.Offer ? 33 : 19;
 
   return (
     <button className={favoriteClasses} type="button">
       <svg
-        className={`${className}__bookmark-icon`}
+        className={`${bemBlock}__bookmark-icon`}
         width={imgWidth}
         height={imgHeight}
       >

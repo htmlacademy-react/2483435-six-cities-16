@@ -4,9 +4,9 @@ import { Rating } from '../../components/main/rating/rating';
 import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
-import ShowLoading from '../../components/main/show-loading';
-import { Comment } from '../../types/comment-type';
-import { OfferType } from '../../types/offer-type';
+import { ShowLoading } from '../../components/main/show-loading';
+import type { Comment } from '../../types/comment-type';
+import type { OfferType } from '../../types/offer-type';
 
 type DescriptionProps = {
   activeOffer: OfferType;
@@ -44,7 +44,7 @@ function Description({ activeOffer, comments }: DescriptionProps) {
         )}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">{title}</h1>
-          <FavoriteButton className="offer" isFavorite={isFavorite} />
+          <FavoriteButton bemBlock="offer" isFavorite={isFavorite} />
         </div>
         <Rating prefix="offer" rating={rating} showValue />
         <ul className="offer__features">

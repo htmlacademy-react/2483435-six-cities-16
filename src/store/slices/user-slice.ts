@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { UserSlice } from '../../types/store-types/slices-types';
-import { AuthType } from '../../types/user-type';
+import type { AuthType } from '../../types/user-type';
 
 const userState: UserSlice = {
   status: 'UNKNOWN',

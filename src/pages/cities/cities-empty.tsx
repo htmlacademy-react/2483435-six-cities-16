@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks/store';
 import { activeSelectors } from '../../store/slices/active-slice';
 
-export function Empty() {
+function CitiesEmpty() {
   const city = useAppSelector(activeSelectors.city);
   return (
     <>
@@ -17,3 +17,5 @@ export function Empty() {
     </>
   );
 }
+
+export { CitiesEmpty };

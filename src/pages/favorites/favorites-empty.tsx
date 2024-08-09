@@ -1,4 +1,4 @@
-function Empty() {
+function FavoritesEmpty() {
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>
@@ -12,4 +12,4 @@ function Empty() {
   );
 }
 
-export { Empty };
+export { FavoritesEmpty };

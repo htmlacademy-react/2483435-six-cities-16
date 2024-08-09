@@ -1,5 +1,6 @@
 import { CITIES } from '../const';
-import { UserGeneral } from './user-type';
+import type { UserGeneral } from './user-type';
+
 type CityName = (typeof CITIES)[number];
 type OfferTypes = 'apartment' | 'hotel' | 'house' | 'room';
 

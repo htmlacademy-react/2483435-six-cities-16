@@ -1,5 +1,9 @@
 import { APIRoute } from '../../const';
-import { FullOffer, OfferType, ThumbnailOffer } from '../../types/offer-type';
+import type {
+  FullOffer,
+  OfferType,
+  ThumbnailOffer,
+} from '../../types/offer-type';
 import { activeActions } from '../slices/active-slice';
 import { offersActions } from '../slices/offers-slice/offers-slice';
 import { store } from '../store';
