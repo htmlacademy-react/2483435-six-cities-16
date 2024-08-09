@@ -1,7 +1,7 @@
-import { Offer } from '../../types/offer-type';
+import { OfferType } from '../../types/offer-type';
 
-export type PhotosProps = {
-  activeOffer: Offer;
+type PhotosProps = {
+  activeOffer: OfferType;
 };
 
 export function Photos({ activeOffer }: PhotosProps) {

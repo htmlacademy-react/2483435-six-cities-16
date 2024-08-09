@@ -4,11 +4,12 @@ import { Rating } from '../../components/main/rating/rating';
 import { upFirstLetter } from '../../utils/utils';
 import { correctName } from './utils';
 import { Reviews } from './reviews/reviews';
-import { PhotosProps } from './photos';
 import ShowLoading from '../../components/main/show-loading';
 import { Comment } from '../../types/comment-type';
+import { OfferType } from '../../types/offer-type';
 
-type DescriptionProps = PhotosProps & {
+type DescriptionProps = {
+  activeOffer: OfferType;
   comments: Comment[];
 };
 function Description({ activeOffer, comments }: DescriptionProps) {

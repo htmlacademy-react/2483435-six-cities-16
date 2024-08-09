@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Offer, ThumbnailOffer } from '../../../types/offer-type';
+import { OfferType, ThumbnailOffer } from '../../../types/offer-type';
 import { OffersSlice } from '../../../types/store-types/slices-types';
 import { Comment } from '../../../types/comment-type';
 
@@ -17,7 +17,7 @@ const offersSlice = createSlice({
     setAllOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
       state.allOffers = action.payload;
     },
-    setActiveOffer: (state, action: PayloadAction<Offer | null>) => {
+    setActiveOffer: (state, action: PayloadAction<OfferType | null>) => {
       state.activeOffer = action.payload;
     },
     setNearbyOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
