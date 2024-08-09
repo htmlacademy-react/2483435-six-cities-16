@@ -1,5 +1,5 @@
 import { APIRoute } from '../../const';
-import { FullOffer, Offer, ThumbnailOffer } from '../../types/offer-type';
+import { FullOffer, OfferType, ThumbnailOffer } from '../../types/offer-type';
 import { activeActions } from '../slices/active-slice';
 import { offersActions } from '../slices/offers-slice/offers-slice';
 import { store } from '../store';
@@ -18,7 +18,7 @@ const fetchOffersAction = appCreateAsyncThunk<void, undefined>(
 const fetchOfferAction = appCreateAsyncThunk<void, string>(
   'data/fetchOffer',
   async (offerId, { extra: api }) => {
-    const { data: offer } = await api.get<Offer>(
+    const { data: offer } = await api.get<OfferType>(
       `${APIRoute.Offers}/${offerId}`
     );
     store.dispatch(offersActions.setActiveOffer(offer));

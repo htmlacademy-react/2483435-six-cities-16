@@ -5,10 +5,9 @@ import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
 import {
   FullOffer,
-  LocationData,
-  Offer,
-  ThumbnailOffer,
+  LocationData
 } from '../../types/offer-type';
+import { OffersMapType } from '../../pages/offer/offer';
 
 type Location = {
   lat: number;
@@ -52,7 +51,7 @@ const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
 
 const useUpdateMarkers = (
   map: LeafletMap | null,
-  offers: (ThumbnailOffer | Offer)[]
+  offers: OffersMapType[]
 ) => {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
 

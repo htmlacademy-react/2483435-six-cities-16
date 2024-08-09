@@ -11,12 +11,12 @@ import { store } from '../../store/store';
 import { fetchOfferAction, fetchOffersNearbyAction } from '../../store/api-actions/offers-actions';
 
 type NeighboringProps = {
-  nearbyOffers: ThumbnailOffer[];
+  offers: ThumbnailOffer[];
 };
 
-export function Neighboring({ nearbyOffers }: NeighboringProps) {
+export function Neighboring({ offers }: NeighboringProps) {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
-  nearbyOffers = nearbyOffers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  offers = offers.slice(0, MAX_NEARBY_OFFER_COUNT);
   const { setActiveOfferId } = useActionCreators(activeActions);
 
   const handleMouseClick = (offer: ThumbnailOffer) => {
@@ -26,7 +26,7 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
     store.dispatch(fetchOffersNearbyAction(offer.id));
   };
 
-  return nearbyOffers.length <= 1 ? (
+  return offers.length <= 1 ? (
     ''
   ) : (
     <div className="container">
@@ -35,7 +35,7 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
           Other places in the neighbourhood
         </h2>
         <div className="near-places__list places__list">
-          {nearbyOffers.map(
+          {offers.map(
             (offer) =>
               offer.id !== activeOfferId && (
                 <OfferCard

@@ -5,33 +5,24 @@ import {
   useUpdateLocation,
   useUpdateMarkers,
 } from './map-utils';
-import { useAppSelector } from '../../hooks/store';
 import { useMap } from './use-map';
-import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { offersByCity } from '../../store/slices/offers-slice/offers-selectors';
-import { Offer, ThumbnailOffer } from '../../types/offer-type';
+import { OfferType } from '../../types/offer-type';
+import { OffersMapType } from '../../pages/offer/offer';
 
 type MapProps = {
   bemBlock: string;
-  activeOffer: Offer | null;
-  nearbyOffers: ThumbnailOffer[];
+  activeOffer: OfferType | null;
+  offers: OffersMapType[];
 };
 
-export function Map({ bemBlock, activeOffer, nearbyOffers }: MapProps) {
-  const offers = useAppSelector(offersByCity);
-  const location = (activeOffer ? activeOffer : offers[0]).location;
-  const offersForMap: (ThumbnailOffer | Offer)[] =
-    bemBlock === 'cities'
-      ? offers
-      : nearbyOffers
-        .slice(0, MAX_NEARBY_OFFER_COUNT)
-        .concat([].push(activeOffer));
+export function Map({ bemBlock, activeOffer, offers }: MapProps) {
+  const location = (activeOffer ? activeOffer : offers[offers.length / 2]).location;
   const correctLocation = adaptLocation(location);
   const mapRef = useRef(null);
   const map = useMap(mapRef, correctLocation);
 
   useUpdateLocation(map, correctLocation);
-  useUpdateMarkers(map, offersForMap);
+  useUpdateMarkers(map, offers);
 
   return <section className={`${bemBlock}__map map`} ref={mapRef}></section>;
 }
