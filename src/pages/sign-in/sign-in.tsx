@@ -23,7 +23,6 @@ function SignIn(): JSX.Element {
           password: passwordRef.current.value,
         })
       );
-
     }
   };
 

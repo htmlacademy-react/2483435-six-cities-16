@@ -25,18 +25,27 @@ const activeSlice = createSlice({
     },
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
-    }
+    },
   },
   selectors: {
     city: (state) => state.city,
     activeOfferId: (state) => state.activeOfferId,
-    sortOption: (state) => state.sortOption ,
+    sortOption: (state) => state.sortOption,
     isLoading: (state) => state.isLoading,
   },
 });
 
 const activeSelectors = activeSlice.selectors;
-const { setCity, setActiveOfferId, setSortOption, setIsLoading } = activeSlice.actions;
+const { setCity, setActiveOfferId, setSortOption, setIsLoading } =
+  activeSlice.actions;
 const activeActions = activeSlice.actions;
 
-export { activeSlice, activeSelectors, setCity, setActiveOfferId, setSortOption, setIsLoading, activeActions };
+export {
+  activeSlice,
+  activeSelectors,
+  setCity,
+  setActiveOfferId,
+  setSortOption,
+  setIsLoading,
+  activeActions,
+};

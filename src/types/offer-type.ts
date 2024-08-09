@@ -1,4 +1,3 @@
-
 import { CITIES } from '../const';
 import { UserGeneral } from './user-type';
 type CityName = (typeof CITIES)[number];

@@ -90,7 +90,7 @@ function Description({ activeOffer, comments }: DescriptionProps) {
             <p className="offer__text">{description}</p>
           </div>
         </div>
-        <Reviews comments={comments}/>
+        <Reviews comments={comments} />
       </div>
     </div>
   );

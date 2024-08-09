@@ -3,12 +3,25 @@
   "version": "14.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
     "build": "tsc && vite build",
+    "format": "biome format --write src",
     "lint": "eslint src --ext ts,tsx",
     "lint:fix": "eslint src/ --fix",
     "preview": "vite preview",
+    "start": "vite",
     "test": "vitest --passWithNoTests"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@reduxjs/toolkit": "2.2.7",
@@ -25,6 +38,7 @@
     "typescript": "5.5.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@faker-js/faker": "8.4.1",
     "@testing-library/jest-dom": "6.1.3",
     "@testing-library/react": "14.0.0",
@@ -46,16 +60,8 @@
     "vite": "4.4.11",
     "vitest": "0.34.6"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "packageManager": "npm@10.8.2+sha512.c7f0088c520a46596b85c6f8f1da943400199748a0f7ea8cb8df75469668dc26f6fb3ba26df87e2884a5ebe91557292d0f3db7d0929cdb4f14910c3032ac81fb",
+  "volta": {
+    "node": "20.16.0"
   }
 }

@@ -3,7 +3,12 @@ import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
-import { FullOffer, LocationData, Offer, ThumbnailOffer } from '../../types/offer-type';
+import {
+  FullOffer,
+  LocationData,
+  Offer,
+  ThumbnailOffer,
+} from '../../types/offer-type';
 
 type Location = {
   lat: number;
@@ -45,7 +50,10 @@ const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
   });
 };
 
-const useUpdateMarkers = (map: LeafletMap | null, offers: (ThumbnailOffer | Offer)[]) => {
+const useUpdateMarkers = (
+  map: LeafletMap | null,
+  offers: (ThumbnailOffer | Offer)[]
+) => {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
 
   useEffect(() => {

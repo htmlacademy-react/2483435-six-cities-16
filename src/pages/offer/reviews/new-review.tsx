@@ -2,7 +2,10 @@ import { Fragment, useRef, useState } from 'react';
 import { RATING } from '../../../const';
 import { getStarsText } from '../utils';
 import { dispatch, store } from '../../../store/store';
-import { fetchGetCommentsAction, fetchPostCommentsAction } from '../../../store/api-actions/comments-actions/fetch-comments-action';
+import {
+  fetchGetCommentsAction,
+  fetchPostCommentsAction,
+} from '../../../store/api-actions/comments-actions/fetch-comments-action';
 import { activeSelectors } from '../../../store/slices/active-slice';
 
 type NewReviewProps = HTMLFormElement & {

@@ -7,8 +7,8 @@ import { Comment } from '../../../types/comment-type';
 
 type ReviewsProp = {
   comments: Comment[];
-}
-export function Reviews({comments}:ReviewsProp) {
+};
+export function Reviews({ comments }: ReviewsProp) {
   const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
   const sortedReviews = sortByDate(comments);

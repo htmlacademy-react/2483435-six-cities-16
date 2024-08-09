@@ -12,7 +12,7 @@ interface User extends UserGeneral {
 type AuthData = {
   login: string;
   password: string;
-}
+};
 
 type AuthType = 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
 export type { User, UserGeneral, AuthData, AuthType };
