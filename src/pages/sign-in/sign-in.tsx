@@ -3,12 +3,11 @@ import { Header } from '../../components/header/header';
 import { useChangeTitle } from '../../hooks/title';
 import { useNavigate } from 'react-router-dom';
 import { dispatch } from '../../store/store';
-import { loginAction } from '../../store/api-actions/auth-actions.ts/login-action';
 import { AppRoute } from '../../const';
+import { loginAction } from '../../store/api-actions/auth-actions';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
-
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
@@ -73,7 +72,7 @@ function SignIn(): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+                <span>Paris</span>
               </a>
             </div>
           </section>
@@ -83,4 +82,4 @@ function SignIn(): JSX.Element {
   );
 }
 
-export default SignIn;
+export { SignIn };

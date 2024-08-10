@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CityName } from '../../types/offer-type';
+import type { CityName } from '../../types/offer-type';
 import { ActiveSlice } from '../../types/store-types/slices-types';
-import { SortType } from '../../types/sort-type';
+import type { SortType } from '../../types/sort-type';
 
 const activeState: ActiveSlice = {
   city: 'Paris',

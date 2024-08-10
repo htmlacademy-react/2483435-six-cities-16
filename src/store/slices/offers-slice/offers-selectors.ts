@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { ThumbnailOffer } from '../../../types/offer-type';
-import { SortType } from '../../../types/sort-type';
+import type { ThumbnailOffer } from '../../../types/offer-type';
+import type { SortType } from '../../../types/sort-type';
 import {
   priceHighSort,
   priceLowSort,

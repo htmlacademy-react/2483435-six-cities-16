@@ -1,23 +1,25 @@
-import OfferCard from '../../components/main/offer-card/offer-card';
+import { OfferCard } from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { ThumbnailOffer } from '../../types/offer-type';
+import type { ThumbnailOffer } from '../../types/offer-type';
 import {
   activeActions,
   activeSelectors,
 } from '../../store/slices/active-slice';
-import { MAX_NEARBY_OFFER_COUNT } from '../../const';
-import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions/fetch-comments-action';
-import { fetchOfferAction } from '../../store/api-actions/offers-actions/fetch-offer-action';
-import { fetchOffersNearbyAction } from '../../store/api-actions/offers-actions/fetch-offers-nearby-action';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 import { store } from '../../store/store';
+import {
+  fetchOfferAction,
+  fetchOffersNearbyAction,
+} from '../../store/api-actions/offers-actions';
+import { Setting } from '../../const';
 
 type NeighboringProps = {
-  nearbyOffers: ThumbnailOffer[];
+  offers: ThumbnailOffer[];
 };
 
-export function Neighboring({ nearbyOffers }: NeighboringProps) {
+function Neighboring({ offers }: NeighboringProps) {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
-  nearbyOffers = nearbyOffers.slice(0, MAX_NEARBY_OFFER_COUNT);
+  offers = offers.slice(0, Setting.NearbyCount);
   const { setActiveOfferId } = useActionCreators(activeActions);
 
   const handleMouseClick = (offer: ThumbnailOffer) => {
@@ -27,7 +29,7 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
     store.dispatch(fetchOffersNearbyAction(offer.id));
   };
 
-  return nearbyOffers.length <= 1 ? (
+  return offers.length <= 1 ? (
     ''
   ) : (
     <div className="container">
@@ -36,7 +38,7 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
           Other places in the neighbourhood
         </h2>
         <div className="near-places__list places__list">
-          {nearbyOffers.map(
+          {offers.map(
             (offer) =>
               offer.id !== activeOfferId && (
                 <OfferCard
@@ -52,3 +54,5 @@ export function Neighboring({ nearbyOffers }: NeighboringProps) {
     </div>
   );
 }
+
+export { Neighboring };

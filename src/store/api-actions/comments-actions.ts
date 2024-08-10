@@ -1,10 +1,10 @@
-import { APIRoute } from '../../../const';
-import { store } from '../../store';
-import { offersActions } from '../../slices/offers-slice/offers-slice';
-import { Comment } from '../../../types/comment-type';
-import { appCreateAsyncThunk } from '../../utils';
+import { APIRoute } from '../../const';
+import { store } from '../store';
+import { offersActions } from '../slices/offers-slice/offers-slice';
+import type { Comment } from '../../types/comment-type';
+import { appCreateAsyncThunk } from '../utils';
 
-export const fetchGetCommentsAction = appCreateAsyncThunk<void, string>(
+const fetchGetCommentsAction = appCreateAsyncThunk<void, string>(
   'data/fetchComments',
   async (offerId, { extra: api }) => {
     const { data: comments } = await api.get<Comment[]>(
@@ -14,7 +14,7 @@ export const fetchGetCommentsAction = appCreateAsyncThunk<void, string>(
   }
 );
 
-export const fetchPostCommentsAction = appCreateAsyncThunk<
+const fetchPostCommentsAction = appCreateAsyncThunk<
   void,
   { offerId: string; comment: string; rating: number }
 >('data/fetchComment', async ({ offerId, comment, rating }, { extra: api }) => {
@@ -25,3 +25,5 @@ export const fetchPostCommentsAction = appCreateAsyncThunk<
 
   store.dispatch(fetchGetCommentsAction(offerId));
 });
+
+export { fetchGetCommentsAction, fetchPostCommentsAction };

@@ -4,10 +4,10 @@ import {
   activeActions,
   activeSelectors,
 } from '../../store/slices/active-slice';
-import { SortType } from '../../types/sort-type';
+import type { SortType } from '../../types/sort-type';
 import { SortOption } from '../../const';
 
-export function SortSelect() {
+function SortSelect() {
   const activeSortOption = useAppSelector(activeSelectors.sortOption);
   const { setSortOption } = useActionCreators(activeActions);
 
@@ -51,3 +51,5 @@ export function SortSelect() {
     </form>
   );
 }
+
+export { SortSelect };

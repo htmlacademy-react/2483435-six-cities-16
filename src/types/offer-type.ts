@@ -1,7 +1,8 @@
 import { CITIES } from '../const';
-import { UserGeneral } from './user-type';
+import type { UserGeneral } from './user-type';
+
 type CityName = (typeof CITIES)[number];
-type OfferType = 'apartment' | 'hotel' | 'house' | 'room';
+type OfferTypes = 'apartment' | 'hotel' | 'house' | 'room';
 
 interface OfferCity {
   name: CityName;
@@ -17,7 +18,7 @@ interface LocationData {
 interface FullOffer {
   id: string;
   title: string;
-  type: OfferType;
+  type: OfferTypes;
   price: number;
   city: OfferCity;
   location: LocationData;
@@ -44,15 +45,15 @@ type ThumbnailOffer = Omit<
   'bedrooms' | 'description' | 'goods' | 'host' | 'images' | 'maxAdults'
 >;
 
-type Offer = Omit<FullOffer, 'previewImage'>;
+type OfferType = Omit<FullOffer, 'previewImage'>;
 
 export type {
   FullOffer,
   OfferCity,
   OfferHost,
-  OfferType,
+  OfferTypes,
   ThumbnailOffer,
   LocationData,
   CityName,
-  Offer,
+  OfferType,
 };

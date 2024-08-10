@@ -1,6 +1,6 @@
 import type { ThumbnailOffer } from '../../../types/offer-type';
 import { Rating } from '../rating/rating';
-import { AppRoute } from '../../../const';
+import { AppRoute, BemClass } from '../../../const';
 import { Link } from 'react-router-dom';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 import { upFirstLetter } from '../../../utils/utils';
@@ -12,7 +12,6 @@ type OfferCardProps = {
   onMouseLeave?: () => void;
   onClick: (offer: ThumbnailOffer) => void;
 };
-const FAVORITES_CLASS_NAME = 'favorites';
 
 function OfferCard({
   bemBlock,
@@ -32,10 +31,10 @@ function OfferCard({
     previewImage,
   } = offer;
 
-  const imgWidth = bemBlock === FAVORITES_CLASS_NAME ? 150 : 260;
-  const imgHeight = bemBlock === FAVORITES_CLASS_NAME ? 110 : 200;
+  const imgWidth = bemBlock === BemClass.Favorites ? 150 : 260;
+  const imgHeight = bemBlock === BemClass.Favorites ? 110 : 200;
   const cardInfoClassName =
-    bemBlock === FAVORITES_CLASS_NAME ? 'favorites__card-info ' : '';
+    bemBlock === BemClass.Favorites ? 'favorites__card-info ' : '';
 
   return (
     <article
@@ -67,7 +66,7 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton className="place-card" isFavorite={isFavorite} />
+          <FavoriteButton bemBlock="place-card" isFavorite={isFavorite} />
         </div>
         <Rating prefix="place-card" rating={rating} />
         <h2 className="place-card__name">
@@ -79,4 +78,4 @@ function OfferCard({
   );
 }
 
-export default OfferCard;
+export { OfferCard };

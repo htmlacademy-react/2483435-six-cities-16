@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { AppRoute, CITIES } from '../../../const';
-import { useActionCreators, useAppSelector } from '../../../hooks/store';
+import { AppRoute, CITIES } from '../../const';
+import { useActionCreators, useAppSelector } from '../../hooks/store';
 import {
   activeActions,
   activeSelectors,
-} from '../../../store/slices/active-slice';
-import { CityName } from '../../../types/offer-type';
+} from '../../store/slices/active-slice';
+import type { CityName } from '../../types/offer-type';
 
 function CitiesTabs() {
   const city = useAppSelector(activeSelectors.city);

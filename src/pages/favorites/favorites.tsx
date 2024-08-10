@@ -2,7 +2,7 @@ import { useChangeTitle } from '../../hooks/title';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import clsx from 'clsx';
-import { Empty } from '../favorites/empty';
+import { FavoritesEmpty } from './favorites-empty';
 import { List } from './list';
 import { useAppSelector } from '../../hooks/store';
 import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
@@ -19,7 +19,7 @@ function Favorites(): JSX.Element {
       <Header />
       <main className={favoritePageClasses}>
         <div className="page__favorites-container container">
-          {isEmptyFavorites ? <Empty /> : <List />}
+          {isEmptyFavorites ? <FavoritesEmpty /> : <List />}
         </div>
       </main>
       <Footer />
@@ -27,4 +27,4 @@ function Favorites(): JSX.Element {
   );
 }
 
-export default Favorites;
+export { Favorites };

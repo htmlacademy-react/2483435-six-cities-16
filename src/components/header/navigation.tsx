@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { IsLogged } from './isLogged';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/store';
 import { userSelectors } from '../../store/slices/user-slice';
 
 function Navigation() {
   const authStatus = useAppSelector(userSelectors.status);
-  const isAuth = authStatus === 'AUTH';
+  const isAuth = authStatus === AuthStatus.Auth;
 
   return (
     <nav className="header__nav">

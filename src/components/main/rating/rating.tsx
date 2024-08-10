@@ -10,7 +10,7 @@ const getRatingStyle = (rating: number): CSSProperties => ({
   width: `${Math.round(rating) * 20}%`,
 });
 
-export const Rating = ({ prefix, rating, showValue = false }: RatingProps) => (
+const Rating = ({ prefix, rating, showValue = false }: RatingProps) => (
   <div className={`${prefix}__rating rating`}>
     <div className={`${prefix}__stars rating__stars`}>
       <span style={getRatingStyle(rating)} />
@@ -23,3 +23,5 @@ export const Rating = ({ prefix, rating, showValue = false }: RatingProps) => (
     )}
   </div>
 );
+
+export { Rating };

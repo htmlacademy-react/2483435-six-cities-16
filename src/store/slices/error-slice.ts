@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit/react';
-import { ErrorType } from '../../types/error-type';
+import type { ErrorType } from '../../types/error-type';
 
 const errorState: ErrorType = {
   error: null,

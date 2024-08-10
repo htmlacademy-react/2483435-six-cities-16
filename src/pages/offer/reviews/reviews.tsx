@@ -3,12 +3,12 @@ import { Review } from './review';
 import { NewReview } from './new-review';
 import { useAppSelector } from '../../../hooks/store';
 import { userSelectors } from '../../../store/slices/user-slice';
-import { Comment } from '../../../types/comment-type';
+import type { Comment } from '../../../types/comment-type';
 
 type ReviewsProp = {
   comments: Comment[];
 };
-export function Reviews({ comments }: ReviewsProp) {
+function Reviews({ comments }: ReviewsProp) {
   const authStatus = useAppSelector(userSelectors.status);
   const isAuth = authStatus === 'AUTH';
   const sortedReviews = sortByDate(comments);
@@ -27,3 +27,5 @@ export function Reviews({ comments }: ReviewsProp) {
     </section>
   );
 }
+
+export { Reviews };
