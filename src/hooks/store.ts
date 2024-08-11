@@ -9,6 +9,8 @@ const useActionCreators = <Actions extends ActionCreatorsMapObject>(
   actions: Actions
 ) => {
   const dispatch = useAppDispatch();
+  //`actions` will have the same reference, dispatch too
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(() => bindActionCreators(actions, dispatch), []);
 };
 

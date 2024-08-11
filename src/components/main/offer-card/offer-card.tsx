@@ -6,7 +6,7 @@ import { FavoriteButton } from '../favorite-button/favorite-button';
 import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
-  bemBlock: string;
+  bemBlock: BemClass;
   offer: ThumbnailOffer;
   onMouseEnter?: (offer: ThumbnailOffer) => void;
   onMouseLeave?: () => void;
