@@ -13,6 +13,7 @@ import {
   fetchOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
+import { BemClass } from '../../const';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
@@ -40,7 +41,7 @@ function CityOffers() {
         {sortedOffers.map((offer) => (
           <OfferCard
             key={offer.id}
-            bemBlock="cities"
+            bemBlock={BemClass.Cities}
             offer={offer}
             onMouseEnter={() => handleMouseEnter(offer)}
             onMouseLeave={handleMouseLeave}
