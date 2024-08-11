@@ -1,15 +1,19 @@
 import { FormEvent, useRef } from 'react';
 import { Header } from '../../components/header/header';
 import { useChangeTitle } from '../../hooks/title';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { dispatch } from '../../store/store';
-import { AppRoute } from '../../const';
+import { AppRoute, CITIES } from '../../const';
 import { loginAction } from '../../store/api-actions/auth-actions';
+import { faker } from '@faker-js/faker';
+import { activeActions } from '../../store/slices/active-slice';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const city = faker.helpers.arrayElement(CITIES);
+
   const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -24,6 +28,8 @@ function SignIn(): JSX.Element {
       );
     }
   };
+
+  const handleClick = () => dispatch(activeActions.setCity(city));
 
   return (
     <div className="page page--gray page--login">
@@ -71,9 +77,9 @@ function SignIn(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Paris</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoute.Main} onClick={handleClick}>
+                <span>{city}</span>
+              </Link>
             </div>
           </section>
         </div>

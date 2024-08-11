@@ -31,7 +31,8 @@ enum BemClass {
   Cities = 'cities',
   Offer = 'offer',
   Favorites = 'favorites',
-  PlaceCard = 'place-card'
+  PlaceCard = 'place-card',
+  NearPlaces = 'near-places'
 }
 
 enum AppRoute {
