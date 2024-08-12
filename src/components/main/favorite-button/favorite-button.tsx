@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { BemClass } from '../../../const';
 
 type FavoriteButtonProps = {
-  bemBlock: string;
+  bemBlock: BemClass;
   isFavorite: boolean;
 };
 

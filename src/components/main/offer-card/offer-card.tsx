@@ -6,7 +6,7 @@ import { FavoriteButton } from '../favorite-button/favorite-button';
 import { upFirstLetter } from '../../../utils/utils';
 
 type OfferCardProps = {
-  bemBlock: string;
+  bemBlock: BemClass;
   offer: ThumbnailOffer;
   onMouseEnter?: (offer: ThumbnailOffer) => void;
   onMouseLeave?: () => void;
@@ -66,7 +66,7 @@ function OfferCard({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton bemBlock="place-card" isFavorite={isFavorite} />
+          <FavoriteButton bemBlock={BemClass.PlaceCard} isFavorite={isFavorite} />
         </div>
         <Rating prefix="place-card" rating={rating} />
         <h2 className="place-card__name">

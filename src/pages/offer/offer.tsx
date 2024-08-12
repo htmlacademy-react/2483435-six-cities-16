@@ -24,22 +24,24 @@ function Offer(): JSX.Element {
 
   useChangeTitle('Offer');
 
-  if (!activeOffer || !comments) {
-    return <ShowLoading />;
-  }
-
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
-          <Photos activeOffer={activeOffer} />
-          <Description activeOffer={activeOffer} comments={comments} />
-          <Map
-            bemBlock="offer"
-            activeOffer={activeOffer}
-            offers={offersForMap}
-          />
+          {!activeOffer ? (
+            <ShowLoading />
+          ) : (
+            <>
+              <Photos activeOffer={activeOffer} />
+              <Description activeOffer={activeOffer} comments={comments} />
+              <Map
+                bemBlock="offer"
+                activeOffer={activeOffer}
+                offers={offersForMap}
+              />
+            </>
+          )}
         </section>
         <Neighboring offers={nearbyOffers} />
       </main>

@@ -9,7 +9,7 @@ const getRoute = (status: AuthStatus, redirection: AppRoute) =>
     switch (authStatus) {
       case status:
         return <Outlet />;
-      case 'UNKNOWN':
+      case AuthStatus.Unknown:
         return 'Loading...';
       default:
         return <Navigate to={redirection} />;

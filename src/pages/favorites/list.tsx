@@ -5,6 +5,7 @@ import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { activeActions } from '../../store/slices/active-slice';
 import type { ThumbnailOffer } from '../../types/offer-type';
 import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
+import { BemClass } from '../../const';
 
 function List() {
   const favorites = useAppSelector(favoritesOffers);
@@ -30,7 +31,7 @@ function List() {
               {offers.map((offer) => (
                 <OfferCard
                   key={offer.id}
-                  bemBlock="favorites"
+                  bemBlock={BemClass.Favorites}
                   offer={offer}
                   onClick={() => handleMouseClick(offer)}
                 />

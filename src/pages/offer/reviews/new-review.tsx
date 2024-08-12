@@ -14,11 +14,13 @@ type NewReviewProps = HTMLFormElement & {
   review: HTMLFormElement;
 };
 
+const INITIAL = {
+  rating: 0,
+  review: '',
+};
+
 export function NewReview() {
-  const [reviewForm, setReviewForm] = useState({
-    rating: 0,
-    review: '',
-  });
+  const [reviewForm, setReviewForm] = useState(INITIAL);
 
   const ratingRef = useRef<HTMLInputElement | null>(null);
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
@@ -36,6 +38,7 @@ export function NewReview() {
 
   const handleFormSubmit = (evt: React.FormEvent<NewReviewProps>) => {
     evt.preventDefault();
+    const form = evt.currentTarget;
     const id = activeSelectors.activeOfferId(store.getState());
 
     dispatch(
@@ -46,7 +49,8 @@ export function NewReview() {
       })
     );
     fetchGetCommentsAction(id);
-    setReviewForm({ rating: 0, review: '' });
+    form.reset();
+    setReviewForm(INITIAL);
   };
 
   const isButtonDisabled =

@@ -7,6 +7,7 @@ import { Reviews } from './reviews/reviews';
 import { ShowLoading } from '../../components/main/show-loading';
 import type { Comment } from '../../types/comment-type';
 import type { OfferType } from '../../types/offer-type';
+import { BemClass } from '../../const';
 
 type DescriptionProps = {
   activeOffer: OfferType;
@@ -44,7 +45,7 @@ function Description({ activeOffer, comments }: DescriptionProps) {
         )}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">{title}</h1>
-          <FavoriteButton bemBlock="offer" isFavorite={isFavorite} />
+          <FavoriteButton bemBlock={BemClass.Offer} isFavorite={isFavorite} />
         </div>
         <Rating prefix="offer" rating={rating} showValue />
         <ul className="offer__features">

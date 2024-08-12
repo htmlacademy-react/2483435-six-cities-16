@@ -11,7 +11,7 @@ import {
   fetchOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
-import { Setting } from '../../const';
+import { BemClass, Setting } from '../../const';
 
 type NeighboringProps = {
   offers: ThumbnailOffer[];
@@ -43,7 +43,7 @@ function Neighboring({ offers }: NeighboringProps) {
               offer.id !== activeOfferId && (
                 <OfferCard
                   key={offer.id}
-                  bemBlock="near-places"
+                  bemBlock={BemClass.NearPlaces}
                   offer={offer}
                   onClick={() => handleMouseClick(offer)}
                 />
