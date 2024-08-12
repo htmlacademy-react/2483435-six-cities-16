@@ -9,7 +9,6 @@ import { fetchFavoritesAction } from '../../store/api-actions/offers-actions';
 
 store.dispatch(fetchFavoritesAction());
 
-
 function IsLogged() {
   const userEmail = useAppSelector(userSelectors.userEmail);
   const favorites = useAppSelector(favoriteSelectors.favoriteOffers);

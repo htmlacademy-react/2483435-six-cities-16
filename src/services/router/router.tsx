@@ -7,8 +7,6 @@ import { PublicRoute, PrivateRoute } from './private-route';
 import { Error } from '../../components/main/error/error';
 import { Offer } from '../../pages/offer/offer';
 
-
-
 function Router() {
   const router = createBrowserRouter([
     {
