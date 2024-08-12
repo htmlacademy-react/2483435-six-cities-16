@@ -10,6 +10,10 @@ type OffersSlice = {
   comments: Comment[];
 };
 
+type FavoriteSlice = {
+  favoriteOffers: ThumbnailOffer[];
+}
+
 type ActiveSlice = {
   isLoading: boolean;
   sortOption: SortType;
@@ -22,4 +26,4 @@ type UserSlice = {
   userEmail: string;
 };
 
-export type { OffersSlice, ActiveSlice, UserSlice };
+export type { OffersSlice, FavoriteSlice, ActiveSlice, UserSlice };

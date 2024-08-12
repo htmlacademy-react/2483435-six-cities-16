@@ -34,8 +34,4 @@ const toSortOffers = createSelector(
   }
 );
 
-const favoritesOffers = createSelector(offersSelectors.allOffers, (offers) =>
-  offers.filter((offer) => offer.isFavorite)
-);
-
-export { offersByCity, toSortOffers, favoritesOffers };
+export { offersByCity, toSortOffers };

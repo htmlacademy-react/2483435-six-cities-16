@@ -4,11 +4,11 @@ import { OfferCard } from '../../components/main/offer-card/offer-card';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { activeActions } from '../../store/slices/active-slice';
 import type { ThumbnailOffer } from '../../types/offer-type';
-import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
 import { BemClass } from '../../const';
+import { favoriteSelectors } from '../../store/slices/favorite-slice';
 
 function List() {
-  const favorites = useAppSelector(favoritesOffers);
+  const favorites = useAppSelector(favoriteSelectors.favoriteOffers);
   const structuredOffers = toStructureOffers(favorites);
   const { setActiveOfferId } = useActionCreators(activeActions);
 

@@ -47,6 +47,8 @@ type ThumbnailOffer = Omit<
 
 type OfferType = Omit<FullOffer, 'previewImage'>;
 
+type AllOffersType = FullOffer | ThumbnailOffer | OfferType;
+
 export type {
   FullOffer,
   OfferCity,
@@ -56,4 +58,5 @@ export type {
   LocationData,
   CityName,
   OfferType,
+  AllOffersType
 };
