@@ -6,10 +6,8 @@ import { SignIn } from '../../pages/sign-in/sign-in';
 import { PublicRoute, PrivateRoute } from './private-route';
 import { Error } from '../../components/main/error/error';
 import { Offer } from '../../pages/offer/offer';
-import { fetchFavoritesAction } from '../../store/api-actions/offers-actions';
-import { store } from '../../store/store';
 
-store.dispatch(fetchFavoritesAction());
+
 
 function Router() {
   const router = createBrowserRouter([
