@@ -12,7 +12,7 @@ type OffersSlice = {
 
 type FavoriteSlice = {
   favoriteOffers: ThumbnailOffer[];
-}
+};
 
 type ActiveSlice = {
   isLoading: boolean;

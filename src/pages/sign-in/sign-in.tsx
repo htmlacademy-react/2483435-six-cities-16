@@ -77,7 +77,11 @@ function SignIn(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main} onClick={handleClick}>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.Main}
+                onClick={handleClick}
+              >
                 <span>{city}</span>
               </Link>
             </div>

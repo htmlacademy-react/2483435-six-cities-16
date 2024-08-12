@@ -58,5 +58,5 @@ export type {
   LocationData,
   CityName,
   OfferType,
-  AllOffersType
+  AllOffersType,
 };

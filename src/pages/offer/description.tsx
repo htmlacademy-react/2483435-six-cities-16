@@ -45,7 +45,11 @@ function Description({ activeOffer, comments }: DescriptionProps) {
         )}
         <div className="offer__name-wrapper">
           <h1 className="offer__name">{title}</h1>
-          <FavoriteButton bemBlock={BemClass.Offer} isFavorite={isFavorite} offer = {activeOffer}/>
+          <FavoriteButton
+            bemBlock={BemClass.Offer}
+            isFavorite={isFavorite}
+            currentOffer={activeOffer}
+          />
         </div>
         <Rating prefix="offer" rating={rating} showValue />
         <ul className="offer__features">

@@ -69,7 +69,7 @@ function OfferCard({
           <FavoriteButton
             bemBlock={BemClass.PlaceCard}
             isFavorite={isFavorite}
-            offer={offer}
+            currentOffer={offer}
           />
         </div>
         <Rating prefix="place-card" rating={rating} />
