@@ -1,26 +1,29 @@
 import clsx from 'clsx';
 import { BemClass } from '../../../const';
 import { AllOffersType } from '../../../types/offer-type';
+import { useState } from 'react';
 import { dispatch } from '../../../store/store';
 import { fetchSetFavoriteAction } from '../../../store/api-actions/offers-actions';
 
 type FavoriteButtonProps = {
   bemBlock: BemClass;
   isFavorite: boolean;
-  currentOffer: AllOffersType;
+  offer: AllOffersType
 };
 
-function FavoriteButton({ bemBlock, isFavorite, currentOffer }: FavoriteButtonProps) {
+function FavoriteButton({ bemBlock, isFavorite, offer }: FavoriteButtonProps) {
   const favoriteLabel = `${isFavorite ? 'In' : 'To'} bookmarks`;
   const favoriteClasses = clsx('button', `${bemBlock}__bookmark-button`, {
     [`${bemBlock}__bookmark-button--active`]: isFavorite,
   });
 
-  const handleFavoriteButtonClick = (offer: AllOffersType) => {
+
+  const handleFavoriteButtonClick = (offer:AllOffersType) => {
     let status: 1 | 0 = 1;
     offer.isFavorite ? (status = 0) : (status = 1);
     dispatch(fetchSetFavoriteAction({ offer, status }));
   };
+
 
   const imgWidth = bemBlock === BemClass.Offer ? 31 : 18;
   const imgHeight = bemBlock === BemClass.Offer ? 33 : 19;
@@ -29,7 +32,7 @@ function FavoriteButton({ bemBlock, isFavorite, currentOffer }: FavoriteButtonPr
     <button
       className={favoriteClasses}
       type="button"
-      onClick={() => handleFavoriteButtonClick(currentOffer)}
+      onClick={()=>handleFavoriteButtonClick(offer)}
     >
       <svg
         className={`${bemBlock}__bookmark-icon`}
