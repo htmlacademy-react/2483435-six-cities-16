@@ -8,9 +8,6 @@ type OffersSlice = {
   activeOffer: OfferType | null;
   nearbyOffers: ThumbnailOffer[];
   comments: Comment[];
-};
-
-type FavoriteSlice = {
   favoriteOffers: ThumbnailOffer[];
 };
 
@@ -26,4 +23,4 @@ type UserSlice = {
   userEmail: string;
 };
 
-export type { OffersSlice, FavoriteSlice, ActiveSlice, UserSlice };
+export type { OffersSlice, ActiveSlice, UserSlice };
