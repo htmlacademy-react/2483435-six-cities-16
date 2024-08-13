@@ -1,13 +1,8 @@
 import { APIRoute } from '../../const';
-import type {
-  AllOffersType,
-  OfferType,
-  ThumbnailOffer,
-} from '../../types/offer-type';
+import type { OfferType, ThumbnailOffer } from '../../types/offer-type';
 import { activeActions } from '../slices/active-slice';
-import { favoriteActions } from '../slices/favorite-slice';
 import { offersActions } from '../slices/offers-slice/offers-slice';
-import { store } from '../store';
+import { dispatch, store } from '../store';
 import { appCreateAsyncThunk } from '../utils';
 
 const fetchOffersAction = appCreateAsyncThunk<void, undefined>(
@@ -46,19 +41,20 @@ const fetchFavoritesAction = appCreateAsyncThunk<void, undefined>(
     dispatch(activeActions.setIsLoading(true));
     const { data: offers } = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
     dispatch(activeActions.setIsLoading(false));
-    dispatch(favoriteActions.setFavorite(offers));
+    dispatch(offersActions.setFavorite(offers));
   }
 );
 
-const fetchSetFavoriteAction = appCreateAsyncThunk<
+const fetchChangeFavoriteAction = appCreateAsyncThunk<
   void,
-  { offer: AllOffersType; status: 1 | 0 }
+  { offer: ThumbnailOffer | OfferType; status: number }
 >('data/fetchComment', async ({ offer, status }, { extra: api }) => {
-  await api.post<AllOffersType>(`${APIRoute.Favorite}/${offer.id}/${status}`, {
-    offer,
-  });
-
-  store.dispatch(fetchFavoritesAction());
+  await api.post<ThumbnailOffer | OfferType>(
+    `${APIRoute.Favorite}/${offer.id}/${status}`
+  );
+  dispatch(fetchOffersAction());
+  dispatch(fetchFavoritesAction());
+  dispatch(fetchOfferAction(offer.id));
 });
 
 export {
@@ -66,5 +62,5 @@ export {
   fetchOfferAction,
   fetchOffersNearbyAction,
   fetchFavoritesAction,
-  fetchSetFavoriteAction,
+  fetchChangeFavoriteAction,
 };
