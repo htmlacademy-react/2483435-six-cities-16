@@ -4,14 +4,14 @@ import { useAppSelector } from '../../hooks/store';
 import { userActions, userSelectors } from '../../store/slices/user-slice';
 import { dispatch, store } from '../../store/store';
 import { logoutAction } from '../../store/api-actions/auth-actions';
-import { favoriteSelectors } from '../../store/slices/favorite-slice';
 import { fetchFavoritesAction } from '../../store/api-actions/offers-actions';
+import { FavoriteCount } from './favorite-count';
 
 store.dispatch(fetchFavoritesAction());
 
 function IsLogged() {
   const userEmail = useAppSelector(userSelectors.userEmail);
-  const favorites = useAppSelector(favoriteSelectors.favoriteOffers);
+
   const handleClick = () => {
     dispatch(logoutAction());
     dispatch(userActions.setUserEmail(''));
@@ -26,7 +26,7 @@ function IsLogged() {
         >
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
           <span className="header__user-name user__name">{userEmail}</span>
-          <span className="header__favorite-count">{favorites.length}</span>
+          <FavoriteCount />
         </Link>
       </li>
       <li className="header__nav-item">
