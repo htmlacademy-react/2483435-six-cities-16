@@ -2,7 +2,7 @@ import { APIRoute } from '../../const';
 import { store } from '../store';
 import { offersActions } from '../slices/offers-slice/offers-slice';
 import type { Comment } from '../../types/comment-type';
-import { appCreateAsyncThunk } from '../utils';
+import { appCreateAsyncThunk } from './auth-actions';
 
 const fetchGetCommentsAction = appCreateAsyncThunk<void, string>(
   'data/fetchComments',

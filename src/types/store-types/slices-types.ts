@@ -1,3 +1,4 @@
+import { RequestStatus } from '../../const';
 import type { Comment } from '../comment-type';
 import type { CityName, OfferType, ThumbnailOffer } from '../offer-type';
 import type { SortType } from '../sort-type';
@@ -8,8 +9,12 @@ type OffersSlice = {
   activeOffer: OfferType | null;
   nearbyOffers: ThumbnailOffer[];
   comments: Comment[];
-  favoriteOffers: ThumbnailOffer[];
 };
+
+type FavoritesSlice = {
+  favoritesOffers: ThumbnailOffer[];
+  requestStatus: RequestStatus
+}
 
 type ActiveSlice = {
   isLoading: boolean;
@@ -23,4 +28,4 @@ type UserSlice = {
   userEmail: string;
 };
 
-export type { OffersSlice, ActiveSlice, UserSlice };
+export type { OffersSlice, ActiveSlice, UserSlice, FavoritesSlice};

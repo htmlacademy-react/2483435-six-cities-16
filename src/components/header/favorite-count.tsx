@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../hooks/store';
-import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
+import { favoritesSelectors } from '../../store/slices/favorites-slice';
 
 function FavoriteCount() {
-  const favorites = useAppSelector(offersSelectors.favoriteOffers);
+  const favorites = useAppSelector(favoritesSelectors.favoritesOffers);
   return <span className="header__favorite-count">{favorites.length}</span>;
 }
 

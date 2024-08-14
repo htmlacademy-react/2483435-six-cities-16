@@ -61,6 +61,13 @@ enum APIRoute {
   Logout = '/logout',
 }
 
+enum RequestStatus {
+  Idle = 'idle',
+  Loading = 'loading',
+  Success= 'success',
+  Failed ='failed',
+}
+
 export {
   Setting,
   CITIES,
@@ -71,4 +78,5 @@ export {
   MapMarker,
   AuthStatus,
   APIRoute,
+  RequestStatus,
 };

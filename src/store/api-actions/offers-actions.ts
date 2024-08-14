@@ -2,8 +2,8 @@ import { APIRoute } from '../../const';
 import type { OfferType, ThumbnailOffer } from '../../types/offer-type';
 import { activeActions } from '../slices/active-slice';
 import { offersActions } from '../slices/offers-slice/offers-slice';
-import { dispatch, store } from '../store';
-import { appCreateAsyncThunk } from '../utils';
+import { store } from '../store';
+import { appCreateAsyncThunk } from './auth-actions';
 
 const fetchOffersAction = appCreateAsyncThunk<void, undefined>(
   'data/fetchOffers',
@@ -35,26 +35,29 @@ const fetchOffersNearbyAction = appCreateAsyncThunk<void, string>(
   }
 );
 
-const fetchFavoritesAction = appCreateAsyncThunk<void, undefined>(
+const fetchFavoritesAction = appCreateAsyncThunk<ThumbnailOffer[], undefined>(
   'data/fetchFavorites',
   async (_arg, { dispatch, extra: api }) => {
-    dispatch(activeActions.setIsLoading(true));
-    const { data: offers } = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
-    dispatch(activeActions.setIsLoading(false));
-    dispatch(offersActions.setFavorite(offers));
+    // dispatch(activeActions.setIsLoading(true));
+    const  {data:offers} = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
+    // dispatch(activeActions.setIsLoading(false));
+    // console.log(store.getState());
+    // dispatch(offersActions.setFavorite(offers));
+    return offers;
   }
 );
 
 const fetchChangeFavoriteAction = appCreateAsyncThunk<
-  void,
-  { offer: ThumbnailOffer | OfferType; status: number }
+ThumbnailOffer,
+  { offer: ThumbnailOffer; status: number }
 >('data/fetchComment', async ({ offer, status }, { extra: api }) => {
-  await api.post<ThumbnailOffer | OfferType>(
+  const result = await api.post<ThumbnailOffer>(
     `${APIRoute.Favorite}/${offer.id}/${status}`
-  );
-  dispatch(fetchOffersAction());
-  dispatch(fetchFavoritesAction());
-  dispatch(fetchOfferAction(offer.id));
+    );
+    return result.data;
+  // dispatch(fetchOffersAction());
+  // dispatch(fetchFavoritesAction());
+  // dispatch(fetchOfferAction(offer.id));
 });
 
 export {
