@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import { FavoritesEmpty } from './favorites-empty';
 import { List } from './list';
 import { useAppSelector } from '../../hooks/store';
-import { favoritesOffers } from '../../store/slices/offers-slice/offers-selectors';
+import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
 function Favorites(): JSX.Element {
-  const favorites = useAppSelector(favoritesOffers);
+  const favorites = useAppSelector(offersSelectors.favoriteOffers);
   const isEmptyFavorites = favorites.length === 0;
   const favoritePageClasses = clsx('page__main', 'page__mxain--favorites', {
     'page__main--favorites-empty': isEmptyFavorites,

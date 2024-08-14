@@ -8,6 +8,7 @@ const offersState: OffersSlice = {
   activeOffer: null,
   nearbyOffers: [],
   comments: [],
+  favoriteOffers: [],
 };
 
 const offersSlice = createSlice({
@@ -26,18 +27,27 @@ const offersSlice = createSlice({
     setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
     },
+    setFavorite: (state, action: PayloadAction<ThumbnailOffer[]>) => {
+      state.favoriteOffers = action.payload;
+    },
   },
   selectors: {
     allOffers: (state) => state.allOffers,
     activeOffer: (state) => state.activeOffer,
     nearbyOffers: (state) => state.nearbyOffers,
     comments: (state) => state.comments,
+    favoriteOffers: (state) => state.favoriteOffers,
   },
 });
 
 const offersSelectors = offersSlice.selectors;
-const { setAllOffers, setActiveOffer, setNearbyOffers, setComments } =
-  offersSlice.actions;
+const {
+  setAllOffers,
+  setActiveOffer,
+  setNearbyOffers,
+  setComments,
+  setFavorite,
+} = offersSlice.actions;
 const offersActions = offersSlice.actions;
 
 export {
@@ -48,4 +58,5 @@ export {
   setAllOffers,
   setComments,
   setNearbyOffers,
+  setFavorite,
 };

@@ -8,6 +8,7 @@ type OffersSlice = {
   activeOffer: OfferType | null;
   nearbyOffers: ThumbnailOffer[];
   comments: Comment[];
+  favoriteOffers: ThumbnailOffer[];
 };
 
 type ActiveSlice = {
