@@ -64,8 +64,8 @@ enum APIRoute {
 enum RequestStatus {
   Idle = 'idle',
   Loading = 'loading',
-  Success= 'success',
-  Failed ='failed',
+  Success = 'success',
+  Failed = 'failed',
 }
 
 export {

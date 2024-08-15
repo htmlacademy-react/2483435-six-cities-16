@@ -39,7 +39,7 @@ const fetchFavoritesAction = appCreateAsyncThunk<ThumbnailOffer[], undefined>(
   'data/fetchFavorites',
   async (_arg, { dispatch, extra: api }) => {
     // dispatch(activeActions.setIsLoading(true));
-    const  {data:offers} = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
+    const { data: offers } = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
     // dispatch(activeActions.setIsLoading(false));
     // console.log(store.getState());
     // dispatch(offersActions.setFavorite(offers));
@@ -48,13 +48,13 @@ const fetchFavoritesAction = appCreateAsyncThunk<ThumbnailOffer[], undefined>(
 );
 
 const fetchChangeFavoriteAction = appCreateAsyncThunk<
-ThumbnailOffer,
+  ThumbnailOffer,
   { offer: ThumbnailOffer; status: number }
 >('data/fetchComment', async ({ offer, status }, { extra: api }) => {
   const result = await api.post<ThumbnailOffer>(
     `${APIRoute.Favorite}/${offer.id}/${status}`
-    );
-    return result.data;
+  );
+  return result.data;
   // dispatch(fetchOffersAction());
   // dispatch(fetchFavoritesAction());
   // dispatch(fetchOfferAction(offer.id));

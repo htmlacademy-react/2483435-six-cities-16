@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AuthStatus } from '../../const';
 import { dropToken, saveToken } from '../../services/token';
-import { AppDispatch,RootState } from '../../types/store-types/store-type';
+import { AppDispatch, RootState } from '../../types/store-types/store-type';
 import { AuthData, User } from '../../types/user-type';
 import { userActions } from '../slices/user-slice';
 
@@ -27,7 +27,7 @@ const checkAuthAction = appCreateAsyncThunk<void, undefined>(
 
 const loginAction = appCreateAsyncThunk<void, AuthData>(
   'user/login',
-  async ({ login: email, password }, { dispatch,extra: api }) => {
+  async ({ login: email, password }, { dispatch, extra: api }) => {
     const {
       data: { token },
     } = await api.post<User>(APIRoute.Login, { email, password });

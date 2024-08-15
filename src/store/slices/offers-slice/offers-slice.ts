@@ -36,12 +36,8 @@ const offersSlice = createSlice({
 });
 
 const offersSelectors = offersSlice.selectors;
-const {
-  setAllOffers,
-  setActiveOffer,
-  setNearbyOffers,
-  setComments,
-} = offersSlice.actions;
+const { setAllOffers, setActiveOffer, setNearbyOffers, setComments } =
+  offersSlice.actions;
 const offersActions = offersSlice.actions;
 
 export {

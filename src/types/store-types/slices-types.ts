@@ -13,8 +13,8 @@ type OffersSlice = {
 
 type FavoritesSlice = {
   favoritesOffers: ThumbnailOffer[];
-  requestStatus: RequestStatus
-}
+  requestStatus: RequestStatus;
+};
 
 type ActiveSlice = {
   isLoading: boolean;
@@ -28,4 +28,4 @@ type UserSlice = {
   userEmail: string;
 };
 
-export type { OffersSlice, ActiveSlice, UserSlice, FavoritesSlice};
+export type { OffersSlice, ActiveSlice, UserSlice, FavoritesSlice };

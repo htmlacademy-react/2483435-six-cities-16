@@ -12,7 +12,7 @@ const store = configureStore({
     [offersSlice.name]: offersSlice.reducer,
     [activeSlice.name]: activeSlice.reducer,
     [userSlice.name]: userSlice.reducer,
-    [favoritesSlice.name]: favoritesSlice.reducer
+    [favoritesSlice.name]: favoritesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

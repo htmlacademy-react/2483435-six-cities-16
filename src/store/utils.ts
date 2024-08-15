@@ -9,4 +9,4 @@ const checkToken = () =>
     ? store.dispatch(checkAuthAction())
     : store.dispatch(userActions.setStatus(AuthStatus.NoAuth));
 
-export {checkToken };
+export { checkToken };
