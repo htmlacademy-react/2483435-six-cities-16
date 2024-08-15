@@ -14,9 +14,9 @@ type DescriptionProps = {
   comments: Comment[];
 };
 function Description({ activeOffer, comments }: DescriptionProps) {
-  // if (!activeOffer) {
-  //   return <ShowLoading />;
-  // }
+  if (!activeOffer) {
+    return <ShowLoading />;
+  }
   const {
     title,
     type,

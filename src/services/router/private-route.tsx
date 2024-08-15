@@ -2,6 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
 import { userSelectors } from '../../store/slices/user-slice';
 import { useAppSelector } from '../../hooks/store';
+import { ShowLoading } from '../../components/main/show-loading';
 
 const getRoute = (status: AuthStatus, redirection: AppRoute) =>
   function AccessRoute() {
@@ -10,7 +11,7 @@ const getRoute = (status: AuthStatus, redirection: AppRoute) =>
       case status:
         return <Outlet />;
       case AuthStatus.Unknown:
-        return 'Loading...';
+        return <ShowLoading />;
       default:
         return <Navigate to={redirection} />;
     }

@@ -11,7 +11,7 @@ const appCreateAsyncThunk = createAsyncThunk.withTypes<{
   extra: AxiosInstance;
 }>();
 
-const checkAuthAction = appCreateAsyncThunk<any, undefined>(
+const checkAuthAction = appCreateAsyncThunk<string, undefined>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
     const {
@@ -21,7 +21,7 @@ const checkAuthAction = appCreateAsyncThunk<any, undefined>(
   }
 );
 
-const loginAction = appCreateAsyncThunk<any, AuthData>(
+const loginAction = appCreateAsyncThunk<{ email: string }, AuthData>(
   'user/login',
   async ({ login: email, password }, { extra: api }) => {
     const {

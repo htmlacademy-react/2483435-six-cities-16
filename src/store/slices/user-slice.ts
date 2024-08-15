@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSlice } from '../../types/store-types/slices-types';
 import { AuthStatus, SliceName } from '../../const';
 import {
@@ -15,7 +15,11 @@ const userState: UserSlice = {
 const userSlice = createSlice({
   name: SliceName.User,
   initialState: userState,
-  reducers: {},
+  reducers: {
+    setStatus: (state, action: PayloadAction<AuthStatus>) => {
+      state.authStatus = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
@@ -43,6 +47,7 @@ const userSlice = createSlice({
   },
 });
 const userSelectors = userSlice.selectors;
+const { setStatus } = userSlice.actions;
 const userActions = userSlice.actions;
 
-export { userSlice, userSelectors, userActions };
+export { userSlice, userSelectors, userActions, setStatus };

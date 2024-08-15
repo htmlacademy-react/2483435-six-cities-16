@@ -7,6 +7,8 @@ import {
   fetchOffersNearbyAction,
 } from '../../api-actions/offers-actions';
 import { fetchGetCommentsAction } from '../../api-actions/comments-actions';
+import { fetchChangeFavoriteAction } from '../../api-actions/favorites-actions';
+import type { ThumbnailOffer } from '../../../types/offer-type';
 
 const offersState: OffersSlice = {
   allOffers: [],
@@ -14,6 +16,17 @@ const offersState: OffersSlice = {
   nearbyOffers: [],
   comments: [],
   requestStatus: RequestStatus.Idle,
+};
+
+const changeFavorite = (
+  { id, isFavorite }: Pick<ThumbnailOffer, 'id' | 'isFavorite'>,
+  items: ThumbnailOffer[]
+) => {
+  const foundOffer = items.find((offer) => offer.id === id);
+
+  if (foundOffer) {
+    foundOffer.isFavorite = isFavorite;
+  }
 };
 
 const offersSlice = createSlice({
@@ -60,6 +73,11 @@ const offersSlice = createSlice({
       .addCase(fetchGetCommentsAction.fulfilled, (state, action) => {
         state.requestStatus = RequestStatus.Success;
         state.comments = action.payload;
+      })
+      .addCase(fetchChangeFavoriteAction.fulfilled, (state, action) => {
+        const changedOffer = action.payload;
+        changeFavorite(changedOffer, state.allOffers);
+        changeFavorite(changedOffer, state.nearbyOffers);
       });
   },
   reducers: {},

@@ -10,7 +10,7 @@ type OfferCardProps = {
   offer: ThumbnailOffer;
   onMouseEnter?: (offer: ThumbnailOffer) => void;
   onMouseLeave?: () => void;
-  onClick: (offer: ThumbnailOffer) => void;
+  onClick?: (offer: ThumbnailOffer) => void;
 };
 
 function OfferCard({

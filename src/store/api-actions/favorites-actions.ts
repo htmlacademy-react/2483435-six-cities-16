@@ -14,7 +14,7 @@ const fetchFavoritesAction = appCreateAsyncThunk<ThumbnailOffer[], undefined>(
 const fetchChangeFavoriteAction = appCreateAsyncThunk<
   ThumbnailOffer,
   { offerId: ThumbnailOffer['id']; status: number }
->('data/fetchComment', async ({ offerId, status }, { extra: api }) => {
+>('data/changeFavorite', async ({ offerId, status }, { extra: api }) => {
   const result = await api.post<ThumbnailOffer>(
     `${APIRoute.Favorite}/${offerId}/${status}`
   );
