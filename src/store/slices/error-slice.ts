@@ -1,12 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit/react';
 import type { ErrorType } from '../../types/error-type';
+import { SliceName } from '../../const';
 
 const errorState: ErrorType = {
   error: null,
 };
 
 const errorSlice = createSlice({
-  name: 'error',
+  name: SliceName.Error,
   initialState: errorState,
   reducers: {
     setError: (state, action: PayloadAction<string | null>) => {

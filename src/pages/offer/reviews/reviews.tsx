@@ -9,7 +9,7 @@ type ReviewsProp = {
   comments: Comment[];
 };
 function Reviews({ comments }: ReviewsProp) {
-  const authStatus = useAppSelector(userSelectors.status);
+  const authStatus = useAppSelector(userSelectors.authStatus);
   const isAuth = authStatus === 'AUTH';
   const sortedReviews = sortByDate(comments);
   const lastestsReviews = sortedReviews.slice(0, 10);

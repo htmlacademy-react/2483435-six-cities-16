@@ -2,16 +2,16 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { CityName } from '../../types/offer-type';
 import { ActiveSlice } from '../../types/store-types/slices-types';
 import type { SortType } from '../../types/sort-type';
+import { SliceName } from '../../const';
 
 const activeState: ActiveSlice = {
   city: 'Paris',
   activeOfferId: '',
   sortOption: 'Popular',
-  isLoading: false,
 };
 
 const activeSlice = createSlice({
-  name: 'active',
+  name: SliceName.Active,
   initialState: activeState,
   reducers: {
     setCity: (state, action: PayloadAction<CityName>) => {
@@ -23,21 +23,16 @@ const activeSlice = createSlice({
     setSortOption: (state, action: PayloadAction<SortType>) => {
       state.sortOption = action.payload;
     },
-    setIsLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
   },
   selectors: {
     city: (state) => state.city,
     activeOfferId: (state) => state.activeOfferId,
     sortOption: (state) => state.sortOption,
-    isLoading: (state) => state.isLoading,
   },
 });
 
 const activeSelectors = activeSlice.selectors;
-const { setCity, setActiveOfferId, setSortOption, setIsLoading } =
-  activeSlice.actions;
+const { setCity, setActiveOfferId, setSortOption } = activeSlice.actions;
 const activeActions = activeSlice.actions;
 
 export {
@@ -46,6 +41,5 @@ export {
   setCity,
   setActiveOfferId,
   setSortOption,
-  setIsLoading,
   activeActions,
 };

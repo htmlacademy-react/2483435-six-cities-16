@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/store';
 
 const getRoute = (status: AuthStatus, redirection: AppRoute) =>
   function AccessRoute() {
-    const authStatus = useAppSelector(userSelectors.status);
+    const authStatus = useAppSelector(userSelectors.authStatus);
     switch (authStatus) {
       case status:
         return <Outlet />;

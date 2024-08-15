@@ -4,9 +4,9 @@ import { OfferType, ThumbnailOffer } from '../../../types/offer-type';
 import { useAppSelector } from '../../../hooks/store';
 import { userSelectors } from '../../../store/slices/user-slice';
 import { useNavigate } from 'react-router-dom';
-import { dispatch } from '../../../store/store';
-import { fetchChangeFavoriteAction } from '../../../store/api-actions/offers-actions';
 import { useState } from 'react';
+import { fetchChangeFavoriteAction } from '../../../store/api-actions/favorites-actions';
+import { dispatch } from '../../../store/store';
 
 type FavoriteButtonProps = {
   bemBlock: BemClass;
@@ -20,7 +20,7 @@ function FavoriteButton({
   currentOffer,
 }: FavoriteButtonProps) {
   const navigate = useNavigate();
-  const authStatus = useAppSelector(userSelectors.status);
+  const authStatus = useAppSelector(userSelectors.authStatus);
   const isAuth = authStatus === AuthStatus.Auth;
   const [isOn, setOn] = useState(isFavorite);
   const isActive = isAuth && isOn;
@@ -35,12 +35,17 @@ function FavoriteButton({
     'button'
   );
 
-  const handleFavoriteButtonClick = (offer: ThumbnailOffer | OfferType) => {
+  const handleFavoriteButtonClick = () => {
     if (!isAuth) {
       return navigate(AppRoute.Login);
     }
+    dispatch(
+      fetchChangeFavoriteAction({
+        offerId: currentOffer.id,
+        status: Number(!isOn),
+      })
+    );
     setOn((prev) => !prev);
-    dispatch(fetchChangeFavoriteAction({ offer, status: Number(!isActive) }));
   };
 
   const imgWidth = bemBlock === BemClass.Offer ? 31 : 18;
@@ -50,7 +55,7 @@ function FavoriteButton({
     <button
       className={favoriteClasses}
       type="button"
-      onClick={() => handleFavoriteButtonClick(currentOffer)}
+      onClick={() => handleFavoriteButtonClick()}
     >
       <svg
         className={`${bemBlock}__bookmark-icon`}

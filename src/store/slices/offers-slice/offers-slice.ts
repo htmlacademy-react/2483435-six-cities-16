@@ -1,32 +1,68 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { Comment } from '../../../types/comment-type';
-import type { OfferType, ThumbnailOffer } from '../../../types/offer-type';
+import { createSlice } from '@reduxjs/toolkit';
 import { OffersSlice } from '../../../types/store-types/slices-types';
+import { RequestStatus, SliceName } from '../../../const';
+import {
+  fetchOfferAction,
+  fetchOffersAction,
+  fetchOffersNearbyAction,
+} from '../../api-actions/offers-actions';
+import { fetchGetCommentsAction } from '../../api-actions/comments-actions';
 
 const offersState: OffersSlice = {
   allOffers: [],
   activeOffer: null,
   nearbyOffers: [],
   comments: [],
+  requestStatus: RequestStatus.Idle,
 };
 
 const offersSlice = createSlice({
-  name: 'offers',
+  name: SliceName.Offers,
   initialState: offersState,
-  reducers: {
-    setAllOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
-      state.allOffers = action.payload;
-    },
-    setActiveOffer: (state, action: PayloadAction<OfferType | null>) => {
-      state.activeOffer = action.payload;
-    },
-    setNearbyOffers: (state, action: PayloadAction<ThumbnailOffer[]>) => {
-      state.nearbyOffers = action.payload;
-    },
-    setComments: (state, action: PayloadAction<Comment[]>) => {
-      state.comments = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchOffersAction.pending, (state) => {
+        state.requestStatus = RequestStatus.Loading;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.requestStatus = RequestStatus.Failed;
+      })
+      .addCase(fetchOffersAction.fulfilled, (state, action) => {
+        state.requestStatus = RequestStatus.Success;
+        state.allOffers = action.payload;
+      })
+      .addCase(fetchOfferAction.pending, (state) => {
+        state.requestStatus = RequestStatus.Loading;
+      })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.requestStatus = RequestStatus.Failed;
+      })
+      .addCase(fetchOfferAction.fulfilled, (state, action) => {
+        state.requestStatus = RequestStatus.Success;
+        state.activeOffer = action.payload;
+      })
+      .addCase(fetchOffersNearbyAction.pending, (state) => {
+        state.requestStatus = RequestStatus.Loading;
+      })
+      .addCase(fetchOffersNearbyAction.rejected, (state) => {
+        state.requestStatus = RequestStatus.Failed;
+      })
+      .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
+        state.requestStatus = RequestStatus.Success;
+        state.nearbyOffers = action.payload;
+      })
+      .addCase(fetchGetCommentsAction.pending, (state) => {
+        state.requestStatus = RequestStatus.Loading;
+      })
+      .addCase(fetchGetCommentsAction.rejected, (state) => {
+        state.requestStatus = RequestStatus.Failed;
+      })
+      .addCase(fetchGetCommentsAction.fulfilled, (state, action) => {
+        state.requestStatus = RequestStatus.Success;
+        state.comments = action.payload;
+      });
   },
+  reducers: {},
   selectors: {
     allOffers: (state) => state.allOffers,
     activeOffer: (state) => state.activeOffer,
@@ -36,16 +72,5 @@ const offersSlice = createSlice({
 });
 
 const offersSelectors = offersSlice.selectors;
-const { setAllOffers, setActiveOffer, setNearbyOffers, setComments } =
-  offersSlice.actions;
-const offersActions = offersSlice.actions;
 
-export {
-  offersActions,
-  offersSelectors,
-  offersSlice,
-  setActiveOffer,
-  setAllOffers,
-  setComments,
-  setNearbyOffers,
-};
+export { offersSelectors, offersSlice };

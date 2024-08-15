@@ -68,6 +68,14 @@ enum RequestStatus {
   Failed = 'failed',
 }
 
+enum SliceName {
+  Offers = 'offers',
+  Active = 'active',
+  Error = 'error',
+  Favorites = 'favorites',
+  User = 'user',
+}
+
 export {
   Setting,
   CITIES,
@@ -79,4 +87,5 @@ export {
   AuthStatus,
   APIRoute,
   RequestStatus,
+  SliceName,
 };

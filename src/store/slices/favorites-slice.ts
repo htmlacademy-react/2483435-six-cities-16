@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RequestStatus } from '../../const';
+import { RequestStatus, SliceName } from '../../const';
 import { FavoritesSlice } from '../../types/store-types/slices-types';
+import {} from '../api-actions/offers-actions';
 import {
   fetchChangeFavoriteAction,
   fetchFavoritesAction,
-} from '../api-actions/offers-actions';
+} from '../api-actions/favorites-actions';
 
 const favoritesState: FavoritesSlice = {
   favoritesOffers: [],
@@ -12,10 +13,10 @@ const favoritesState: FavoritesSlice = {
 };
 
 const favoritesSlice = createSlice({
-  name: 'favorites',
+  name: SliceName.Favorites,
   initialState: favoritesState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers(builder) {
     builder
       .addCase(fetchFavoritesAction.pending, (state) => {
         state.requestStatus = RequestStatus.Loading;

@@ -9,6 +9,7 @@ type OffersSlice = {
   activeOffer: OfferType | null;
   nearbyOffers: ThumbnailOffer[];
   comments: Comment[];
+  requestStatus: RequestStatus;
 };
 
 type FavoritesSlice = {
@@ -17,14 +18,13 @@ type FavoritesSlice = {
 };
 
 type ActiveSlice = {
-  isLoading: boolean;
   sortOption: SortType;
   city: CityName;
   activeOfferId: string;
 };
 
 type UserSlice = {
-  status: AuthType;
+  authStatus: AuthType;
   userEmail: string;
 };
 

@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/store';
 import { userSelectors } from '../../store/slices/user-slice';
 
 function Navigation() {
-  const authStatus = useAppSelector(userSelectors.status);
+  const authStatus = useAppSelector(userSelectors.authStatus);
   const isAuth = authStatus === AuthStatus.Auth;
 
   return (
