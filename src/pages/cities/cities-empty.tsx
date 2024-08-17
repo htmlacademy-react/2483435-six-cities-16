@@ -3,6 +3,7 @@ import { activeSelectors } from '../../store/slices/active-slice';
 
 function CitiesEmpty() {
   const city = useAppSelector(activeSelectors.city);
+
   return (
     <>
       <section className="cities__no-places">

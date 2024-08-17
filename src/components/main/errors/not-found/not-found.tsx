@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useChangeTitle } from '../../../hooks/title';
+import { useChangeTitle } from '../../../../hooks/title';
 import css from './style.module.css';
 
-function Error(): JSX.Element {
+function NotFound(): JSX.Element {
   useChangeTitle('Page Not Found');
 
   return (
@@ -16,4 +16,4 @@ function Error(): JSX.Element {
   );
 }
 
-export { Error };
+export { NotFound };

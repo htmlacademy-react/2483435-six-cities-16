@@ -1,66 +1,33 @@
 import { APIRoute } from '../../const';
 import type { OfferType, ThumbnailOffer } from '../../types/offer-type';
-import { activeActions } from '../slices/active-slice';
-import { offersActions } from '../slices/offers-slice/offers-slice';
-import { dispatch, store } from '../store';
-import { appCreateAsyncThunk } from '../utils';
+import { appCreateAsyncThunk } from './auth-actions';
 
-const fetchOffersAction = appCreateAsyncThunk<void, undefined>(
+const fetchOffersAction = appCreateAsyncThunk<ThumbnailOffer[], undefined>(
   'data/fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(activeActions.setIsLoading(true));
+  async (_arg, { extra: api }) => {
     const { data: offers } = await api.get<ThumbnailOffer[]>(APIRoute.Offers);
-    dispatch(activeActions.setIsLoading(false));
-    dispatch(offersActions.setAllOffers(offers));
+    return offers;
   }
 );
 
-const fetchOfferAction = appCreateAsyncThunk<void, string>(
+const fetchOfferAction = appCreateAsyncThunk<OfferType, string>(
   'data/fetchOffer',
   async (offerId, { extra: api }) => {
     const { data: offer } = await api.get<OfferType>(
       `${APIRoute.Offers}/${offerId}`
     );
-    store.dispatch(offersActions.setActiveOffer(offer));
+    return offer;
   }
 );
 
-const fetchOffersNearbyAction = appCreateAsyncThunk<void, string>(
-  'data/fetchOffer',
+const fetchOffersNearbyAction = appCreateAsyncThunk<ThumbnailOffer[], string>(
+  'data/fetchNearby',
   async (offerId, { extra: api }) => {
-    const { data: offers } = await api.get<ThumbnailOffer[]>(
+    const { data: nearbyOffers } = await api.get<ThumbnailOffer[]>(
       `${APIRoute.Offers}/${offerId}/nearby`
     );
-    store.dispatch(offersActions.setNearbyOffers(offers));
+    return nearbyOffers;
   }
 );
 
-const fetchFavoritesAction = appCreateAsyncThunk<void, undefined>(
-  'data/fetchFavorites',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(activeActions.setIsLoading(true));
-    const { data: offers } = await api.get<ThumbnailOffer[]>(APIRoute.Favorite);
-    dispatch(activeActions.setIsLoading(false));
-    dispatch(offersActions.setFavorite(offers));
-  }
-);
-
-const fetchChangeFavoriteAction = appCreateAsyncThunk<
-  void,
-  { offer: ThumbnailOffer | OfferType; status: number }
->('data/fetchComment', async ({ offer, status }, { extra: api }) => {
-  await api.post<ThumbnailOffer | OfferType>(
-    `${APIRoute.Favorite}/${offer.id}/${status}`
-  );
-  dispatch(fetchOffersAction());
-  dispatch(fetchFavoritesAction());
-  dispatch(fetchOfferAction(offer.id));
-});
-
-export {
-  fetchOffersAction,
-  fetchOfferAction,
-  fetchOffersNearbyAction,
-  fetchFavoritesAction,
-  fetchChangeFavoriteAction,
-};
+export { fetchOffersAction, fetchOfferAction, fetchOffersNearbyAction };

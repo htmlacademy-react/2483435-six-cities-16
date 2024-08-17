@@ -61,6 +61,33 @@ enum APIRoute {
   Logout = '/logout',
 }
 
+enum RequestStatus {
+  Idle = 'idle',
+  Loading = 'loading',
+  Success = 'success',
+  Failed = 'failed',
+}
+
+enum SliceName {
+  Offers = 'offers',
+  Active = 'active',
+  Error = 'error',
+  Favorites = 'favorites',
+  User = 'user',
+}
+
+enum ErrorMessage {
+  FetchOffersAction = 'Не удалось загрузить данные по предложениям',
+  FetchOfferAction = 'Не удалось загрузить выбранное предложение',
+  FetchOffersNearbyAction = 'Не удалось загрузить варианты аренды поблизости',
+  FetchGetCommentsAction = 'Не удалось загрузить отзывы',
+  FetchChangeFavoriteAction = 'Не удалось изменить избранное',
+  FetchFavoritesAction = 'Не удалось загрузить список избранных предложений',
+  LoginAction = 'Ошибка авторизации',
+  LogoutAction = 'Ошибка выхода',
+  CheckAuthAction = 'Не удалось загрузить данные пользователя',
+}
+
 export {
   Setting,
   CITIES,
@@ -71,4 +98,7 @@ export {
   MapMarker,
   AuthStatus,
   APIRoute,
+  RequestStatus,
+  SliceName,
+  ErrorMessage,
 };

@@ -1,16 +1,15 @@
 import { APIRoute } from '../../const';
 import { store } from '../store';
-import { offersActions } from '../slices/offers-slice/offers-slice';
 import type { Comment } from '../../types/comment-type';
-import { appCreateAsyncThunk } from '../utils';
+import { appCreateAsyncThunk } from './auth-actions';
 
-const fetchGetCommentsAction = appCreateAsyncThunk<void, string>(
+const fetchGetCommentsAction = appCreateAsyncThunk<Comment[], string>(
   'data/fetchComments',
   async (offerId, { extra: api }) => {
     const { data: comments } = await api.get<Comment[]>(
       `${APIRoute.Comments}/${offerId}`
     );
-    store.dispatch(offersActions.setComments(comments));
+    return comments;
   }
 );
 

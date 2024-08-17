@@ -3,6 +3,8 @@ import { offersSlice } from './slices/offers-slice/offers-slice';
 import { activeSlice } from './slices/active-slice';
 import { userSlice } from './slices/user-slice';
 import { createAPI } from '../services/api';
+import { favoritesSlice } from './slices/favorites-slice';
+import { errorSlice } from './slices/error-slice';
 
 const api = createAPI();
 
@@ -11,6 +13,8 @@ const store = configureStore({
     [offersSlice.name]: offersSlice.reducer,
     [activeSlice.name]: activeSlice.reducer,
     [userSlice.name]: userSlice.reducer,
+    [favoritesSlice.name]: favoritesSlice.reducer,
+    [errorSlice.name]: errorSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

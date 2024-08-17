@@ -8,12 +8,12 @@ import {
 import { toSortOffers } from '../../store/slices/offers-slice/offers-selectors';
 import { store } from '../../store/store';
 import type { ThumbnailOffer } from '../../types/offer-type';
-import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 import {
   fetchOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
 import { BemClass } from '../../const';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);

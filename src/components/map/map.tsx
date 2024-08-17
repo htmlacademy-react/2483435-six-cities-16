@@ -16,7 +16,7 @@ type MapProps = {
 };
 
 function Map({ bemBlock, activeOffer, offers }: MapProps) {
-  const location = (activeOffer ? activeOffer : offers[offers.length / 2])
+  const location = (activeOffer ? activeOffer : offers[offers.length / 2])!
     .location;
   const correctLocation = adaptLocation(location);
   const mapRef = useRef(null);

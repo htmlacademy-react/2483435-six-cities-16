@@ -1,32 +1,34 @@
-import { APIRoute, AuthStatus } from '../../const';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+import { APIRoute } from '../../const';
 import { dropToken, saveToken } from '../../services/token';
+import { AppDispatch, RootState } from '../../types/store-types/store-type';
 import { AuthData, User } from '../../types/user-type';
-import { userActions } from '../slices/user-slice';
-import { dispatch } from '../store';
-import { appCreateAsyncThunk } from '../utils';
 
-const checkAuthAction = appCreateAsyncThunk<void, undefined>(
+const appCreateAsyncThunk = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>();
+
+const checkAuthAction = appCreateAsyncThunk<string, undefined>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
-    try {
-      const resp = await api.get<User>(APIRoute.Login);
-      dispatch(userActions.setStatus(AuthStatus.Auth));
-      dispatch(userActions.setUserEmail(resp.data.email));
-    } catch {
-      dispatch(userActions.setStatus(AuthStatus.NoAuth));
-    }
+    const {
+      data: { email },
+    } = await api.get<User>(APIRoute.Login);
+    return email;
   }
 );
 
-const loginAction = appCreateAsyncThunk<void, AuthData>(
+const loginAction = appCreateAsyncThunk<{ email: string }, AuthData>(
   'user/login',
   async ({ login: email, password }, { extra: api }) => {
     const {
       data: { token },
     } = await api.post<User>(APIRoute.Login, { email, password });
     saveToken(token);
-    dispatch(userActions.setStatus(AuthStatus.Auth));
-    dispatch(userActions.setUserEmail(email));
+    return { email };
   }
 );
 
@@ -35,8 +37,7 @@ const logoutAction = appCreateAsyncThunk<void, undefined>(
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(userActions.setStatus(AuthStatus.NoAuth));
   }
 );
 
-export { checkAuthAction, logoutAction, loginAction };
+export { checkAuthAction, logoutAction, loginAction, appCreateAsyncThunk };

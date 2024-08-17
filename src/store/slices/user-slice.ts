@@ -1,30 +1,53 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSlice } from '../../types/store-types/slices-types';
-import type { AuthType } from '../../types/user-type';
+import { AuthStatus, SliceName } from '../../const';
+import {
+  checkAuthAction,
+  loginAction,
+  logoutAction,
+} from '../api-actions/auth-actions';
 
 const userState: UserSlice = {
-  status: 'UNKNOWN',
+  authStatus: AuthStatus.Unknown,
   userEmail: '',
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: SliceName.User,
   initialState: userState,
   reducers: {
-    setStatus: (state, action: PayloadAction<AuthType>) => {
-      state.status = action.payload;
-    },
-    setUserEmail: (state, action: PayloadAction<string>) => {
-      state.userEmail = action.payload;
+    setStatus: (state, action: PayloadAction<AuthStatus>) => {
+      state.authStatus = action.payload;
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
+        state.authStatus = AuthStatus.Auth;
+        state.userEmail = action.payload;
+      })
+      .addCase(checkAuthAction.rejected, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+      })
+      .addCase(loginAction.fulfilled, (state, action) => {
+        state.authStatus = AuthStatus.Auth;
+        state.userEmail = action.payload.email;
+      })
+      .addCase(loginAction.rejected, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+        state.userEmail = '';
+      });
+  },
   selectors: {
-    status: (state) => state.status,
+    authStatus: (state) => state.authStatus,
     userEmail: (state) => state.userEmail,
   },
 });
 const userSelectors = userSlice.selectors;
-const { setStatus, setUserEmail } = userSlice.actions;
+const { setStatus } = userSlice.actions;
 const userActions = userSlice.actions;
 
-export { userSlice, userSelectors, setStatus, setUserEmail, userActions };
+export { userSlice, userSelectors, userActions, setStatus };

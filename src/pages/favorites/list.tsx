@@ -5,16 +5,16 @@ import { useAppSelector } from '../../hooks/store';
 import { activeActions } from '../../store/slices/active-slice';
 import type { CityName, ThumbnailOffer } from '../../types/offer-type';
 import { AppRoute, BemClass } from '../../const';
-import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
 import { dispatch, store } from '../../store/store';
 import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 import {
   fetchOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
+import { favoritesSelectors } from '../../store/slices/favorites-slice';
 
 function List() {
-  const favorites = useAppSelector(offersSelectors.favoriteOffers);
+  const favorites = useAppSelector(favoritesSelectors.favoritesOffers);
   const structuredOffers = toStructureOffers(favorites);
 
   const handleCityClick = (city: CityName) =>
