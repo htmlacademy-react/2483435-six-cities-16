@@ -18,7 +18,7 @@ import {
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
 
-export type OffersMapType = OfferType | ThumbnailOffer;
+export type OffersMapType = OfferType | ThumbnailOffer | null;
 
 function Offer(): JSX.Element {
   const { id = '' } = useParams();
