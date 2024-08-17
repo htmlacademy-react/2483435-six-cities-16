@@ -3,14 +3,9 @@ import { toStructureOffers } from './favorites-utils';
 import { OfferCard } from '../../components/main/offer-card/offer-card';
 import { useAppSelector } from '../../hooks/store';
 import { activeActions } from '../../store/slices/active-slice';
-import type { CityName, ThumbnailOffer } from '../../types/offer-type';
+import type { CityName } from '../../types/offer-type';
 import { AppRoute, BemClass } from '../../const';
-import { dispatch, store } from '../../store/store';
-import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
-import {
-  fetchOfferAction,
-  fetchOffersNearbyAction,
-} from '../../store/api-actions/offers-actions';
+import { dispatch } from '../../store/store';
 import { favoritesSelectors } from '../../store/slices/favorites-slice';
 
 function List() {
@@ -19,12 +14,6 @@ function List() {
 
   const handleCityClick = (city: CityName) =>
     dispatch(activeActions.setCity(city));
-
-  const handleMouseClick = (offer: ThumbnailOffer) => {
-    store.dispatch(fetchOfferAction(offer.id));
-    store.dispatch(fetchGetCommentsAction(offer.id));
-    store.dispatch(fetchOffersNearbyAction(offer.id));
-  };
 
   return (
     <section className="favorites">
@@ -49,7 +38,6 @@ function List() {
                   key={offer.id}
                   bemBlock={BemClass.Favorites}
                   offer={offer}
-                  onClick={() => handleMouseClick(offer)}
                 />
               ))}
             </div>

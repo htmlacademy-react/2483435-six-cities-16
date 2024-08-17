@@ -47,7 +47,7 @@ type ThumbnailOffer = Omit<
 
 type OfferType = Omit<FullOffer, 'previewImage'>;
 
-type OfferForMap = Pick<FullOffer, 'id' | 'location'>;
+type OffersMapType = Pick<FullOffer, 'id' | 'location'>;
 
 export type {
   FullOffer,
@@ -58,5 +58,5 @@ export type {
   LocationData,
   CityName,
   OfferType,
-  OfferForMap,
+  OffersMapType,
 };

@@ -6,11 +6,10 @@ import { dispatch } from '../../store/store';
 import { logoutAction } from '../../store/api-actions/auth-actions';
 import { FavoriteCount } from './favorite-count';
 import { fetchFavoritesAction } from '../../store/api-actions/favorites-actions';
+dispatch(fetchFavoritesAction());
 
 function IsLogged() {
   const userEmail = useAppSelector(userSelectors.userEmail);
-
-  dispatch(fetchFavoritesAction());
 
   const handleClick = () => {
     dispatch(logoutAction());
