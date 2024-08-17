@@ -5,14 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { dispatch } from '../../store/store';
 import { AppRoute, CITIES } from '../../const';
 import { loginAction } from '../../store/api-actions/auth-actions';
-import { faker } from '@faker-js/faker';
 import { activeActions } from '../../store/slices/active-slice';
+import { getRandomCity } from '../../utils/utils';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const city = faker.helpers.arrayElement(CITIES);
+  const city = getRandomCity(CITIES);
 
   const navigate = useNavigate();
 
