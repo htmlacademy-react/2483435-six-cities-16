@@ -21,7 +21,7 @@ function useMap(
           lat: currentCity.lat,
           lng: currentCity.lng,
         },
-        zoom: currentCity.zoom,
+        zoom: 13,
       });
 
       const layer = new TileLayer(MapSetting.MapUrl, {

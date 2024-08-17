@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks/store';
 import type {
   FullOffer,
   LocationData,
-  OfferForMap,
+  OffersMapType,
 } from '../../types/offer-type';
 
 export type Location = {
@@ -49,7 +49,7 @@ const useUpdateLocation = (map: LeafletMap | null, location: Location) => {
   });
 };
 
-const useUpdateMarkers = (map: LeafletMap | null, offers: OfferForMap[]) => {
+const useUpdateMarkers = (map: LeafletMap | null, offers: OffersMapType[]) => {
   const activeOfferId = useAppSelector(activeSelectors.activeOfferId);
 
   useEffect(() => {
