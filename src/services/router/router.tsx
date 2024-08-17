@@ -4,13 +4,13 @@ import { Cities } from '../../pages/cities/cities';
 import { Favorites } from '../../pages/favorites/favorites';
 import { SignIn } from '../../pages/sign-in/sign-in';
 import { PublicRoute, PrivateRoute } from './private-route';
-import { Error } from '../../components/main/error/error';
 import { Offer } from '../../pages/offer/offer';
+import { NotFound } from '../../components/main/errors/not-found/not-found';
 
 function Router() {
   const router = createBrowserRouter([
     {
-      errorElement: <Error />,
+      errorElement: <NotFound />,
       children: [
         {
           index: true,

@@ -8,8 +8,12 @@ import {
 import { toSortOffers } from '../../store/slices/offers-slice/offers-selectors';
 import { store } from '../../store/store';
 import type { ThumbnailOffer } from '../../types/offer-type';
-import { fetchOfferAction } from '../../store/api-actions/offers-actions';
+import {
+  fetchOfferAction,
+  fetchOffersNearbyAction,
+} from '../../store/api-actions/offers-actions';
 import { BemClass } from '../../const';
+import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 
 function CityOffers() {
   const city = useAppSelector(activeSelectors.city);
@@ -22,8 +26,8 @@ function CityOffers() {
   const handleMouseLeave = () => setActiveOfferId('');
   const handleMouseClick = (offer: ThumbnailOffer) => {
     store.dispatch(fetchOfferAction(offer.id));
-    // store.dispatch(fetchGetCommentsAction(offer.id));
-    // store.dispatch(fetchOffersNearbyAction(offer.id));
+    store.dispatch(fetchGetCommentsAction(offer.id));
+    store.dispatch(fetchOffersNearbyAction(offer.id));
   };
 
   return (

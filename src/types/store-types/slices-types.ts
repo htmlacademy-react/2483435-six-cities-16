@@ -10,6 +10,7 @@ type OffersSlice = {
   nearbyOffers: ThumbnailOffer[];
   comments: Comment[];
   requestStatus: RequestStatus;
+  error: string;
 };
 
 type FavoritesSlice = {

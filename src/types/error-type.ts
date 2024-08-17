@@ -1,3 +1,4 @@
 export type ErrorType = {
-  error: string | null;
+  notFound: boolean;
+  loadError: { [key: string]: string };
 };

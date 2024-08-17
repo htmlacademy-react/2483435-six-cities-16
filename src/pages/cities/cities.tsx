@@ -25,7 +25,6 @@ function Cities(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
-
       <main className={isEmptyMainClasses}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -16,6 +16,7 @@ const offersState: OffersSlice = {
   nearbyOffers: [],
   comments: [],
   requestStatus: RequestStatus.Idle,
+  error: '',
 };
 
 const changeFavorite = (
