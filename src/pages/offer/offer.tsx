@@ -43,8 +43,6 @@ function Offer(): JSX.Element {
     }
   }, [id, dispatch, currentId]);
 
-  const offersForMap: OffersMapType[] = [...nearbyOffers, activeOffer];
-
   return (
     <div className="page">
       <Header />
@@ -59,7 +57,7 @@ function Offer(): JSX.Element {
               <Map
                 bemBlock="offer"
                 activeOffer={activeOffer}
-                offers={offersForMap}
+                offers={[...nearbyOffers, activeOffer]}
               />
             </>
           )}

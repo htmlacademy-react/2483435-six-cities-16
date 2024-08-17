@@ -10,6 +10,7 @@ const downFirstLetter = (str: string): string =>
 const favorites = (offers: FullOffer[]) =>
   offers.filter((offer) => offer.isFavorite);
 
-const getRandomCity = (cities: typeof CITIES): CityName => cities[Math.floor(Math.random()*cities.length)];
+const getRandomCity = (cities: typeof CITIES): CityName =>
+  cities[Math.floor(Math.random() * cities.length)];
 
 export { upFirstLetter, downFirstLetter, favorites, getRandomCity };
