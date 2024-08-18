@@ -1,5 +1,6 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, isAxiosError } from 'axios';
 import { getToken } from './token';
+import toast from 'react-hot-toast';
 
 const BASE_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const TIMEOUT = 5000;
@@ -19,6 +20,19 @@ const createAPI = (): AxiosInstance => {
 
     return config;
   });
+
+  api.interceptors.response.use(null, (error) => {
+    if (isAxiosError(error)) {
+      if (error.code === 'ERR_NETWORK') {
+        toast.error(error.message);
+      }
+
+      if (error.response && error.response.status >= 500) {
+        toast.error('Server error');
+      }
+    }
+  });
+
   return api;
 };
 

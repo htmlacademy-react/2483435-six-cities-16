@@ -1,5 +1,5 @@
 import { Fragment, useRef, useState } from 'react';
-import { RATING } from '../../../const';
+import { RATING, Setting } from '../../../const';
 import { getStarsText } from '../utils';
 import { store } from '../../../store/store';
 import {
@@ -8,6 +8,7 @@ import {
 } from '../../../store/api-actions/comments-actions';
 import { activeSelectors } from '../../../store/slices/active-slice';
 import { useAppDispatch } from '../../../hooks/store';
+import toast from 'react-hot-toast';
 
 type NewReviewProps = HTMLFormElement & {
   rating: HTMLInputElement;
@@ -21,10 +22,23 @@ const INITIAL = {
 
 export function NewReview() {
   const [reviewForm, setReviewForm] = useState(INITIAL);
+  const [isSubmitDisabled, setSubmitDisabled] = useState(true);
+  const [isFormDisabled, setFormDisabled] = useState(false);
 
   const ratingRef = useRef<HTMLInputElement | null>(null);
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
   const dispatch = useAppDispatch();
+
+  const handleError = () => {
+    setFormDisabled(false);
+    setSubmitDisabled(false);
+    return 'Error send review';
+  };
+
+  const handleSuccess = () => {
+    setFormDisabled(false);
+    return 'Review send successfully';
+  };
 
   const handleFormInput = (evt: React.ChangeEvent<NewReviewProps>) => {
     const name = evt.target.name;
@@ -34,29 +48,39 @@ export function NewReview() {
       value = Number(value);
     }
     setReviewForm({ ...reviewForm, [name]: value });
+    setSubmitDisabled(
+      reviewForm.review.length < Setting.ReviewMin ||
+        reviewForm.review.length > Setting.ReviewMax ||
+        !reviewForm.rating
+    );
   };
 
   const handleFormSubmit = (evt: React.FormEvent<NewReviewProps>) => {
     evt.preventDefault();
     const form = evt.currentTarget;
     const id = activeSelectors.activeOfferId(store.getState());
+    setFormDisabled(true);
+    setSubmitDisabled(true);
 
-    dispatch(
-      fetchPostCommentsAction({
-        offerId: id,
-        comment: reviewForm.review,
-        rating: reviewForm.rating,
-      })
+    toast.promise(
+      dispatch(
+        fetchPostCommentsAction({
+          offerId: id,
+          comment: reviewForm.review,
+          rating: reviewForm.rating,
+        })
+      ).unwrap(),
+      {
+        loading: 'Sending...',
+        error: handleError,
+        success: handleSuccess,
+      }
     );
+
     fetchGetCommentsAction(id);
     form.reset();
     setReviewForm(INITIAL);
   };
-
-  const isButtonDisabled =
-    !reviewForm.rating ||
-    reviewForm.review.length < 50 ||
-    reviewForm.review.length > 300;
 
   return (
     <form
@@ -79,6 +103,7 @@ export function NewReview() {
               id={getStarsText(star.value)}
               type="radio"
               ref={ratingRef}
+              disabled={isFormDisabled}
             />
             <label
               htmlFor={getStarsText(star.value)}
@@ -99,6 +124,7 @@ export function NewReview() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        disabled={isFormDisabled}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -109,7 +135,7 @@ export function NewReview() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isButtonDisabled}
+          disabled={isSubmitDisabled}
         >
           Submit
         </button>
