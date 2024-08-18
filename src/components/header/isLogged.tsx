@@ -6,9 +6,17 @@ import { dispatch } from '../../store/store';
 import { logoutAction } from '../../store/api-actions/auth-actions';
 import { FavoriteCount } from './favorite-count';
 import { fetchFavoritesAction } from '../../store/api-actions/favorites-actions';
-dispatch(fetchFavoritesAction());
+import { useMemo } from 'react';
 
 function IsLogged() {
+  const auth = useAppSelector(userSelectors.authStatus);
+
+  useMemo(() => {
+    if (auth) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [auth]);
+
   const userEmail = useAppSelector(userSelectors.userEmail);
 
   const handleClick = () => {

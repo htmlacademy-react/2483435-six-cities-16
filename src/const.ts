@@ -1,6 +1,8 @@
 const Setting = {
   NearbyCount: 3,
   TimeoutError: 2000,
+  ReviewMin: 50,
+  ReviewMax: 300,
 } as const;
 
 const CITIES = [
