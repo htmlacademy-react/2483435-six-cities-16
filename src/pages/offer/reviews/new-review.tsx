@@ -1,13 +1,8 @@
 import { Fragment, useRef, useState } from 'react';
 import { RATING, Setting } from '../../../const';
-import { getStarsText } from '../utils';
-import { store } from '../../../store/store';
-import {
-  fetchGetCommentsAction,
-  fetchPostCommentsAction,
-} from '../../../store/api-actions/comments-actions';
+import { fetchPostCommentsAction } from '../../../store/api-actions/comments-actions';
 import { activeSelectors } from '../../../store/slices/active-slice';
-import { useAppDispatch } from '../../../hooks/store';
+import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import toast from 'react-hot-toast';
 
 type NewReviewProps = HTMLFormElement & {
@@ -20,10 +15,19 @@ const INITIAL = {
   review: '',
 };
 
+const isValidReview = ({ rating, review }: typeof INITIAL) =>
+  Boolean(
+    review.length >= Setting.ReviewMin &&
+      review.length <= Setting.ReviewMax &&
+      rating
+  );
+
 export function NewReview() {
   const [reviewForm, setReviewForm] = useState(INITIAL);
-  const [isSubmitDisabled, setSubmitDisabled] = useState(true);
   const [isFormDisabled, setFormDisabled] = useState(false);
+  const id = useAppSelector(activeSelectors.activeOfferId);
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const ratingRef = useRef<HTMLInputElement | null>(null);
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
@@ -31,11 +35,12 @@ export function NewReview() {
 
   const handleError = () => {
     setFormDisabled(false);
-    setSubmitDisabled(false);
     return 'Error send review';
   };
 
   const handleSuccess = () => {
+    formRef.current?.reset();
+    setReviewForm(INITIAL);
     setFormDisabled(false);
     return 'Review send successfully';
   };
@@ -48,19 +53,13 @@ export function NewReview() {
       value = Number(value);
     }
     setReviewForm({ ...reviewForm, [name]: value });
-    setSubmitDisabled(
-      reviewForm.review.length < Setting.ReviewMin ||
-        reviewForm.review.length > Setting.ReviewMax ||
-        !reviewForm.rating
-    );
   };
+
+  const isValid = isValidReview(reviewForm);
 
   const handleFormSubmit = (evt: React.FormEvent<NewReviewProps>) => {
     evt.preventDefault();
-    const form = evt.currentTarget;
-    const id = activeSelectors.activeOfferId(store.getState());
     setFormDisabled(true);
-    setSubmitDisabled(true);
 
     toast.promise(
       dispatch(
@@ -76,10 +75,6 @@ export function NewReview() {
         success: handleSuccess,
       }
     );
-
-    fetchGetCommentsAction(id);
-    form.reset();
-    setReviewForm(INITIAL);
   };
 
   return (
@@ -89,6 +84,7 @@ export function NewReview() {
       method="post"
       onInput={handleFormInput}
       onSubmit={handleFormSubmit}
+      ref={formRef}
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
@@ -100,13 +96,13 @@ export function NewReview() {
               className="form__rating-input visually-hidden"
               name="rating"
               defaultValue={star.value}
-              id={getStarsText(star.value)}
+              id={`${star.value}-stars`}
               type="radio"
               ref={ratingRef}
               disabled={isFormDisabled}
             />
             <label
-              htmlFor={getStarsText(star.value)}
+              htmlFor={`${star.value}-stars`}
               className="reviews__rating-label form__rating-label"
               title={star.text}
             >
@@ -135,7 +131,7 @@ export function NewReview() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isSubmitDisabled}
+          disabled={!isValid || isFormDisabled}
         >
           Submit
         </button>

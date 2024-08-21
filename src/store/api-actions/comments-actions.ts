@@ -14,15 +14,16 @@ const fetchGetCommentsAction = appCreateAsyncThunk<Comment[], string>(
 );
 
 const fetchPostCommentsAction = appCreateAsyncThunk<
-  void,
+  Comment,
   { offerId: string; comment: string; rating: number }
 >('data/fetchComment', async ({ offerId, comment, rating }, { extra: api }) => {
-  await api.post<{ comment: string; rating: number }>(
-    `${APIRoute.Comments}/${offerId}`,
-    { comment, rating }
-  );
+  const res = await api.post<Comment>(`${APIRoute.Comments}/${offerId}`, {
+    comment,
+    rating,
+  });
 
   store.dispatch(fetchGetCommentsAction(offerId));
+  return res.data;
 });
 
 export { fetchGetCommentsAction, fetchPostCommentsAction };

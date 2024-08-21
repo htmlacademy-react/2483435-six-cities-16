@@ -33,7 +33,7 @@ const errorSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffersAction.rejected, (state) => {
-        state.loadError['FetchOffersAction'] = ErrorMessage.FetchOffersAction;
+        state.loadError.FetchOffersAction = ErrorMessage.FetchOffersAction;
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.loadError.FetchOffersAction = ErrorMessage.FetchOfferAction;

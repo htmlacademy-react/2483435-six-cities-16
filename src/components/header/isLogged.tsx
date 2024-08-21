@@ -19,7 +19,8 @@ function IsLogged() {
 
   const userEmail = useAppSelector(userSelectors.userEmail);
 
-  const handleClick = () => {
+  const handleClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
     dispatch(logoutAction());
   };
 
@@ -36,13 +37,9 @@ function IsLogged() {
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link
-          onClick={handleClick}
-          className="header__nav-link"
-          to={AppRoute.Login}
-        >
+        <a onClick={handleClick} className="header__nav-link" href="#2222">
           <span className="header__signout">Sign out</span>
-        </Link>
+        </a>
       </li>
     </ul>
   );
