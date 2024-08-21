@@ -2,17 +2,18 @@ import { FormEvent, useRef } from 'react';
 import { Header } from '../../components/header/header';
 import { useChangeTitle } from '../../hooks/title';
 import { Link, useNavigate } from 'react-router-dom';
-import { dispatch } from '../../store/store';
+import { dispatch, store } from '../../store/store';
 import { AppRoute, CITIES } from '../../const';
 import { loginAction } from '../../store/api-actions/auth-actions';
-import { faker } from '@faker-js/faker';
 import { activeActions } from '../../store/slices/active-slice';
+import { getRandomCity } from '../../utils/utils';
+import toast from 'react-hot-toast';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const city = faker.helpers.arrayElement(CITIES);
+  const city = getRandomCity(CITIES);
 
   const navigate = useNavigate();
 
@@ -20,11 +21,20 @@ function SignIn(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(
-        loginAction({
-          login: loginRef.current.value,
-          password: passwordRef.current.value,
-        })
+      toast.promise(
+        store
+          .dispatch(
+            loginAction({
+              login: loginRef.current.value,
+              password: passwordRef.current.value,
+            })
+          )
+          .unwrap(),
+        {
+          loading: 'Logging in...',
+          error: 'Login failed',
+          success: 'Logged in successfully',
+        }
       );
     }
   };

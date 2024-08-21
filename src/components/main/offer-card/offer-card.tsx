@@ -10,7 +10,6 @@ type OfferCardProps = {
   offer: ThumbnailOffer;
   onMouseEnter?: (offer: ThumbnailOffer) => void;
   onMouseLeave?: () => void;
-  onClick?: (offer: ThumbnailOffer) => void;
 };
 
 function OfferCard({
@@ -18,7 +17,6 @@ function OfferCard({
   offer,
   onMouseEnter,
   onMouseLeave,
-  onClick,
 }: OfferCardProps): React.ReactNode {
   const {
     id,
@@ -49,7 +47,6 @@ function OfferCard({
           to={AppRoute.Offer.replace(':id', id)}
           onMouseEnter={() => onMouseEnter?.(offer)}
           onMouseLeave={() => onMouseLeave?.()}
-          onClick={() => onClick?.(offer)}
         >
           <img
             className="place-card__image"

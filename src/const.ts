@@ -1,6 +1,8 @@
 const Setting = {
   NearbyCount: 3,
   TimeoutError: 2000,
+  ReviewMin: 50,
+  ReviewMax: 300,
 } as const;
 
 const CITIES = [
@@ -17,7 +19,7 @@ const RATING = [
   { value: 4, text: 'good' },
   { value: 3, text: 'not bad' },
   { value: 2, text: 'badly' },
-  { value: 1, text: 'terrible' },
+  { value: 1, text: 'terribly' },
 ];
 
 const SortOption = {

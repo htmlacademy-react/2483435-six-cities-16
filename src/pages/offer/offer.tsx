@@ -7,8 +7,6 @@ import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
 import { Neighboring } from './neighboring';
 import { useChangeTitle } from '../../hooks/title';
 import { Map } from '../../components/map/map';
-import type { ThumbnailOffer } from '../../types/offer-type';
-import type { OfferType } from '../../types/offer-type';
 import { Setting } from '../../const';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -17,8 +15,7 @@ import {
   fetchOfferAction,
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
-
-export type OffersMapType = OfferType | ThumbnailOffer | null;
+import { setActiveOfferId } from '../../store/slices/active-slice';
 
 function Offer(): JSX.Element {
   const { id = '' } = useParams();
@@ -35,6 +32,7 @@ function Offer(): JSX.Element {
 
   useEffect(() => {
     if (currentId !== id) {
+      dispatch(setActiveOfferId(id));
       Promise.all([
         dispatch(fetchOfferAction(id)).unwrap(),
         dispatch(fetchGetCommentsAction(id)).unwrap(),
@@ -42,8 +40,6 @@ function Offer(): JSX.Element {
       ]);
     }
   }, [id, dispatch, currentId]);
-
-  const offersForMap: OffersMapType[] = [...nearbyOffers, activeOffer];
 
   return (
     <div className="page">
@@ -59,7 +55,7 @@ function Offer(): JSX.Element {
               <Map
                 bemBlock="offer"
                 activeOffer={activeOffer}
-                offers={offersForMap}
+                offers={[...nearbyOffers, activeOffer]}
               />
             </>
           )}

@@ -6,13 +6,21 @@ import { dispatch } from '../../store/store';
 import { logoutAction } from '../../store/api-actions/auth-actions';
 import { FavoriteCount } from './favorite-count';
 import { fetchFavoritesAction } from '../../store/api-actions/favorites-actions';
+import { useMemo } from 'react';
 
 function IsLogged() {
+  const auth = useAppSelector(userSelectors.authStatus);
+
+  useMemo(() => {
+    if (auth) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [auth]);
+
   const userEmail = useAppSelector(userSelectors.userEmail);
 
-  dispatch(fetchFavoritesAction());
-
-  const handleClick = () => {
+  const handleClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
     dispatch(logoutAction());
   };
 
@@ -29,13 +37,9 @@ function IsLogged() {
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link
-          onClick={handleClick}
-          className="header__nav-link"
-          to={AppRoute.Login}
-        >
+        <a onClick={handleClick} className="header__nav-link" href="#2222">
           <span className="header__signout">Sign out</span>
-        </Link>
+        </a>
       </li>
     </ul>
   );

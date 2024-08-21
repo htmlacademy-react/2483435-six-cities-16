@@ -9,7 +9,7 @@ import { favoritesSelectors } from '../../store/slices/favorites-slice';
 function Favorites(): JSX.Element {
   const favorites = useAppSelector(favoritesSelectors.favoritesOffers);
   const isEmptyFavorites = favorites.length === 0;
-  const favoritePageClasses = clsx('page__main', 'page__mxain--favorites', {
+  const favoritePageClasses = clsx('page__main', 'page__main--favorites', {
     'page__main--favorites-empty': isEmptyFavorites,
   });
   useChangeTitle('Favorites');

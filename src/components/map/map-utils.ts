@@ -3,8 +3,11 @@ import { Map as LeafletMap, Icon, Marker, layerGroup } from 'leaflet';
 import { MapMarker } from '../../const';
 import { activeSelectors } from '../../store/slices/active-slice';
 import { useAppSelector } from '../../hooks/store';
-import type { FullOffer, LocationData } from '../../types/offer-type';
-import { OffersMapType } from '../../pages/offer/offer';
+import type {
+  FullOffer,
+  LocationData,
+  OffersMapType,
+} from '../../types/offer-type';
 
 export type Location = {
   lat: number;
