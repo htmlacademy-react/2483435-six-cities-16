@@ -3,13 +3,16 @@ import { Header } from '../../components/header/header';
 import { ShowLoading } from '../../components/main/show-loading';
 import { Photos } from './photos';
 import { Description } from './description';
-import { offersSelectors } from '../../store/slices/offers-slice/offers-slice';
+import {
+  offersSelectors,
+  offersSlice,
+} from '../../store/slices/offers-slice/offers-slice';
 import { Neighboring } from './neighboring';
 import { useChangeTitle } from '../../hooks/title';
 import { Map } from '../../components/map/map';
 import { Setting } from '../../const';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { fetchGetCommentsAction } from '../../store/api-actions/comments-actions';
 import {
   fetchOfferAction,
@@ -19,6 +22,7 @@ import { setActiveOfferId } from '../../store/slices/active-slice';
 
 function Offer(): JSX.Element {
   const { id = '' } = useParams();
+  const isError = useAppSelector(offersSelectors.isError);
   const activeOffer = useAppSelector(offersSelectors.activeOffer);
   const comments = useAppSelector(offersSelectors.comments);
   const nearbyOffers = useAppSelector(offersSelectors.nearbyOffers).slice(
@@ -40,6 +44,17 @@ function Offer(): JSX.Element {
       ]);
     }
   }, [id, dispatch, currentId]);
+
+  useEffect(
+    () => () => {
+      setTimeout(() => dispatch(offersSlice.actions.resetError()));
+    },
+    [dispatch]
+  );
+
+  if (isError) {
+    return <Navigate to="/404" />;
+  }
 
   return (
     <div className="page">

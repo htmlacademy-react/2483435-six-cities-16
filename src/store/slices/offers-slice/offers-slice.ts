@@ -16,7 +16,7 @@ const offersState: OffersSlice = {
   nearbyOffers: [],
   comments: [],
   requestStatus: RequestStatus.Idle,
-  error: '',
+  isError: '',
 };
 
 const changeFavorite = (
@@ -81,12 +81,19 @@ const offersSlice = createSlice({
         changeFavorite(changedOffer, state.nearbyOffers);
       });
   },
-  reducers: {},
+  reducers: {
+    resetError(state) {
+      if (state.requestStatus === RequestStatus.Failed) {
+        state.requestStatus = RequestStatus.Idle;
+      }
+    },
+  },
   selectors: {
     allOffers: (state) => state.allOffers,
     activeOffer: (state) => state.activeOffer,
     nearbyOffers: (state) => state.nearbyOffers,
     comments: (state) => state.comments,
+    isError: (state) => state.requestStatus === RequestStatus.Failed,
   },
 });
 
