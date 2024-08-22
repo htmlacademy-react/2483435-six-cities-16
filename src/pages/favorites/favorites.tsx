@@ -12,10 +12,11 @@ function Favorites(): JSX.Element {
   const favoritePageClasses = clsx('page__main', 'page__main--favorites', {
     'page__main--favorites-empty': isEmptyFavorites,
   });
+  const emptyClass = favorites.length === 0 ? 'page--favorites-empty' : '';
   useChangeTitle('Favorites');
 
   return (
-    <div className={`page ${isEmptyFavorites}`}>
+    <div className={`page ${emptyClass}`}>
       <Header />
       <main className={favoritePageClasses}>
         <div className="page__favorites-container container">

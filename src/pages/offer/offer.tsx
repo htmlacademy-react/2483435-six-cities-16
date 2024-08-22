@@ -19,6 +19,7 @@ import {
   fetchOffersNearbyAction,
 } from '../../store/api-actions/offers-actions';
 import { setActiveOfferId } from '../../store/slices/active-slice';
+import { OffersMapType } from '../../types/offer-type';
 
 function Offer(): JSX.Element {
   const { id = '' } = useParams();
@@ -56,6 +57,10 @@ function Offer(): JSX.Element {
     return <Navigate to="/404" />;
   }
 
+  const mapOffers: OffersMapType[] = [...nearbyOffers];
+  if (activeOffer) {
+    mapOffers.push(activeOffer);
+  }
   return (
     <div className="page">
       <Header />
@@ -67,11 +72,9 @@ function Offer(): JSX.Element {
             <>
               <Photos activeOffer={activeOffer} />
               <Description activeOffer={activeOffer} comments={comments} />
-              <Map
-                bemBlock="offer"
-                activeOffer={activeOffer}
-                offers={[...nearbyOffers, activeOffer]}
-              />
+              {mapOffers.length > 0 && (
+                <Map bemBlock="offer" offers={mapOffers} />
+              )}
             </>
           )}
         </section>
