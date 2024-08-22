@@ -63,7 +63,7 @@ function SignIn(): JSX.Element {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  pattern='^\S+@\S+\.\S+$'
+                  pattern="^\S+@\S+\.\S+$"
                   required
                 />
               </div>
@@ -75,8 +75,8 @@ function SignIn(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  pattern = "(?=.*\d)(?=.*[a-zA-Z]).{2,}"
-                  title = "Пароль не может быть короче двух символов и должен содержать хотя бы одну цифру и одну латинскую букву."
+                  pattern="(?=.*\d)(?=.*[a-zA-Z]).{2,}"
+                  title="Пароль не может быть короче двух символов и должен содержать хотя бы одну цифру и одну латинскую букву."
                 />
               </div>
               <button

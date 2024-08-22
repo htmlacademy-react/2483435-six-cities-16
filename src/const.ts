@@ -45,8 +45,8 @@ enum AppRoute {
 }
 
 enum MapMarker {
-  DefaultMarker = '../markup/img/pin.svg',
-  ActiveMarker = '../markup/img/pin-active.svg',
+  DefaultMarker = '../public/img/pin.svg',
+  ActiveMarker = '../public/img/pin-active.svg',
 }
 
 enum AuthStatus {
