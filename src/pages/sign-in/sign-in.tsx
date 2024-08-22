@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 
 function SignIn(): JSX.Element {
   useChangeTitle('Login');
-  const loginRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const city = getRandomCity(CITIES);
 
@@ -20,12 +20,12 @@ function SignIn(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (emailRef.current !== null && passwordRef.current !== null) {
       toast.promise(
         store
           .dispatch(
             loginAction({
-              login: loginRef.current.value,
+              login: emailRef.current.value,
               password: passwordRef.current.value,
             })
           )
@@ -58,11 +58,12 @@ function SignIn(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
-                  ref={loginRef}
+                  ref={emailRef}
                   className="login__input form__input"
                   type="email"
                   name="email"
                   placeholder="Email"
+                  pattern='^\S+@\S+\.\S+$'
                   required
                 />
               </div>
@@ -74,6 +75,8 @@ function SignIn(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  pattern = "(?=.*\d)(?=.*[a-zA-Z]).{2,}"
+                  title = "Пароль не может быть короче двух символов и должен содержать хотя бы одну цифру и одну латинскую букву."
                 />
               </div>
               <button
